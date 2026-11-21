@@ -3,390 +3,378 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>જીવસેવક પરિવાર (@jivsevak) - વોલેન્ટિયર બનો</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;500;600;700;800;900&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <title>JIVSEVAK PARIVAR (@jivsevak) - વોલેન્ટિયર જોડાઓ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;500;600;700;800;900&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary: #14532d;
-      --primary-light: #166534;
-      --accent: #ea580c;
+      --primary-dark: #052e16;
+      --accent: #dc2626;
+      --orange: #ea580c;
       --gold: #f59e0b;
-      --bg-gradient: linear-gradient(135deg, #f0fdf4 0%, #fffbeb 50%, #fef3c7 100%);
-      --card-bg: #ffffff;
+      --bg: linear-gradient(135deg, #ecfdf5 0%, #fefce8 50%, #fff7ed 100%);
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: 'Noto Sans Gujarati', 'Poppins', sans-serif;
-      background: var(--bg-gradient);
+      background: var(--bg);
       color: #1f2937;
-      min-height: 100vh;
-      padding: 16px;
+      padding: 14px;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
-    .main-wrapper {
-      max-width: 540px;
+    .wrapper {
+      max-width: 600px;
       width: 100%;
-      background: var(--card-bg);
+      background: #ffffff;
       border-radius: 24px;
-      box-shadow: 0 20px 40px rgba(20, 83, 45, 0.12);
+      box-shadow: 0 20px 45px rgba(20, 83, 45, 0.14);
       overflow: hidden;
-      border: 1px solid rgba(20, 83, 45, 0.1);
+      border: 1px solid rgba(20, 83, 45, 0.12);
     }
 
-    /* ટોપ હીરો બેનર */
-    .hero-banner {
-      background: linear-gradient(135deg, #052e16 0%, #14532d 60%, #166534 100%);
-      color: #ffffff;
-      padding: 28px 22px 24px;
+    /* હીરો સેક્શન */
+    .hero {
+      background: linear-gradient(135deg, #052e16 0%, #14532d 65%, #166534 100%);
+      color: #fff;
+      padding: 26px 20px 24px;
       text-align: center;
-      position: relative;
       border-bottom: 5px solid var(--gold);
     }
 
-    .logo-ring {
-      width: 104px;
-      height: 104px;
-      margin: 0 auto 14px;
+    .logo-circle {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 12px;
       border-radius: 50%;
       padding: 4px;
       background: linear-gradient(45deg, #f59e0b, #ea580c, #fde047);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.35);
     }
 
-    .logo-ring img {
+    .logo-circle img {
       width: 100%;
       height: 100%;
       border-radius: 50%;
       object-fit: cover;
       background: #fff;
-      display: block;
     }
 
-    .hero-badge {
+    .motto-pill {
       display: inline-block;
-      background: rgba(245, 158, 11, 0.2);
-      border: 1px solid #fbbf24;
-      color: #fde68a;
-      font-size: 12px;
-      font-weight: 700;
-      padding: 4px 14px;
+      background: rgba(253, 224, 71, 0.18);
+      border: 1px solid #fde047;
+      color: #fde047;
+      font-size: 13px;
+      font-weight: 800;
+      padding: 4px 16px;
       border-radius: 50px;
       margin-bottom: 8px;
-      letter-spacing: 0.5px;
     }
 
-    .hero-banner h1 {
-      font-size: 28px;
+    .hero h1 {
+      font-size: 27px;
       font-weight: 900;
       letter-spacing: 0.5px;
-      margin-bottom: 6px;
-      text-shadow: 0 2px 6px rgba(0,0,0,0.3);
     }
 
-    .hero-tagline {
+    .hero-banner-red {
+      background: #dc2626;
+      color: #fff;
+      font-weight: 800;
       font-size: 15px;
-      color: #dcfce7;
-      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 12px;
+      margin: 12px auto;
+      display: inline-block;
+      box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
+    }
+
+    .hero-desc {
+      font-size: 14px;
+      line-height: 1.65;
+      color: #ecfdf5;
+      margin-top: 6px;
+    }
+
+    /* સેવા કાર્યો અને લાભો */
+    .info-cards {
+      padding: 18px 20px 6px;
+      background: #f8fafc;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .goal-strip {
+      background: linear-gradient(90deg, #14532d, #15803d);
+      color: #fff;
+      text-align: center;
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-size: 13.5px;
+      font-weight: 700;
       margin-bottom: 14px;
     }
 
-    .mission-box {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(6px);
-      border-radius: 14px;
-      padding: 14px 16px;
-      font-size: 13.5px;
-      line-height: 1.65;
-      color: #f0fdf4;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      text-align: center;
-    }
-
-    .mission-box strong {
-      color: #fde047;
-    }
-
-    .pillars {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
+    .seva-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
       gap: 8px;
-      margin-top: 14px;
+      margin-bottom: 14px;
     }
 
-    .pillar-tag {
+    .seva-item {
       background: #ffffff;
-      color: #14532d;
-      font-size: 12px;
+      border: 1px solid #dcfce7;
+      padding: 8px 10px;
+      border-radius: 10px;
+      font-size: 12.5px;
       font-weight: 700;
-      padding: 5px 12px;
-      border-radius: 20px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      color: #14532d;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+    }
+
+    .benefits-box {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 14px;
+      padding: 12px 14px;
+      margin-bottom: 14px;
+    }
+
+    .benefits-box h3 {
+      font-size: 14px;
+      font-weight: 800;
+      color: #b45309;
+      margin-bottom: 6px;
+    }
+
+    .benefits-list {
+      list-style: none;
+      font-size: 12.5px;
+      color: #451a03;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 4px;
     }
 
     /* ફોર્મ સેક્શન */
-    .form-section {
-      padding: 24px 22px 28px;
+    .form-area {
+      padding: 20px 20px 26px;
     }
 
-    .section-title {
+    .form-header {
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
-    .section-title h2 {
+    .form-header h2 {
       font-size: 20px;
-      font-weight: 800;
+      font-weight: 900;
       color: var(--primary);
     }
 
-    .section-title p {
+    .form-header p {
       font-size: 13px;
-      color: #6b7280;
-      margin-top: 4px;
+      color: #64748b;
+      margin-top: 3px;
     }
 
-    .form-group {
-      margin-bottom: 16px;
-    }
+    .form-group { margin-bottom: 14px; }
 
     label {
       display: block;
       font-weight: 700;
-      font-size: 14px;
-      margin-bottom: 6px;
-      color: #1f2937;
+      font-size: 13.5px;
+      margin-bottom: 5px;
+      color: #1e293b;
     }
 
-    label span.req {
-      color: #dc2626;
-    }
+    label span { color: #dc2626; }
 
     input[type="text"] {
       width: 100%;
-      padding: 12px 15px;
-      border: 2px solid #e5e7eb;
+      padding: 12px 14px;
+      border: 2px solid #e2e8f0;
       border-radius: 12px;
       font-size: 15px;
       font-family: inherit;
-      background: #f9fafb;
-      transition: all 0.25s ease;
+      background: #f8fafc;
+      transition: 0.2s;
     }
 
     input[type="text"]:focus {
       border-color: var(--primary);
-      background: #ffffff;
-      box-shadow: 0 0 0 4px rgba(20, 83, 45, 0.1);
+      background: #fff;
       outline: none;
+      box-shadow: 0 0 0 3px rgba(20, 83, 45, 0.12);
     }
 
-    /* કસ્ટમ ફાઈલ અપલોડ બોક્સ */
-    .file-upload-box {
+    .upload-zone {
       border: 2px dashed #16a34a;
       background: #f0fdf4;
       border-radius: 14px;
       padding: 16px;
       text-align: center;
-      cursor: pointer;
-      transition: 0.25s;
       position: relative;
+      cursor: pointer;
     }
 
-    .file-upload-box:hover {
-      background: #dcfce7;
-      border-color: var(--primary);
-    }
-
-    .file-upload-box input[type="file"] {
+    .upload-zone input[type="file"] {
       position: absolute;
       inset: 0;
       opacity: 0;
-      cursor: pointer;
       width: 100%;
       height: 100%;
-    }
-
-    .file-upload-icon {
-      font-size: 28px;
-      margin-bottom: 4px;
-    }
-
-    .file-upload-text {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--primary);
-    }
-
-    .file-name-display {
-      font-size: 12.5px;
-      color: #ea580c;
-      font-weight: 600;
-      margin-top: 6px;
+      cursor: pointer;
     }
 
     .btn {
       width: 100%;
-      padding: 15px;
+      padding: 14px;
       border: none;
       border-radius: 14px;
       font-size: 16px;
       font-weight: 800;
       cursor: pointer;
       font-family: inherit;
-      margin-top: 8px;
-      transition: transform 0.15s ease, box-shadow 0.2s ease;
+      transition: 0.2s;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
     }
 
-    .btn:active {
-      transform: scale(0.98);
+    .btn-create {
+      background: linear-gradient(135deg, #16a34a, #14532d);
+      color: #fff;
+      box-shadow: 0 8px 20px rgba(20, 83, 45, 0.25);
+      margin-top: 8px;
     }
 
-    .btn-primary {
-      background: linear-gradient(135deg, #16a34a 0%, #14532d 100%);
-      color: #ffffff;
-      box-shadow: 0 8px 20px rgba(20, 83, 45, 0.28);
+    .btn-post-dl {
+      background: linear-gradient(135deg, #ea580c, #c2410c);
+      color: #fff;
+      box-shadow: 0 6px 16px rgba(234, 88, 12, 0.3);
+      margin-top: 12px;
     }
 
-    .btn-download {
-      background: linear-gradient(135deg, #f97316 0%, #c2410c 100%);
-      color: #ffffff;
-      box-shadow: 0 8px 20px rgba(234, 88, 12, 0.3);
+    .btn-story-dl {
+      background: linear-gradient(135deg, #7c3aed, #db2777);
+      color: #fff;
+      box-shadow: 0 6px 16px rgba(219, 39, 119, 0.28);
+      margin-top: 10px;
+    }
+
+    .result-box {
       display: none;
-      margin-top: 14px;
-    }
-
-    /* પ્રિવ્યૂ સેક્શન */
-    .preview-section {
-      margin-top: 26px;
-      padding-top: 22px;
-      border-top: 2px dashed #d1d5db;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 2px dashed #cbd5e1;
       text-align: center;
-      display: none;
-      animation: fadeIn 0.5s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .congrats-title {
-      color: var(--primary);
-      font-size: 19px;
-      font-weight: 800;
-      margin-bottom: 12px;
     }
 
     canvas {
       width: 100%;
-      max-width: 420px;
+      max-width: 460px;
       height: auto;
-      border-radius: 16px;
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
-      border: 3px solid var(--gold);
+      border-radius: 14px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.22);
+      border: 2px solid var(--gold);
     }
 
-    .status-msg {
-      margin-top: 12px;
-      font-size: 13.5px;
+    .status-pill {
+      margin-top: 10px;
+      font-size: 13px;
       font-weight: 700;
       color: #15803d;
-      background: #f0fdf4;
-      padding: 8px 12px;
-      border-radius: 8px;
+      background: #dcfce7;
+      padding: 7px 14px;
+      border-radius: 20px;
       display: inline-block;
     }
 
-    .share-guide {
+    .tag-box {
       background: #fffbeb;
       border: 1.5px solid #fcd34d;
-      padding: 14px 16px;
+      padding: 14px;
       border-radius: 14px;
-      font-size: 13.5px;
-      margin-top: 16px;
+      margin-top: 14px;
       text-align: left;
-      line-height: 1.65;
+      font-size: 13px;
+      line-height: 1.6;
       color: #78350f;
-    }
-
-    .share-guide strong.heading {
-      color: #b45309;
-      font-size: 14.5px;
-      display: block;
-      margin-bottom: 4px;
-    }
-
-    .footer-note {
-      text-align: center;
-      font-size: 12px;
-      color: #6b7280;
-      margin-top: 18px;
-      padding-bottom: 10px;
-    }
-
-    @media (max-width: 400px) {
-      .hero-banner h1 { font-size: 24px; }
-      .form-section { padding: 20px 16px; }
     }
   </style>
 </head>
 <body>
 
-<div class="main-wrapper">
-  <!-- આકર્ષક ટોપ બેનર -->
-  <div class="hero-banner">
-    <div class="logo-ring">
-      <img src="jivsevaklogo.jpg" alt="Jivsevak Family Logo" id="orgLogo">
+<div class="wrapper">
+  <!-- ટોપ બેનર -->
+  <div class="hero">
+    <div class="logo-circle">
+      <img src="jivsevaklogo.jpg" alt="Jivsevak Parivar" id="orgLogo">
     </div>
-    <div class="hero-badge">🐾 ૩૬૫ દિવસ જીવ સેવા યજ્ઞ 🕊️</div>
-    <h1>જીવસેવક પરિવાર</h1>
-    <div class="hero-tagline">"બેજુબાન જીવો માટે પ્રેમ અને ખોરાક સેવા"</div>
+    <div class="motto-pill">💚 સેવા • શ્રદ્ધા • વિશ્વાસ 💚</div>
+    <h1>JIVSEVAK PARIVAR</h1>
+    <div class="hero-banner-red">💚🐾 યુવા શક્તિ જોડાશે, તો જીવસેવાનું અભિયાન આગળ વધશે!</div>
+    <p class="hero-desc">
+      શું તમે પણ સમાજ અને અબોલ જીવો માટે કંઈક સારું કરવા માંગો છો? ❤️<br>
+      અમને ગુજરાતના દરેક શહેર, તાલુકા અને ગામમાંથી સેવાભાવી યુવાનો અને <strong>Volunteers</strong> ની જરૂર છે.
+    </p>
+  </div>
+
+  <!-- સેવા કાર્યો અને લાભો -->
+  <div class="info-cards">
+    <div class="goal-strip">🌍 અમારું લક્ષ્ય: દરેક ગામમાં જીવસેવા, દરેક શહેરમાં સેવાભાવી પરિવાર!</div>
     
-    <div class="mission-box">
-      <strong>"નાનો દાણો • મોટું પુણ્ય"</strong> — અબોલ પશુ-પક્ષીઓની સેવા, ચણ, પાણી અને પર્યાવરણ જતનના આ પવિત્ર અભિયાનમાં આપ પણ જોડાઓ. નીચેની વિગતો ભરીને <strong>જીવસેવક પરિવારના ગૌરવશાળી વોલેન્ટિયર</strong> તરીકે તમારું ડિજિટલ ઓળખ પોસ્ટર મેળવો!
+    <div class="seva-grid">
+      <div class="seva-item">🐄 ગૌસેવા</div>
+      <div class="seva-item">🐕 શ્વાન સેવા</div>
+      <div class="seva-item">🐒 વાંદરા અને જીવસેવા</div>
+      <div class="seva-item">🐦 પક્ષીઓને દાણા-પાણી</div>
+      <div class="seva-item">🏥 ઘાયલ જીવોની મદદ</div>
+      <div class="seva-item">🌳 પર્યાવરણ સંરક્ષણ</div>
+      <div class="seva-item">📚 બાળકોને શિક્ષણ સહયોગ</div>
+      <div class="seva-item">❤️ સામાજિક માનવતા</div>
     </div>
 
-    <div class="pillars">
-      <span class="pillar-tag">🐒 પશુ સેવા</span>
-      <span class="pillar-tag">🕊️ પક્ષી ચણ</span>
-      <span class="pillar-tag">🐜 કીડિયારું</span>
-      <span class="pillar-tag">🌱 દયા • માનવતા</span>
+    <div class="benefits-box">
+      <h3>🎖️ JIVSEVAK PARIVAR સાથે જોડાવાના લાભ:</h3>
+      <ul class="benefits-list">
+        <li>✅ આજીવન મફત Volunteer Registration & વ્યક્તિગત Volunteer ID</li>
+        <li>✅ પોતાની Professional Digital Profile & સેવાકીય રેકોર્ડ</li>
+        <li>✅ યોગ્ય કામગીરી બદલ પ્રશંસાપત્ર (Certificate) અને વિશેષ સન્માન</li>
+      </ul>
     </div>
   </div>
 
   <!-- વોલેન્ટિયર ફોર્મ -->
-  <div class="form-section">
-    <div class="section-title">
-      <h2>✨ તમારું વોલેન્ટિયર કાર્ડ બનાવો</h2>
-      <p>માત્ર ૩૦ સેકન્ડમાં તમારું HD પોસ્ટર તૈયાર થઈ જશે</p>
+  <div class="form-area">
+    <div class="form-header">
+      <h2>✨ તમારું HD Volunteer Poster બનાવો</h2>
+      <p>ફોટો અપલોડ કરો — Instagram Post અને Story બંને સાઈઝ તૈયાર થશે</p>
     </div>
 
     <form id="volunteerForm">
       <div class="form-group">
-        <label>તમારું પૂરું નામ <span class="req">*</span></label>
+        <label>તમારું પૂરું નામ <span>*</span></label>
         <input type="text" id="volName" placeholder="દા.ત. રાજેશભાઈ પટેલ" required>
       </div>
 
       <div class="form-group">
-        <label>ગામ / શહેર (એડ્રેસ) <span class="req">*</span></label>
-        <input type="text" id="volAddress" placeholder="દા.ત. અમદાવાદ, ગુજરાત" required>
+        <label>ગામ / તાલુકો / શહેર <span>*</span></label>
+        <input type="text" id="volAddress" placeholder="દા.ત. ગાંધીનગર, ગુજરાત" required>
       </div>
 
       <div class="form-group">
-        <label>Instagram ID (યુઝરનેમ) <span class="req">*</span></label>
+        <label>Instagram ID <span>*</span></label>
         <input type="text" id="volInsta" placeholder="દા.ત. @rajesh_patel" required>
       </div>
 
@@ -396,61 +384,68 @@
       </div>
 
       <div class="form-group">
-        <label>તમારો સારો ફોટો અપલોડ કરો <span class="req">*</span></label>
-        <div class="file-upload-box">
-          <input type="file" id="volPhoto" accept="image/*" required onchange="updateFileName(this)">
-          <div class="file-upload-icon">📸</div>
-          <div class="file-upload-text">અહીં ક્લિક કરીને ગેલેરીમાંથી ફોટો પસંદ કરો</div>
-          <div class="file-name-display" id="fileNameDisplay">કોઈ ફોટો પસંદ કર્યો નથી</div>
+        <label>તમારો સારો HD ફોટો અપલોડ કરો <span>*</span></label>
+        <div class="upload-zone">
+          <input type="file" id="volPhoto" accept="image/*" required onchange="showFileName(this)">
+          <div style="font-size: 28px;">📸</div>
+          <div style="font-weight: 800; color: #14532d; font-size: 14px;">અહીં ક્લિક કરીને તમારો ફોટો પસંદ કરો</div>
+          <div id="fileLabel" style="font-size: 12px; color: #ea580c; font-weight: 600; margin-top: 4px;">કોઈ ફોટો પસંદ કર્યો નથી</div>
         </div>
       </div>
 
-      <button type="submit" class="btn btn-primary" id="submitBtn">
-        <span>🎨 મારું વોલેન્ટિયર પોસ્ટર બનાવો</span>
-      </button>
+      <button type="submit" class="btn btn-create" id="submitBtn">🎨 મારું HD વોલેન્ટિયર પોસ્ટર બનાવો</button>
     </form>
 
-    <!-- પોસ્ટર પ્રિવ્યૂ અને ડાઉનલોડ -->
-    <div class="preview-section" id="previewSection">
-      <div class="congrats-title">🎉 અભિનંદન! જીવસેવક પરિવારમાં આપનું સ્વાગત છે</div>
-      <canvas id="posterCanvas" width="1080" height="1080"></canvas>
-      <br>
-      <div class="status-msg" id="statusMsg"></div>
+    <!-- પરિણામ અને ડાઉનલોડ -->
+    <div class="result-box" id="resultBox">
+      <h3 style="color: #14532d; font-size: 19px; font-weight: 900; margin-bottom: 10px;">
+        🎉 અભિનંદન! JIVSEVAK PARIVAR માં આપનું સ્વાગત છે
+      </h3>
       
-      <button class="btn btn-download" id="downloadBtn" onclick="downloadPoster()">
-        <span>⬇️ HD પોસ્ટર ડાઉનલોડ કરો</span>
+      <!-- પોસ્ટ સાઈઝ કેનવાસ (1080x1200) -->
+      <canvas id="postCanvas" width="1080" height="1200"></canvas>
+      <!-- સ્ટોરી સાઈઝ કેનવાસ (1080x1920 - છુપાયેલું રહેશે પણ ડાઉનલોડ થશે) -->
+      <canvas id="storyCanvas" width="1080" height="1920" style="display:none;"></canvas>
+
+      <br>
+      <div class="status-pill" id="statusMsg"></div>
+
+      <button class="btn btn-post-dl" onclick="downloadImage('post')">
+        ⬇️ HD Post ડાઉનલોડ કરો (Instagram / FB Post)
       </button>
 
-      <div class="share-guide">
-        <strong class="heading">📲 Instagram અને Facebook પર કેવી રીતે મૂકવું?</strong>
-        1. ઉપરના ઓરેન્જ બટનથી તમારું <b>HD પોસ્ટર ડાઉનલોડ</b> કરો.<br>
-        2. તમારી Instagram Story અથવા Post માં આ ફોટો મૂકો.<br>
-        3. અમને <b>@jivsevak</b> ટેગ કરો, જેથી અમે પણ તમારી પોસ્ટ અમારા પેજ પર શેર કરીને આપનું સન્માન કરી શકીએ! 🙏
+      <button class="btn btn-story-dl" onclick="downloadImage('story')">
+        📱 Full HD Story ડાઉનલોડ કરો (Insta / WhatsApp Story)
+      </button>
+
+      <div class="tag-box">
+        <strong>🔥 હવે શું કરવું?</strong><br>
+        1️⃣ ઉપરથી <b>HD Post</b> અથવા <b>Full HD Story</b> ડાઉનલોડ કરો.<br>
+        2️⃣ તમારા Instagram અને Facebook પર પોસ્ટ/સ્ટોરી મૂકો અને <b>@jivsevak</b> ને ટેગ કરો.<br>
+        3️⃣ અમારા Instagram DM માં <b>VOLUNTEER</b> લખીને આ પોસ્ટર મોકલો જેથી અમે પણ અમારા પેજ પર શેર કરી શકીએ! 🙏
       </div>
     </div>
   </div>
 </div>
 
-<div class="footer-note">
-  © જીવસેવક પરિવાર (@jivsevak) • દયા | કરુણા | માનવતા
-</div>
+<!-- બેકગ્રાઉન્ડ ટેમ્પલેટ ઈમેજ -->
+<img src="poster_bg.png" id="bgTemplate" style="display:none;" crossorigin="anonymous">
 
 <script>
   // અહીં તમારી Google Apps Script Web App URL પેસ્ટ કરો
   const GOOGLE_SCRIPT_URL = "YOUR_GOOGLE_SCRIPT_URL_HERE";
 
   const form = document.getElementById('volunteerForm');
-  const canvas = document.getElementById('posterCanvas');
-  const ctx = canvas.getContext('2d');
+  const postCanvas = document.getElementById('postCanvas');
+  const postCtx = postCanvas.getContext('2d');
+  const storyCanvas = document.getElementById('storyCanvas');
+  const storyCtx = storyCanvas.getContext('2d');
+  const bgTemplate = document.getElementById('bgTemplate');
   const orgLogo = document.getElementById('orgLogo');
 
-  function updateFileName(input) {
-    const display = document.getElementById('fileNameDisplay');
-    if (input.files && input.files[0]) {
-      display.innerText = "✅ પસંદ કરેલ ફોટો: " + input.files[0].name;
-    } else {
-      display.innerText = "કોઈ ફોટો પસંદ કર્યો નથી";
-    }
+  function showFileName(input) {
+    const lbl = document.getElementById('fileLabel');
+    lbl.innerText = (input.files && input.files[0]) ? "✅ પસંદ કરેલ: " + input.files[0].name : "કોઈ ફોટો પસંદ કર્યો નથી";
   }
 
   form.addEventListener('submit', function(e) {
@@ -462,27 +457,25 @@
     const fb = document.getElementById('volFb').value.trim() || name;
     const photoInput = document.getElementById('volPhoto');
 
-    if (!photoInput.files || !photoInput.files[0]) {
-      alert("કૃપા કરીને તમારો ફોટો પસંદ કરો.");
-      return;
-    }
+    if (!photoInput.files || !photoInput.files[0]) return;
 
-    const submitBtn = document.getElementById('submitBtn');
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = "<span>⏳ પોસ્ટર બની રહ્યું છે...</span>";
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.innerText = "⏳ HD પોસ્ટર બની રહ્યું છે...";
 
     const reader = new FileReader();
     reader.onload = function(event) {
       const userImg = new Image();
       userImg.onload = function() {
-        drawPoster(userImg, name, address, insta, fb);
-        const previewSec = document.getElementById('previewSection');
-        previewSec.style.display = 'block';
-        document.getElementById('downloadBtn').style.display = 'flex';
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = "<span>✨ ફરીથી પોસ્ટર બનાવો</span>";
-        
-        previewSec.scrollIntoView({ behavior: 'smooth' });
+        drawMainPost(userImg, name, address, insta, fb);
+        drawStoryPost(userImg, name, address, insta, fb);
+
+        const resBox = document.getElementById('resultBox');
+        resBox.style.display = 'block';
+        btn.disabled = false;
+        btn.innerText = "✨ ફરીથી પોસ્ટર બનાવો";
+        resBox.scrollIntoView({ behavior: 'smooth' });
+
         saveToGoogleDrive(name, address, insta, fb);
       };
       userImg.src = event.target.result;
@@ -490,166 +483,294 @@
     reader.readAsDataURL(photoInput.files[0]);
   });
 
-  function drawPoster(userImg, name, address, insta, fb) {
-    const W = 1080, H = 1080;
+  // 1. મુખ્ય HD પોસ્ટ (1080x1200) - તમારા સુંદર બેકગ્રાઉન્ડ ટેમ્પલેટ સાથે
+  function drawMainPost(userImg, name, address, insta, fb) {
+    const W = 1080, H = 1200;
+    postCtx.clearRect(0, 0, W, H);
 
-    // 1. પ્રીમિયમ ડાર્ક ગ્રીન બેકગ્રાઉન્ડ ગ્રેડિયન્ટ
-    const bgGrad = ctx.createLinearGradient(0, 0, W, H);
+    if (bgTemplate && bgTemplate.complete && bgTemplate.naturalWidth > 0) {
+      postCtx.drawImage(bgTemplate, 0, 0, W, H);
+    } else {
+      postCtx.fillStyle = '#14532d';
+      postCtx.fillRect(0, 0, W, H);
+    }
+
+    // વચ્ચેના કાર્ડ પર નવા વોલેન્ટિયરનો મોટો HD ફોટો અને વિગતો સેટ કરવી
+    // કાર્ડ એરિયા: x=330, y=275, width=376, height=540
+    const cardX = 332, cardY = 278, cardW = 372, cardH = 534;
+
+    // કાર્ડનું બેકગ્રાઉન્ડ ક્લીન કરવું જેથી જૂનો સેમ્પલ ફોટો/નામ ઢંકાઈ જાય
+    postCtx.save();
+    roundRect(postCtx, cardX, cardY, cardW, cardH, 22);
+    postCtx.clip();
+
+    const grad = postCtx.createLinearGradient(0, cardY, 0, cardY + cardH);
+    grad.addColorStop(0, '#073b1c');
+    grad.addColorStop(0.65, '#14532d');
+    grad.addColorStop(1, '#052e16');
+    postCtx.fillStyle = grad;
+    postCtx.fillRect(cardX, cardY, cardW, cardH);
+
+    // ટોપ ઓરેન્જ હેડર
+    postCtx.fillStyle = '#ea580c';
+    roundRect(postCtx, cardX + 16, cardY + 14, cardW - 32, 42, 21);
+    postCtx.fill();
+
+    // નાનો લોગો
+    if (orgLogo && orgLogo.complete && orgLogo.naturalWidth > 0) {
+      postCtx.save();
+      postCtx.beginPath();
+      postCtx.arc(cardX + 38, cardY + 35, 22, 0, Math.PI * 2);
+      postCtx.fillStyle = '#fde047';
+      postCtx.fill();
+      postCtx.beginPath();
+      postCtx.arc(cardX + 38, cardY + 35, 19, 0, Math.PI * 2);
+      postCtx.clip();
+      postCtx.drawImage(orgLogo, cardX + 19, cardY + 16, 38, 38);
+      postCtx.restore();
+    }
+
+    postCtx.fillStyle = '#ffffff';
+    postCtx.font = 'bold 18px "Noto Sans Gujarati", sans-serif';
+    postCtx.textAlign = 'center';
+    postCtx.fillText('જીવસેવક પરિવાર (JIVSEVAK)', cardX + cardW / 2 + 16, cardY + 41);
+
+    // સબ-હેડિંગ
+    postCtx.fillStyle = '#fde047';
+    postCtx.font = 'bold 18px "Noto Sans Gujarati", sans-serif';
+    postCtx.fillText('ગૌરવશાળી વોલેન્ટિયર (PROUD VOLUNTEER)', cardX + cardW / 2, cardY + 80);
+
+    postCtx.fillStyle = '#dcfce7';
+    postCtx.font = '600 13px "Noto Sans Gujarati", sans-serif';
+    postCtx.fillText('"૩૬૫ દિવસ જીવ સેવા યજ્ઞ — નાનો દાણો, મોટું પુણ્ય"', cardX + cardW / 2, cardY + 100);
+
+    // વોલેન્ટિયરનો મોટો HD ગોળ ફોટો (Radius = 118 -> 236px મોટો ફોટો)
+    const cx = cardX + cardW / 2;
+    const cy = cardY + 234;
+    const r = 118;
+
+    postCtx.beginPath();
+    postCtx.arc(cx, cy, r + 9, 0, Math.PI * 2);
+    postCtx.fillStyle = '#f59e0b';
+    postCtx.fill();
+
+    postCtx.beginPath();
+    postCtx.arc(cx, cy, r + 4, 0, Math.PI * 2);
+    postCtx.fillStyle = '#ffffff';
+    postCtx.fill();
+
+    postCtx.save();
+    postCtx.beginPath();
+    postCtx.arc(cx, cy, r, 0, Math.PI * 2);
+    postCtx.closePath();
+    postCtx.clip();
+
+    drawCroppedImage(postCtx, userImg, cx - r, cy - r, r * 2, r * 2);
+    postCtx.restore();
+
+    // નીચેનું વ્હાઈટ ડિટેલ કાર્ડ
+    postCtx.fillStyle = '#ffffff';
+    roundRect(postCtx, cardX + 14, cardY + 368, cardW - 28, 134, 16);
+    postCtx.fill();
+
+    // વોલેન્ટિયરનું નામ
+    postCtx.fillStyle = '#14532d';
+    postCtx.font = 'bold 26px "Noto Sans Gujarati", sans-serif';
+    postCtx.fillText(name, cx, cardY + 402);
+
+    // ગામ / શહેર
+    postCtx.fillStyle = '#dc2626';
+    postCtx.font = 'bold 18px "Noto Sans Gujarati", sans-serif';
+    postCtx.fillText('📍 ' + address, cx, cardY + 430);
+
+    // ડિવાઈડર લાઈન
+    postCtx.strokeStyle = '#e2e8f0';
+    postCtx.lineWidth = 1.5;
+    postCtx.beginPath();
+    postCtx.moveTo(cardX + 34, cardY + 444);
+    postCtx.lineTo(cardX + cardW - 34, cardY + 444);
+    postCtx.stroke();
+
+    // Insta & FB ID
+    postCtx.fillStyle = '#1e293b';
+    postCtx.font = '600 14px "Poppins", "Noto Sans Gujarati", sans-serif';
+    postCtx.fillText('📸 ' + insta + '  |  📘 ' + fb, cx, cardY + 468);
+
+    // ટેગ લાઈન
+    postCtx.fillStyle = '#15803d';
+    postCtx.font = 'bold 14px "Noto Sans Gujarati", sans-serif';
+    postCtx.fillText('અમારી સાથે જોડાવા ફોલો કરો: @jivsevak', cx, cardY + 492);
+
+    // બોટમ પટ્ટી
+    postCtx.fillStyle = '#bbf7d0';
+    postCtx.font = '600 11.5px "Noto Sans Gujarati", sans-serif';
+    postCtx.fillText('બેજુબાન જીવો માટે પ્રેમ અને ખોરાક સેવા • દયા | કરુણા | માનવતા', cx, cardY + 520);
+
+    postCtx.restore();
+  }
+
+  // 2. Full HD Story (1080x1920) - Instagram અને WhatsApp સ્ટોરી માટે
+  function drawStoryPost(userImg, name, address, insta, fb) {
+    const W = 1080, H = 1920;
+    const bgGrad = storyCtx.createLinearGradient(0, 0, W, H);
     bgGrad.addColorStop(0, '#052e16');
     bgGrad.addColorStop(0.5, '#14532d');
     bgGrad.addColorStop(1, '#064e3b');
-    ctx.fillStyle = bgGrad;
-    ctx.fillRect(0, 0, W, H);
+    storyCtx.fillStyle = bgGrad;
+    storyCtx.fillRect(0, 0, W, H);
 
-    // બેકગ્રાઉન્ડમાં હળવા સુશોભન વર્તુળો
-    ctx.fillStyle = 'rgba(245, 158, 11, 0.06)';
-    ctx.beginPath();
-    ctx.arc(W / 2, 460, 360, 0, Math.PI * 2);
-    ctx.fill();
+    // ગોલ્ડન બોર્ડર
+    storyCtx.strokeStyle = '#f59e0b';
+    storyCtx.lineWidth = 16;
+    storyCtx.strokeRect(32, 32, W - 64, H - 64);
 
-    // 2. ડબલ ગોલ્ડન બોર્ડર
-    ctx.strokeStyle = '#f59e0b';
-    ctx.lineWidth = 14;
-    ctx.strokeRect(26, 26, W - 52, H - 52);
-
-    ctx.strokeStyle = 'rgba(253, 224, 71, 0.35)';
-    ctx.lineWidth = 3;
-    ctx.strokeRect(46, 46, W - 92, H - 92);
-
-    // 3. ટોપ હેડર બેનર + લોગો
-    ctx.fillStyle = '#ea580c';
-    roundRect(ctx, 210, 62, 690, 78, 39, true, false);
-
+    // ટોપ લોગો
     if (orgLogo && orgLogo.complete && orgLogo.naturalWidth > 0) {
-      ctx.save();
-      ctx.beginPath();
-      ctx.arc(215, 101, 50, 0, Math.PI * 2);
-      ctx.fillStyle = '#fde047';
-      ctx.fill();
-      ctx.beginPath();
-      ctx.arc(215, 101, 45, 0, Math.PI * 2);
-      ctx.clip();
-      ctx.drawImage(orgLogo, 170, 56, 90, 90);
-      ctx.restore();
+      storyCtx.save();
+      storyCtx.beginPath();
+      storyCtx.arc(W / 2, 165, 85, 0, Math.PI * 2);
+      storyCtx.fillStyle = '#fde047';
+      storyCtx.fill();
+      storyCtx.beginPath();
+      storyCtx.arc(W / 2, 165, 78, 0, Math.PI * 2);
+      storyCtx.clip();
+      storyCtx.drawImage(orgLogo, W / 2 - 78, 87, 156, 156);
+      storyCtx.restore();
     }
 
-    ctx.fillStyle = '#ffffff';
-    ctx.font = 'bold 35px "Noto Sans Gujarati", sans-serif';
-    ctx.textAlign = 'center';
-    ctx.fillText('જીવસેવક પરિવાર (JIVSEVAK)', 575, 113);
+    storyCtx.fillStyle = '#ffffff';
+    storyCtx.textAlign = 'center';
+    storyCtx.font = 'bold 54px "Noto Sans Gujarati", sans-serif';
+    storyCtx.fillText('JIVSEVAK PARIVAR', W / 2, 315);
 
-    // 4. સબ-ટાઈટલ
-    ctx.fillStyle = '#fde047';
-    ctx.font = 'bold 40px "Noto Sans Gujarati", sans-serif';
-    ctx.fillText('ગૌરવશાળી વોલેન્ટિયર (PROUD VOLUNTEER)', W / 2, 202);
+    storyCtx.fillStyle = '#fde047';
+    storyCtx.font = 'bold 30px "Noto Sans Gujarati", sans-serif';
+    storyCtx.fillText('💚 સેવા • શ્રદ્ધા • વિશ્વાસ 💚', W / 2, 365);
 
-    ctx.fillStyle = '#dcfce7';
-    ctx.font = '600 26px "Noto Sans Gujarati", sans-serif';
-    ctx.fillText('"૩૬૫ દિવસ જીવ સેવા યજ્ઞ — નાનો દાણો, મોટું પુણ્ય"', W / 2, 246);
+    // રેડ બેનર
+    storyCtx.fillStyle = '#dc2626';
+    roundRect(storyCtx, 130, 405, 820, 74, 37);
+    storyCtx.fill();
+    storyCtx.fillStyle = '#ffffff';
+    storyCtx.font = 'bold 34px "Noto Sans Gujarati", sans-serif';
+    storyCtx.fillText('ગૌરવશાળી વોલેન્ટિયર (PROUD VOLUNTEER)', W / 2, 453);
 
-    // 5. વોલેન્ટિયરનો ગોળ ફોટો
-    const centerX = W / 2;
-    const centerY = 468;
-    const radius = 185;
+    // મોટો HD ફોટો (Radius = 240 -> 480px મોટો ફોટો)
+    const cx = W / 2, cy = 780, r = 240;
+    storyCtx.beginPath();
+    storyCtx.arc(cx, cy, r + 18, 0, Math.PI * 2);
+    storyCtx.fillStyle = '#f59e0b';
+    storyCtx.fill();
 
-    ctx.save();
-    ctx.beginPath();
-    ctx.arc(centerX, centerY, radius + 15, 0, Math.PI * 2);
-    ctx.fillStyle = '#f59e0b';
-    ctx.fill();
+    storyCtx.beginPath();
+    storyCtx.arc(cx, cy, r + 8, 0, Math.PI * 2);
+    storyCtx.fillStyle = '#ffffff';
+    storyCtx.fill();
 
-    ctx.beginPath();
-    ctx.arc(centerX, centerY, radius + 6, 0, Math.PI * 2);
-    ctx.fillStyle = '#ffffff';
-    ctx.fill();
+    storyCtx.save();
+    storyCtx.beginPath();
+    storyCtx.arc(cx, cy, r, 0, Math.PI * 2);
+    storyCtx.clip();
+    drawCroppedImage(storyCtx, userImg, cx - r, cy - r, r * 2, r * 2);
+    storyCtx.restore();
 
-    ctx.beginPath();
-    ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
-    ctx.closePath();
-    ctx.clip();
+    // ડિટેલ કાર્ડ
+    storyCtx.fillStyle = '#ffffff';
+    roundRect(storyCtx, 95, 1080, 890, 380, 32);
+    storyCtx.fill();
 
-    const imgAspect = userImg.width / userImg.height;
-    let drawW, drawH, offsetX, offsetY;
-    if (imgAspect > 1) {
-      drawH = radius * 2;
-      drawW = drawH * imgAspect;
-      offsetX = centerX - drawW / 2;
-      offsetY = centerY - radius;
+    storyCtx.fillStyle = '#14532d';
+    storyCtx.font = 'bold 58px "Noto Sans Gujarati", sans-serif';
+    storyCtx.fillText(name, W / 2, 1170);
+
+    storyCtx.fillStyle = '#dc2626';
+    storyCtx.font = 'bold 38px "Noto Sans Gujarati", sans-serif';
+    storyCtx.fillText('📍 ' + address, W / 2, 1235);
+
+    storyCtx.strokeStyle = '#e2e8f0';
+    storyCtx.lineWidth = 3;
+    storyCtx.beginPath();
+    storyCtx.moveTo(160, 1275);
+    storyCtx.lineTo(920, 1275);
+    storyCtx.stroke();
+
+    storyCtx.fillStyle = '#1e293b';
+    storyCtx.font = '600 32px "Poppins", "Noto Sans Gujarati", sans-serif';
+    storyCtx.fillText('📸 ' + insta + '   |   📘 ' + fb, W / 2, 1340);
+
+    storyCtx.fillStyle = '#15803d';
+    storyCtx.font = 'bold 32px "Noto Sans Gujarati", sans-serif';
+    storyCtx.fillText('અમારી સાથે જોડાવા ફોલો કરો: @jivsevak', W / 2, 1410);
+
+    // નીચેનું સ્લોગન
+    storyCtx.fillStyle = '#fde047';
+    storyCtx.font = 'bold 34px "Noto Sans Gujarati", sans-serif';
+    storyCtx.fillText('"યુવા શક્તિ જોડાશે, તો જીવસેવાનું અભિયાન આગળ વધશે!"', W / 2, 1550);
+
+    storyCtx.fillStyle = '#dcfce7';
+    storyCtx.font = '28px "Noto Sans Gujarati", sans-serif';
+    storyCtx.fillText('🐄 ગૌસેવા  •  🐕 શ્વાન સેવા  •  🐒 જીવસેવા  •  🐦 પક્ષી ચણ', W / 2, 1620);
+
+    storyCtx.fillStyle = '#ea580c';
+    roundRect(storyCtx, 180, 1690, 720, 80, 40);
+    storyCtx.fill();
+    storyCtx.fillStyle = '#ffffff';
+    storyCtx.font = 'bold 32px "Noto Sans Gujarati", sans-serif';
+    storyCtx.fillText('જોડાવા માટે @jivsevak ને DM કરો: VOLUNTEER', W / 2, 1741);
+  }
+
+  function drawCroppedImage(ctx, img, x, y, w, h) {
+    const aspect = img.width / img.height;
+    let drawW, drawH, offX, offY;
+    if (aspect > 1) {
+      drawH = h;
+      drawW = drawH * aspect;
+      offX = x - (drawW - w) / 2;
+      offY = y;
     } else {
-      drawW = radius * 2;
-      drawH = drawW / imgAspect;
-      offsetX = centerX - radius;
-      offsetY = centerY - drawH / 2;
+      drawW = w;
+      drawH = drawW / aspect;
+      offX = x;
+      offY = y - (drawH - h) / 2;
     }
-    ctx.drawImage(userImg, offsetX, offsetY, drawW, drawH);
-    ctx.restore();
-
-    // 6. વોલેન્ટિયરની વિગતોનું કાર્ડ
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.97)';
-    roundRect(ctx, 105, 692, 870, 265, 26, true, false);
-
-    ctx.fillStyle = '#14532d';
-    ctx.font = 'bold 48px "Noto Sans Gujarati", sans-serif';
-    ctx.fillText(name, W / 2, 758);
-
-    ctx.fillStyle = '#c2410c';
-    ctx.font = 'bold 30px "Noto Sans Gujarati", sans-serif';
-    ctx.fillText('📍 ' + address, W / 2, 810);
-
-    ctx.strokeStyle = '#e5e7eb';
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(175, 838);
-    ctx.lineTo(905, 838);
-    ctx.stroke();
-
-    ctx.fillStyle = '#1f2937';
-    ctx.font = '600 26px "Poppins", "Noto Sans Gujarati", sans-serif';
-    ctx.fillText('📸 Insta: ' + insta + '   |   📘 FB: ' + fb, W / 2, 888);
-
-    ctx.fillStyle = '#15803d';
-    ctx.font = 'bold 25px "Noto Sans Gujarati", sans-serif';
-    ctx.fillText('અમારી સાથે જોડાવા ફોલો કરો: @jivsevak', W / 2, 934);
-
-    // 7. ફૂટર ક્રેડિટ
-    ctx.fillStyle = '#bbf7d0';
-    ctx.font = '22px "Noto Sans Gujarati", sans-serif';
-    ctx.fillText('બેજુબાન જીવો માટે પ્રેમ અને ખોરાક સેવા • દયા | કરુણા | માનવતા', W / 2, 1012);
+    ctx.drawImage(img, offX, offY, drawW, drawH);
   }
 
-  function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
+  function roundRect(ctx, x, y, w, h, r) {
     ctx.beginPath();
-    ctx.moveTo(x + radius, y);
-    ctx.lineTo(x + width - radius, y);
-    ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
-    ctx.lineTo(x + width, y + height - radius);
-    ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
-    ctx.lineTo(x + radius, y + height);
-    ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
-    ctx.lineTo(x, y + radius);
-    ctx.quadraticCurveTo(x, y, x + radius, y);
+    ctx.moveTo(x + r, y);
+    ctx.lineTo(x + w - r, y);
+    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+    ctx.lineTo(x + w, y + h - r);
+    ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+    ctx.lineTo(x + r, y + h);
+    ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+    ctx.lineTo(x, y + r);
+    ctx.quadraticCurveTo(x, y, x + r, y);
     ctx.closePath();
-    if (fill) ctx.fill();
-    if (stroke) ctx.stroke();
   }
 
-  function downloadPoster() {
+  function downloadImage(type) {
     const link = document.createElement('a');
     const name = document.getElementById('volName').value.trim().replace(/\s+/g, '_') || 'Volunteer';
-    link.download = 'Jivsevak_Volunteer_' + name + '.png';
-    link.href = canvas.toDataURL('image/png', 1.0);
+    if (type === 'post') {
+      link.download = 'Jivsevak_Post_' + name + '.png';
+      link.href = postCanvas.toDataURL('image/png', 1.0);
+    } else {
+      link.download = 'Jivsevak_Story_' + name + '.png';
+      link.href = storyCanvas.toDataURL('image/png', 1.0);
+    }
     link.click();
   }
 
   function saveToGoogleDrive(name, address, instaId, fbName) {
     const statusMsg = document.getElementById('statusMsg');
     if (GOOGLE_SCRIPT_URL === "https://script.google.com/macros/s/AKfycbyyvq-9Fn5ELzzjaVJA45smi_PDK25IZTcUo50JlBwW-xxGzaz2orbpFegL30hepmi8/exec") {
-      statusMsg.innerText = "✅ તમારું પોસ્ટર ડાઉનલોડ માટે તૈયાર છે!";
+      statusMsg.innerText = "✅ તમારું HD પોસ્ટર અને સ્ટોરી ડાઉનલોડ માટે તૈયાર છે!";
       return;
     }
-
-    statusMsg.innerText = "⏳ તમારી વિગતો જીવસેવક પરિવારના રેકોર્ડમાં સેવ થઈ રહી છે...";
-    const posterImage = canvas.toDataURL('image/png', 0.85);
+    statusMsg.innerText = "⏳ તમારી વિગતો JIVSEVAK PARIVAR ના રેકોર્ડમાં સેવ થઈ રહી છે...";
+    const posterImage = postCanvas.toDataURL('image/png', 0.9);
 
     fetch(GOOGLE_SCRIPT_URL, {
       method: 'POST',
@@ -658,11 +779,10 @@
       body: JSON.stringify({ name, address, instaId, fbName, posterImage })
     })
     .then(() => {
-      statusMsg.innerText = "✅ તમારું રજીસ્ટ્રેશન સફળતાપૂર્વક જીવસેવક પરિવારમાં નોંધાઈ ગયું છે!";
+      statusMsg.innerText = "✅ રજીસ્ટ્રેશન સફળ! હવે પોસ્ટર ડાઉનલોડ કરીને @jivsevak ને ટેગ કરો.";
     })
-    .catch(err => {
-      console.error(err);
-      statusMsg.innerText = "✅ તમારું પોસ્ટર ડાઉનલોડ માટે તૈયાર છે!";
+    .catch(() => {
+      statusMsg.innerText = "✅ તમારું HD પોસ્ટર ડાઉનલોડ માટે તૈયાર છે!";
     });
   }
 </script>
