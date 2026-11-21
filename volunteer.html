@@ -260,7 +260,6 @@
       margin-top: 8px;
     }
 
-    /* WhatsApp Group Join Button */
     .whatsapp-card {
       background: linear-gradient(135deg, #ecfdf5, #d1fae5);
       border: 2px solid #10b981;
@@ -479,7 +478,6 @@
       <br>
       <div class="status-pill" id="statusMsg"></div>
 
-      <!-- WhatsApp Group Join Box -->
       <div class="whatsapp-card">
         <p>🐾 જીવસેવાના દૈનિક અપડેટ્સ અને વોલેન્ટિયર ટીમ સાથે જોડાવા અમારા WhatsApp ગ્રુપમાં જોડાઓ:</p>
         <a href="https://chat.whatsapp.com/HHj0iQsahDM5B9nLngv6eR" target="_blank" class="btn btn-whatsapp" id="waJoinBtn">
@@ -520,10 +518,7 @@
 <img src="poster_bg.png" id="bgTemplate" style="display:none;" crossorigin="anonymous">
 
 <script>
-  // ૧. અહીં તમારી Google Apps Script Web App URL પેસ્ટ કરો
   const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyyvq-9Fn5ELzzjaVJA45smi_PDK25IZTcUo50JlBwW-xxGzaz2orbpFegL30hepmi8/exec";
-
-  // ૨. અહીં તમારી WhatsApp Group Invite Link પેસ્ટ કરો (દા.ત. https://chat.whatsapp.com/AbCdEfGhIjKlMnOpQr)
   const WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/HHj0iQsahDM5B9nLngv6eR";
 
   document.getElementById('waJoinBtn').href = WHATSAPP_GROUP_URL;
@@ -543,9 +538,6 @@
   }
 
   async function getNextVolunteerId() {
-    if (GOOGLE_SCRIPT_URL === "https://script.google.com/macros/s/AKfycbyyvq-9Fn5ELzzjaVJA45smi_PDK25IZTcUo50JlBwW-xxGzaz2orbpFegL30hepmi8/exec") {
-      return "JS_1";
-    }
     try {
       const res = await fetch(GOOGLE_SCRIPT_URL);
       const data = await res.json();
@@ -900,10 +892,6 @@
 
   function saveToGoogleDrive(volId, name, mobile, address, instaId, fbName) {
     const statusMsg = document.getElementById('statusMsg');
-    if (GOOGLE_SCRIPT_URL === "https://script.google.com/macros/s/AKfycbyyvq-9Fn5ELzzjaVJA45smi_PDK25IZTcUo50JlBwW-xxGzaz2orbpFegL30hepmi8/exec") {
-      statusMsg.innerText = "✅ તમારું ID (" + volId + ") અને HD પોસ્ટર તૈયાર છે!";
-      return;
-    }
     statusMsg.innerText = "⏳ તમારું ID (" + volId + ") JIVSEVAK PARIVAR ના રેકોર્ડમાં સેવ થઈ રહ્યું છે...";
     const posterImage = getCompressedPoster();
 
