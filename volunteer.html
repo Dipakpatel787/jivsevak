@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>જીવસેવક પરિવાર - વોલેન્ટિયર બનો</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;600;700;800&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1b5e20;
+      --secondary: #ff6f00;
+      --bg: #f1f8e9;
+      --card: #ffffff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Noto Sans Gujarati', 'Poppins', sans-serif;
+      background: var(--bg);
+      color: #222;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .container {
+      max-width: 500px;
+      width: 100%;
+      background: var(--card);
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      padding: 24px;
+      border-top: 6px solid var(--secondary);
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .header img.site-logo {
+      width: 85px;
+      height: 85px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--secondary);
+      margin-bottom: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+    .header h1 {
+      color: var(--primary);
+      font-size: 24px;
+      font-weight: 800;
+    }
+    .header p {
+      color: #555;
+      font-size: 14px;
+      margin-top: 6px;
+    }
+    .form-group {
+      margin-bottom: 14px;
+    }
+    label {
+      display: block;
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 6px;
+      color: #333;
+    }
+    input[type="text"], input[type="file"] {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid #ccc;
+      border-radius: 10px;
+      font-size: 15px;
+      font-family: inherit;
+      transition: 0.2s;
+    }
+    input[type="text"]:focus {
+      border-color: var(--primary);
+      outline: none;
+    }
+    .btn {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      margin-top: 10px;
+      transition: 0.2s;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #2e7d32, #1b5e20);
+      color: #fff;
+    }
+    .btn-primary:hover { opacity: 0.95; }
+    .btn-download {
+      background: linear-gradient(135deg, #ff8f00, #e65100);
+      color: #fff;
+      display: none;
+    }
+    .preview-section {
+      margin-top: 24px;
+      text-align: center;
+      display: none;
+    }
+    canvas {
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+      border: 2px solid var(--primary);
+    }
+    .status-msg {
+      margin-top: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+    .share-tip {
+      background: #fff8e1;
+      border: 1px dashed #ffa000;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 13px;
+      margin-top: 14px;
+      text-align: left;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <img src="jivsevaklogo.jpg" alt="Jivsevak Logo" class="site-logo" id="orgLogo">
+    <h1>જીવસેવક પરિવાર</h1>
+    <p>"જીવસેવા એ જ સાચી સેવા" — અમારા પરિવારના ગૌરવશાળી વોલેન્ટિયર બનો અને તમારું ડિજિટલ ઓળખ પોસ્ટર મેળવો.</p>
+  </div>
+
+  <form id="volunteerForm">
+    <div class="form-group">
+      <label>તમારું પૂરું નામ *</label>
+      <input type="text" id="volName" placeholder="દા.ત. દીપકભાઈ પટેલ" required>
+    </div>
+
+    <div class="form-group">
+      <label>ગામ / શહેર (એડ્રેસ) *</label>
+      <input type="text" id="volAddress" placeholder="દા.ત. સરગાસણ, ગાંધીનગર" required>
+    </div>
+
+    <div class="form-group">
+      <label>Instagram ID (યુઝરનેમ) *</label>
+      <input type="text" id="volInsta" placeholder="દા.ત. @dipak_patel" required>
+    </div>
+
+    <div class="form-group">
+      <label>Facebook આઈડીનું નામ</label>
+      <input type="text" id="volFb" placeholder="દા.ત. Dipak Patel">
+    </div>
+
+    <div class="form-group">
+      <label>તમારો સારો ફોટો અપલોડ કરો *</label>
+      <input type="file" id="volPhoto" accept="image/*" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary" id="submitBtn">✨ મારું વોલેન્ટિયર પોસ્ટર બનાવો</button>
+  </form>
+
+  <div class="preview-section" id="previewSection">
+    <h3 style="color: #1b5e20; margin-bottom: 10px;">🎉 અભિનંદન! તમારું પોસ્ટર તૈયાર છે</h3>
+    <canvas id="posterCanvas" width="1080" height="1080"></canvas>
+    <div class="status-msg" id="statusMsg"></div>
+    
+    <button class="btn btn-download" id="downloadBtn" onclick="downloadPoster()">⬇️ HD પોસ્ટર ડાઉનલોડ કરો</button>
+
+    <div class="share-tip">
+      <strong>📲 Instagram અને Facebook પર કેવી રીતે મૂકવું?</strong><br>
+      1. ઉપરના બટનથી પોસ્ટર ડાઉનલોડ કરો.<br>
+      2. તમારી Instagram Story કે Post માં આ ફોટો મૂકો.<br>
+      3. અમને <b>@jivsevakfamily</b> ટેગ કરો, જેથી અમે પણ તમારી સ્ટોરી અમારા પેજ પર શેર કરી શકીએ!
+    </div>
+  </div>
+</div>
+
+<script>
+  // અહીં Google Apps Script Web App URL પેસ્ટ કરો (બાકી હોય તો અત્યારે આમ જ રહેવા દો, પોસ્ટર તો બનશે જ)
+  const GOOGLE_SCRIPT_URL = "YOUR_GOOGLE_SCRIPT_URL_HERE";
+
+  const form = document.getElementById('volunteerForm');
+  const canvas = document.getElementById('posterCanvas');
+  const ctx = canvas.getContext('2d');
+  const orgLogo = document.getElementById('orgLogo');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name = document.getElementById('volName').value.trim();
+    const address = document.getElementById('volAddress').value.trim();
+    let insta = document.getElementById('volInsta').value.trim();
+    if (insta && !insta.startsWith('@')) insta = '@' + insta;
+    const fb = document.getElementById('volFb').value.trim() || name;
+    const photoInput = document.getElementById('volPhoto');
+
+    if (!photoInput.files || !photoInput.files[0]) {
+      alert("કૃપા કરીને તમારો ફોટો પસંદ કરો.");
+      return;
+    }
+
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.disabled = true;
+    submitBtn.innerText = "પોસ્ટર બની રહ્યું છે...";
+
+    const reader = new FileReader();
+    reader.onload = function(event) {
+      const userImg = new Image();
+      userImg.onload = function() {
+        drawPoster(userImg, name, address, insta, fb);
+        document.getElementById('previewSection').style.display = 'block';
+        document.getElementById('downloadBtn').style.display = 'block';
+        submitBtn.disabled = false;
+        submitBtn.innerText = "✨ ફરીથી પોસ્ટર બનાવો";
+        
+        saveToGoogleDrive(name, address, insta, fb);
+      };
+      userImg.src = event.target.result;
+    };
+    reader.readAsDataURL(photoInput.files[0]);
+  });
+
+  function drawPoster(userImg, name, address, insta, fb) {
+    const W = 1080, H = 1080;
+
+    // 1. બેકગ્રાઉન્ડ ગ્રેડિયન્ટ
+    const bgGrad = ctx.createLinearGradient(0, 0, W, H);
+    bgGrad.addColorStop(0, '#0d3b14');
+    bgGrad.addColorStop(0.5, '#1b5e20');
+    bgGrad.addColorStop(1, '#0a290e');
+    ctx.fillStyle = bgGrad;
+    ctx.fillRect(0, 0, W, H);
+
+    // 2. સુશોભન બોર્ડર
+    ctx.strokeStyle = '#ffb300';
+    ctx.lineWidth = 14;
+    ctx.strokeRect(28, 28, W - 56, H - 56);
+
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
+    ctx.lineWidth = 3;
+    ctx.strokeRect(46, 46, W - 92, H - 92);
+
+    // 3. ટોપ હેડર બેનર + લોગો
+    ctx.fillStyle = '#ff6f00';
+    roundRect(ctx, 210, 62, 690, 76, 38, true, false);
+
+    // Jivsevak લોગો ડાબી બાજુ ગોળ ફ્રેમમાં
+    if (orgLogo && orgLogo.complete && orgLogo.naturalWidth > 0) {
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(215, 100, 48, 0, Math.PI * 2);
+      ctx.fillStyle = '#ffffff';
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(215, 100, 44, 0, Math.PI * 2);
+      ctx.clip();
+      ctx.drawImage(orgLogo, 171, 56, 88, 88);
+      ctx.restore();
+    }
+
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 34px "Noto Sans Gujarati", sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('જીવસેવક પરિવાર (JIVSEVAK)', 575, 112);
+
+    // 4. સબ-ટાઈટલ
+    ctx.fillStyle = '#ffe082';
+    ctx.font = 'bold 40px "Noto Sans Gujarati", sans-serif';
+    ctx.fillText('ગૌરવશાળી વોલેન્ટિયર (PROUD VOLUNTEER)', W / 2, 202);
+
+    ctx.fillStyle = '#e8f5e9';
+    ctx.font = '26px "Noto Sans Gujarati", sans-serif';
+    ctx.fillText('"જીવસેવા એ જ સાચી સેવા — અબોલ જીવોનો આધાર"', W / 2, 246);
+
+    // 5. વોલેન્ટિયરનો ગોળ ફોટો
+    const centerX = W / 2;
+    const centerY = 470;
+    const radius = 185;
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, radius + 14, 0, Math.PI * 2);
+    ctx.fillStyle = '#ffb300';
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, radius + 6, 0, Math.PI * 2);
+    ctx.fillStyle = '#ffffff';
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+    ctx.closePath();
+    ctx.clip();
+
+    const imgAspect = userImg.width / userImg.height;
+    let drawW, drawH, offsetX, offsetY;
+    if (imgAspect > 1) {
+      drawH = radius * 2;
+      drawW = drawH * imgAspect;
+      offsetX = centerX - drawW / 2;
+      offsetY = centerY - radius;
+    } else {
+      drawW = radius * 2;
+      drawH = drawW / imgAspect;
+      offsetX = centerX - radius;
+      offsetY = centerY - drawH / 2;
+    }
+    ctx.drawImage(userImg, offsetX, offsetY, drawW, drawH);
+    ctx.restore();
+
+    // 6. વોલેન્ટિયરની વિગતોનું કાર્ડ
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.96)';
+    roundRect(ctx, 110, 695, 860, 260, 24, true, false);
+
+    ctx.fillStyle = '#1b5e20';
+    ctx.font = 'bold 48px "Noto Sans Gujarati", sans-serif';
+    ctx.fillText(name, W / 2, 760);
+
+    ctx.fillStyle = '#d84315';
+    ctx.font = 'bold 30px "Noto Sans Gujarati", sans-serif';
+    ctx.fillText('📍 ' + address, W / 2, 812);
+
+    ctx.strokeStyle = '#cfd8dc';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(180, 838);
+    ctx.lineTo(900, 838);
+    ctx.stroke();
+
+    ctx.fillStyle = '#263238';
+    ctx.font = '600 26px "Poppins", "Noto Sans Gujarati", sans-serif';
+    ctx.fillText('📸 Insta: ' + insta + '   |   📘 FB: ' + fb, W / 2, 888);
+
+    ctx.fillStyle = '#2e7d32';
+    ctx.font = 'bold 24px "Noto Sans Gujarati", sans-serif';
+    ctx.fillText('અમારી સાથે જોડાવા ફોલો કરો: @jivsevakfamily', W / 2, 932);
+
+    // 7. ફૂટર ક્રેડિટ
+    ctx.fillStyle = '#a5d6a7';
+    ctx.font = '22px "Noto Sans Gujarati", sans-serif';
+    ctx.fillText('પશુ-પક્ષી સેવા • કીડિયારું • પર્યાવરણ જતન | જીવસેવક પરિવાર', W / 2, 1012);
+  }
+
+  function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
+    ctx.beginPath();
+    ctx.moveTo(x + radius, y);
+    ctx.lineTo(x + width - radius, y);
+    ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+    ctx.lineTo(x + width, y + height - radius);
+    ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+    ctx.lineTo(x + radius, y + height);
+    ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+    ctx.lineTo(x, y + radius);
+    ctx.quadraticCurveTo(x, y, x + radius, y);
+    ctx.closePath();
+    if (fill) ctx.fill();
+    if (stroke) ctx.stroke();
+  }
+
+  function downloadPoster() {
+    const link = document.createElement('a');
+    const name = document.getElementById('volName').value.trim().replace(/\s+/g, '_') || 'Volunteer';
+    link.download = 'Jivsevak_Volunteer_' + name + '.png';
+    link.href = canvas.toDataURL('image/png', 1.0);
+    link.click();
+  }
+
+  function saveToGoogleDrive(name, address, instaId, fbName) {
+    const statusMsg = document.getElementById('statusMsg');
+    if (GOOGLE_SCRIPT_URL === "YOUR_GOOGLE_SCRIPT_URL_HERE") {
+      statusMsg.innerText = "✅ પોસ્ટર ડાઉનલોડ માટે તૈયાર છે!";
+      return;
+    }
+
+    statusMsg.innerText = "⏳ તમારી વિગતો જીવસેવક પરિવારના રેકોર્ડમાં સેવ થઈ રહી છે...";
+    const posterImage = canvas.toDataURL('image/png', 0.85);
+
+    fetch(GOOGLE_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, address, instaId, fbName, posterImage })
+    })
+    .then(() => {
+      statusMsg.innerText = "✅ તમારું રજીસ્ટ્રેશન સફળતાપૂર્વક જીવસેવક પરિવારમાં નોંધાઈ ગયું છે!";
+    })
+    .catch(err => {
+      console.error(err);
+      statusMsg.innerText = "✅ પોસ્ટર ડાઉનલોડ માટે તૈયાર છે!";
+    });
+  }
+</script>
+
+</body>
+</html>
