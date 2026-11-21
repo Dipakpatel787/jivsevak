@@ -237,7 +237,7 @@
       padding: 14px;
       border: none;
       border-radius: 14px;
-      font-size: 16px;
+      font-size: 15.5px;
       font-weight: 800;
       cursor: pointer;
       font-family: inherit;
@@ -248,6 +248,8 @@
       gap: 8px;
     }
 
+    .btn:active { transform: scale(0.98); }
+
     .btn-create {
       background: linear-gradient(135deg, #16a34a, #14532d);
       color: #fff;
@@ -255,18 +257,49 @@
       margin-top: 8px;
     }
 
+    /* Direct Share Buttons */
+    .share-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .btn-direct-post {
+      background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+      color: #fff;
+      box-shadow: 0 6px 16px rgba(220, 39, 67, 0.3);
+      font-size: 14px;
+      padding: 13px 10px;
+    }
+
+    .btn-direct-story {
+      background: linear-gradient(135deg, #1877f2, #0d47a1);
+      color: #fff;
+      box-shadow: 0 6px 16px rgba(24, 119, 242, 0.3);
+      font-size: 14px;
+      padding: 13px 10px;
+    }
+
     .btn-post-dl {
       background: linear-gradient(135deg, #ea580c, #c2410c);
       color: #fff;
-      box-shadow: 0 6px 16px rgba(234, 88, 12, 0.3);
-      margin-top: 12px;
+      box-shadow: 0 6px 16px rgba(234, 88, 12, 0.25);
+      margin-top: 10px;
     }
 
     .btn-story-dl {
-      background: linear-gradient(135deg, #7c3aed, #db2777);
+      background: #14532d;
       color: #fff;
-      box-shadow: 0 6px 16px rgba(219, 39, 119, 0.28);
       margin-top: 10px;
+    }
+
+    .btn-copy-caption {
+      background: #f1f5f9;
+      color: #0f172a;
+      border: 1.5px solid #cbd5e1;
+      margin-top: 10px;
+      font-size: 14px;
     }
 
     .result-box {
@@ -353,7 +386,7 @@
   <div class="form-area">
     <div class="form-header">
       <h2>✨ તમારું HD Volunteer Poster બનાવો</h2>
-      <p>ફોટો અપલોડ કરો — Instagram Post અને Story બંને સાઈઝ તૈયાર થશે</p>
+      <p>ફોટો અપલોડ કરો — સીધું Instagram / Facebook Post અને Story માં શેર કરો</p>
     </div>
 
     <form id="volunteerForm">
@@ -401,19 +434,33 @@
       <br>
       <div class="status-pill" id="statusMsg"></div>
 
+      <!-- Direct Share Buttons (Insta / FB / WhatsApp) -->
+      <div class="share-grid">
+        <button class="btn btn-direct-post" onclick="shareDirect('post')">
+          📤 Direct Post Share (Insta / FB)
+        </button>
+        <button class="btn btn-direct-story" onclick="shareDirect('story')">
+          📲 Direct Story Share (Insta / FB)
+        </button>
+      </div>
+
+      <!-- Download Buttons -->
       <button class="btn btn-post-dl" onclick="downloadImage('post')">
-        ⬇️ HD Post ડાઉનલોડ કરો (Instagram / FB Post)
+        ⬇️ HD Post ડાઉનલોડ કરો (Gallery માં સેવ)
       </button>
 
       <button class="btn btn-story-dl" onclick="downloadImage('story')">
-        📱 Full HD Story ડાઉનલોડ કરો (Insta / WhatsApp Story)
+        📱 Full HD Story ડાઉનલોડ કરો (Gallery માં સેવ)
+      </button>
+
+      <button class="btn btn-copy-caption" onclick="copyCaption()">
+        📋 પોસ્ટ માટે કેપ્શન અને @jivsevak ટેગ કોપી કરો
       </button>
 
       <div class="tag-box">
         <strong>🔥 હવે શું કરવું?</strong><br>
-        1️⃣ ઉપરથી <b>HD Post</b> અથવા <b>Full HD Story</b> ડાઉનલોડ કરો.<br>
-        2️⃣ તમારા Instagram અને Facebook પર પોસ્ટ/સ્ટોરી મૂકો અને <b>@jivsevak</b> ને ટેગ કરો.<br>
-        3️⃣ અમારા Instagram DM માં <b>VOLUNTEER</b> લખીને આ પોસ્ટર મોકલો જેથી અમે પણ અમારા પેજ પર શેર કરી શકીએ! 🙏
+        1️⃣ ઉપરના <b>Direct Post Share</b> અથવા <b>Direct Story Share</b> બટન પર ક્લિક કરીને સીધું <b>Instagram</b> કે <b>Facebook</b> પસંદ કરો.<br>
+        2️⃣ પોસ્ટ/સ્ટોરીમાં <b>@jivsevak</b> ને ટેગ કરો, જેથી અમે પણ તમારી પોસ્ટ અમારા પેજ પર શેર કરી શકીએ! 🙏
       </div>
     </div>
   </div>
@@ -473,7 +520,6 @@
     reader.readAsDataURL(photoInput.files[0]);
   });
 
-  // 1. મુખ્ય HD પોસ્ટ (1080x1200) - પરફેક્ટ અલાઈનમેન્ટ અને મોટા ફોટા સાથે
   function drawMainPost(userImg, name, address, insta, fb) {
     const W = 1080, H = 1200;
     postCtx.clearRect(0, 0, W, H);
@@ -485,35 +531,29 @@
       postCtx.fillRect(0, 0, W, H);
     }
 
-    // બેકગ્રાઉન્ડની ગોલ્ડન બોર્ડર અને ટોપ હેડરની બરાબર નીચેથી જ ફોટો + ડિટેલ કાર્ડ સેટ કરવું
-    // જેથી ઉપરની ઓરિજિનલ બોર્ડર અને હેડર બિલકુલ મિસમેચ ન થાય!
     const innerX = 342;
     const innerY = 382;
     const innerW = 352;
     const innerH = 428;
-    const cx = innerX + innerW / 2; // 518
+    const cx = innerX + innerW / 2;
 
-    // જૂના ખાલી સર્કલ અને ટેક્સ્ટ બોક્સને પરફેક્ટ ગ્રીન બેકગ્રાઉન્ડથી કવર કરવું
     postCtx.fillStyle = '#0a4a24';
     postCtx.fillRect(innerX, innerY, innerW, innerH);
 
-    // 1. વોલેન્ટિયરનો મોટો HD ગોળ ફોટો (Radius = 135 -> 270px મોટો ફોટો!)
+    // મોટો HD ફોટો (Radius = 135)
     const cy = 516;
     const r = 135;
 
-    // ગોલ્ડન આઉટર રિંગ
     postCtx.beginPath();
     postCtx.arc(cx, cy, r + 9, 0, Math.PI * 2);
     postCtx.fillStyle = '#f59e0b';
     postCtx.fill();
 
-    // વ્હાઈટ ઇનર રિંગ
     postCtx.beginPath();
     postCtx.arc(cx, cy, r + 4, 0, Math.PI * 2);
     postCtx.fillStyle = '#ffffff';
     postCtx.fill();
 
-    // યુઝરનો HD ફોટો
     postCtx.save();
     postCtx.beginPath();
     postCtx.arc(cx, cy, r, 0, Math.PI * 2);
@@ -522,7 +562,6 @@
     drawCroppedImage(postCtx, userImg, cx - r, cy - r, r * 2, r * 2);
     postCtx.restore();
 
-    // 2. નીચેનું વ્હાઈટ ડિટેલ કાર્ડ (ઓરિજિનલ જગ્યાએ એકદમ પરફેક્ટ ફિટ)
     const boxX = 346;
     const boxY = 664;
     const boxW = 344;
@@ -534,17 +573,14 @@
 
     postCtx.textAlign = 'center';
 
-    // વોલેન્ટિયરનું નામ
     postCtx.fillStyle = '#14532d';
     postCtx.font = 'bold 26px "Noto Sans Gujarati", sans-serif';
     postCtx.fillText(name, cx, boxY + 32);
 
-    // ગામ / શહેર
     postCtx.fillStyle = '#dc2626';
     postCtx.font = 'bold 17px "Noto Sans Gujarati", sans-serif';
     postCtx.fillText('📍 ' + address, cx, boxY + 57);
 
-    // ડિવાઈડર લાઈન
     postCtx.strokeStyle = '#e2e8f0';
     postCtx.lineWidth = 1.5;
     postCtx.beginPath();
@@ -552,23 +588,19 @@
     postCtx.lineTo(boxX + boxW - 18, boxY + 69);
     postCtx.stroke();
 
-    // Insta & FB ID
     postCtx.fillStyle = '#1e293b';
     postCtx.font = '600 13.5px "Poppins", "Noto Sans Gujarati", sans-serif';
     postCtx.fillText('📸 ' + insta + '  |  📘 ' + fb, cx, boxY + 91);
 
-    // ટેગ લાઈન
     postCtx.fillStyle = '#15803d';
     postCtx.font = 'bold 13.5px "Noto Sans Gujarati", sans-serif';
     postCtx.fillText('અમારી સાથે જોડાવા ફોલો કરો: @jivsevak', cx, boxY + 113);
 
-    // બોટમ ગ્રીન પટ્ટી પર લખાણ
     postCtx.fillStyle = '#bbf7d0';
     postCtx.font = '600 11px "Noto Sans Gujarati", sans-serif';
     postCtx.fillText('બેજુબાન જીવો માટે પ્રેમ અને ખોરાક સેવા • દયા | કરુણા | માનવતા', cx, 804);
   }
 
-  // 2. Full HD Story (1080x1920)
   function drawStoryPost(userImg, name, address, insta, fb) {
     const W = 1080, H = 1920;
     const bgGrad = storyCtx.createLinearGradient(0, 0, W, H);
@@ -611,7 +643,6 @@
     storyCtx.font = 'bold 34px "Noto Sans Gujarati", sans-serif';
     storyCtx.fillText('ગૌરવશાળી વોલેન્ટિયર (PROUD VOLUNTEER)', W / 2, 453);
 
-    // મોટો HD ફોટો (Radius = 255 -> 510px)
     const cx = W / 2, cy = 785, r = 255;
     storyCtx.beginPath();
     storyCtx.arc(cx, cy, r + 18, 0, Math.PI * 2);
@@ -704,6 +735,51 @@
     ctx.closePath();
   }
 
+  function getShareCaption() {
+    const name = document.getElementById('volName').value.trim();
+    const address = document.getElementById('volAddress').value.trim();
+    return `💚🐾 ગૌરવશાળી વોલેન્ટિયર - JIVSEVAK PARIVAR (@jivsevak) 🕊️\n\nહું ${name} (${address}) આજથી અબોલ પશુ-પક્ષીઓની સેવા અને માનવતાના આ પવિત્ર અભિયાન "JIVSEVAK PARIVAR" સાથે જોડાયો છું! 🙏\n\n"યુવા શક્તિ જોડાશે, તો જીવસેવાનું અભિયાન આગળ વધશે!"\nતમે પણ જોડાવા માટે ફોલો કરો: @jivsevak\n\n#JivsevakParivar #Jivsevak #YouthForSeva #જીવદયા #ગૌસેવા #AnimalWelfare #GujaratVolunteers`;
+  }
+
+  function copyCaption() {
+    const text = getShareCaption();
+    navigator.clipboard.writeText(text).then(() => {
+      alert("✅ કેપ્શન અને @jivsevak ટેગ કોપી થઈ ગયા છે! હવે Instagram કે Facebook પર પેસ્ટ કરી દો.");
+    });
+  }
+
+  // સીધું Instagram / Facebook / WhatsApp પર ઈમેજ શેર કરવાનું ફંક્શન
+  async function shareDirect(type) {
+    const targetCanvas = (type === 'post') ? postCanvas : storyCanvas;
+    const fileName = (type === 'post') ? 'Jivsevak_Volunteer_Post.png' : 'Jivsevak_Volunteer_Story.png';
+    const caption = getShareCaption();
+
+    // કેપ્શન પણ ક્લિપબોર્ડમાં કોપી કરી દો જેથી Insta/FB માં તરત પેસ્ટ થઈ શકે
+    if (navigator.clipboard) {
+      try { await navigator.clipboard.writeText(caption); } catch(e) {}
+    }
+
+    targetCanvas.toBlob(async function(blob) {
+      const file = new File([blob], fileName, { type: 'image/png' });
+
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        try {
+          await navigator.share({
+            files: [file],
+            title: 'JIVSEVAK PARIVAR Volunteer',
+            text: caption
+          });
+        } catch (err) {
+          console.log('Share cancelled', err);
+        }
+      } else {
+        // જો ડેસ્કટોપ બ્રાઉઝર હોય જ્યાં ડાયરેક્ટ એપ શેર સપોર્ટ ન હોય, તો ડાઉનલોડ કરી આપશે
+        downloadImage(type);
+        alert("તમારું પોસ્ટર ડાઉનલોડ થઈ ગયું છે અને કેપ્શન કોપી થઈ ગયું છે! હવે Instagram અથવા Facebook ખોલીને અપલોડ કરો.");
+      }
+    }, 'image/png', 1.0);
+  }
+
   function downloadImage(type) {
     const link = document.createElement('a');
     const name = document.getElementById('volName').value.trim().replace(/\s+/g, '_') || 'Volunteer';
@@ -720,7 +796,7 @@
   function saveToGoogleDrive(name, address, instaId, fbName) {
     const statusMsg = document.getElementById('statusMsg');
     if (GOOGLE_SCRIPT_URL === "https://script.google.com/macros/s/AKfycbyyvq-9Fn5ELzzjaVJA45smi_PDK25IZTcUo50JlBwW-xxGzaz2orbpFegL30hepmi8/exec") {
-      statusMsg.innerText = "✅ તમારું HD પોસ્ટર અને સ્ટોરી ડાઉનલોડ માટે તૈયાર છે!";
+      statusMsg.innerText = "✅ તમારું HD પોસ્ટર અને સ્ટોરી શેર કરવા માટે તૈયાર છે!";
       return;
     }
     statusMsg.innerText = "⏳ તમારી વિગતો JIVSEVAK PARIVAR ના રેકોર્ડમાં સેવ થઈ રહી છે...";
@@ -733,10 +809,10 @@
       body: JSON.stringify({ name, address, instaId, fbName, posterImage })
     })
     .then(() => {
-      statusMsg.innerText = "✅ રજીસ્ટ્રેશન સફળ! હવે પોસ્ટર ડાઉનલોડ કરીને @jivsevak ને ટેગ કરો.";
+      statusMsg.innerText = "✅ રજીસ્ટ્રેશન સફળ! નીચેના બટનથી Direct Insta/FB પર શેર કરો.";
     })
     .catch(() => {
-      statusMsg.innerText = "✅ તમારું HD પોસ્ટર ડાઉનલોડ માટે તૈયાર છે!";
+      statusMsg.innerText = "✅ તમારું HD પોસ્ટર શેર કરવા માટે તૈયાર છે!";
     });
   }
 </script>
