@@ -257,7 +257,6 @@
       margin-top: 8px;
     }
 
-    /* Direct Share Buttons */
     .share-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -308,6 +307,18 @@
       padding-top: 20px;
       border-top: 2px dashed #cbd5e1;
       text-align: center;
+    }
+
+    .id-badge-display {
+      display: inline-block;
+      background: #fef3c7;
+      border: 2px solid #f59e0b;
+      color: #92400e;
+      font-weight: 900;
+      font-size: 16px;
+      padding: 6px 18px;
+      border-radius: 50px;
+      margin-bottom: 12px;
     }
 
     canvas {
@@ -376,7 +387,7 @@
     <div class="benefits-box">
       <h3>🎖️ JIVSEVAK PARIVAR સાથે જોડાવાના લાભ:</h3>
       <ul class="benefits-list">
-        <li>✅ આજીવન મફત Volunteer Registration & વ્યક્તિગત Volunteer ID</li>
+        <li>✅ આજીવન મફત Volunteer Registration & યુનિક ID (JS_1, JS_2...)</li>
         <li>✅ પોતાની Professional Digital Profile & સેવાકીય રેકોર્ડ</li>
         <li>✅ યોગ્ય કામગીરી બદલ પ્રશંસાપત્ર (Certificate) અને વિશેષ સન્માન</li>
       </ul>
@@ -386,7 +397,7 @@
   <div class="form-area">
     <div class="form-header">
       <h2>✨ તમારું HD Volunteer Poster બનાવો</h2>
-      <p>ફોટો અપલોડ કરો — સીધું Instagram / Facebook Post અને Story માં શેર કરો</p>
+      <p>ફોટો અપલોડ કરો — ઓટોમેટિક Volunteer ID સાથે પોસ્ટર બની જશે</p>
     </div>
 
     <form id="volunteerForm">
@@ -424,9 +435,11 @@
     </form>
 
     <div class="result-box" id="resultBox">
-      <h3 style="color: #14532d; font-size: 19px; font-weight: 900; margin-bottom: 10px;">
+      <h3 style="color: #14532d; font-size: 19px; font-weight: 900; margin-bottom: 8px;">
         🎉 અભિનંદન! JIVSEVAK PARIVAR માં આપનું સ્વાગત છે
       </h3>
+      <div class="id-badge-display" id="volIdBadge">🪪 Volunteer ID: JS_1</div>
+      <br>
       
       <canvas id="postCanvas" width="1080" height="1200"></canvas>
       <canvas id="storyCanvas" width="1080" height="1920" style="display:none;"></canvas>
@@ -434,7 +447,6 @@
       <br>
       <div class="status-pill" id="statusMsg"></div>
 
-      <!-- Direct Share Buttons (Insta / FB / WhatsApp) -->
       <div class="share-grid">
         <button class="btn btn-direct-post" onclick="shareDirect('post')">
           📤 Direct Post Share (Insta / FB)
@@ -444,7 +456,6 @@
         </button>
       </div>
 
-      <!-- Download Buttons -->
       <button class="btn btn-post-dl" onclick="downloadImage('post')">
         ⬇️ HD Post ડાઉનલોડ કરો (Gallery માં સેવ)
       </button>
@@ -459,7 +470,7 @@
 
       <div class="tag-box">
         <strong>🔥 હવે શું કરવું?</strong><br>
-        1️⃣ ઉપરના <b>Direct Post Share</b> અથવા <b>Direct Story Share</b> બટન પર ક્લિક કરીને સીધું <b>Instagram</b> કે <b>Facebook</b> પસંદ કરો.<br>
+        1️⃣ મોબાઈલમાં ઉપરના <b>Direct Post Share</b> અથવા <b>Direct Story Share</b> પર ક્લિક કરીને સીધું <b>Instagram</b> કે <b>Facebook</b> પસંદ કરો.<br>
         2️⃣ પોસ્ટ/સ્ટોરીમાં <b>@jivsevak</b> ને ટેગ કરો, જેથી અમે પણ તમારી પોસ્ટ અમારા પેજ પર શેર કરી શકીએ! 🙏
       </div>
     </div>
@@ -479,13 +490,28 @@
   const storyCtx = storyCanvas.getContext('2d');
   const bgTemplate = document.getElementById('bgTemplate');
   const orgLogo = document.getElementById('orgLogo');
+  let currentVolId = "JS_1";
 
   function showFileName(input) {
     const lbl = document.getElementById('fileLabel');
     lbl.innerText = (input.files && input.files[0]) ? "✅ પસંદ કરેલ: " + input.files[0].name : "કોઈ ફોટો પસંદ કર્યો નથી";
   }
 
-  form.addEventListener('submit', function(e) {
+  // Google Sheet માંથી આગળનો નંબર (JS_1, JS_2...) લાવવાનું ફંક્શન
+  async function getNextVolunteerId() {
+    if (GOOGLE_SCRIPT_URL === "YOUR_GOOGLE_SCRIPT_URL_HERE") {
+      return "JS_1";
+    }
+    try {
+      const res = await fetch(GOOGLE_SCRIPT_URL);
+      const data = await res.json();
+      return data.volId || "JS_1";
+    } catch (e) {
+      return "JS_" + Math.floor(1 + Math.random() * 99);
+    }
+  }
+
+  form.addEventListener('submit', async function(e) {
     e.preventDefault();
     const name = document.getElementById('volName').value.trim();
     const address = document.getElementById('volAddress').value.trim();
@@ -498,14 +524,18 @@
 
     const btn = document.getElementById('submitBtn');
     btn.disabled = true;
-    btn.innerText = "⏳ HD પોસ્ટર બની રહ્યું છે...";
+    btn.innerText = "⏳ ID જનરેટ અને HD પોસ્ટર બની રહ્યું છે...";
+
+    // પહેલા Sheet માંથી સાચો નંબર (JS_1, JS_2...) મેળવો
+    currentVolId = await getNextVolunteerId();
+    document.getElementById('volIdBadge').innerText = "🪪 Volunteer ID: " + currentVolId;
 
     const reader = new FileReader();
     reader.onload = function(event) {
       const userImg = new Image();
       userImg.onload = function() {
-        drawMainPost(userImg, name, address, insta, fb);
-        drawStoryPost(userImg, name, address, insta, fb);
+        drawMainPost(userImg, name, address, insta, fb, currentVolId);
+        drawStoryPost(userImg, name, address, insta, fb, currentVolId);
 
         const resBox = document.getElementById('resultBox');
         resBox.style.display = 'block';
@@ -513,14 +543,14 @@
         btn.innerText = "✨ ફરીથી પોસ્ટર બનાવો";
         resBox.scrollIntoView({ behavior: 'smooth' });
 
-        saveToGoogleDrive(name, address, insta, fb);
+        saveToGoogleDrive(currentVolId, name, address, insta, fb);
       };
       userImg.src = event.target.result;
     };
     reader.readAsDataURL(photoInput.files[0]);
   });
 
-  function drawMainPost(userImg, name, address, insta, fb) {
+  function drawMainPost(userImg, name, address, insta, fb, volId) {
     const W = 1080, H = 1200;
     postCtx.clearRect(0, 0, W, H);
 
@@ -540,9 +570,9 @@
     postCtx.fillStyle = '#0a4a24';
     postCtx.fillRect(innerX, innerY, innerW, innerH);
 
-    // મોટો HD ફોટો (Radius = 135)
-    const cy = 516;
-    const r = 135;
+    // મોટો HD ફોટો
+    const cy = 510;
+    const r = 128;
 
     postCtx.beginPath();
     postCtx.arc(cx, cy, r + 9, 0, Math.PI * 2);
@@ -562,6 +592,20 @@
     drawCroppedImage(postCtx, userImg, cx - r, cy - r, r * 2, r * 2);
     postCtx.restore();
 
+    // ફોટોની બરાબર નીચે ID બેજ (JS_1, JS_2...)
+    postCtx.fillStyle = '#f59e0b';
+    roundRect(postCtx, cx - 72, cy + r - 14, 144, 30, 15);
+    postCtx.fill();
+    postCtx.strokeStyle = '#ffffff';
+    postCtx.lineWidth = 2;
+    postCtx.stroke();
+
+    postCtx.fillStyle = '#052e16';
+    postCtx.font = '800 17px "Poppins", sans-serif';
+    postCtx.textAlign = 'center';
+    postCtx.fillText('ID: ' + volId, cx, cy + r + 7);
+
+    // નીચેનું વ્હાઈટ ડિટેલ કાર્ડ
     const boxX = 346;
     const boxY = 664;
     const boxW = 344;
@@ -571,10 +615,8 @@
     roundRect(postCtx, boxX, boxY, boxW, boxH, 14);
     postCtx.fill();
 
-    postCtx.textAlign = 'center';
-
     postCtx.fillStyle = '#14532d';
-    postCtx.font = 'bold 26px "Noto Sans Gujarati", sans-serif';
+    postCtx.font = 'bold 25px "Noto Sans Gujarati", sans-serif';
     postCtx.fillText(name, cx, boxY + 32);
 
     postCtx.fillStyle = '#dc2626';
@@ -601,7 +643,7 @@
     postCtx.fillText('બેજુબાન જીવો માટે પ્રેમ અને ખોરાક સેવા • દયા | કરુણા | માનવતા', cx, 804);
   }
 
-  function drawStoryPost(userImg, name, address, insta, fb) {
+  function drawStoryPost(userImg, name, address, insta, fb, volId) {
     const W = 1080, H = 1920;
     const bgGrad = storyCtx.createLinearGradient(0, 0, W, H);
     bgGrad.addColorStop(0, '#052e16');
@@ -643,7 +685,7 @@
     storyCtx.font = 'bold 34px "Noto Sans Gujarati", sans-serif';
     storyCtx.fillText('ગૌરવશાળી વોલેન્ટિયર (PROUD VOLUNTEER)', W / 2, 453);
 
-    const cx = W / 2, cy = 785, r = 255;
+    const cx = W / 2, cy = 775, r = 245;
     storyCtx.beginPath();
     storyCtx.arc(cx, cy, r + 18, 0, Math.PI * 2);
     storyCtx.fillStyle = '#f59e0b';
@@ -660,6 +702,18 @@
     storyCtx.clip();
     drawCroppedImage(storyCtx, userImg, cx - r, cy - r, r * 2, r * 2);
     storyCtx.restore();
+
+    // Story માં ID બેજ
+    storyCtx.fillStyle = '#f59e0b';
+    roundRect(storyCtx, cx - 140, cy + r - 24, 280, 56, 28);
+    storyCtx.fill();
+    storyCtx.strokeStyle = '#ffffff';
+    storyCtx.lineWidth = 4;
+    storyCtx.stroke();
+
+    storyCtx.fillStyle = '#052e16';
+    storyCtx.font = '800 32px "Poppins", sans-serif';
+    storyCtx.fillText('ID: ' + volId, cx, cy + r + 15);
 
     storyCtx.fillStyle = '#ffffff';
     roundRect(storyCtx, 95, 1095, 890, 370, 32);
@@ -738,44 +792,34 @@
   function getShareCaption() {
     const name = document.getElementById('volName').value.trim();
     const address = document.getElementById('volAddress').value.trim();
-    return `💚🐾 ગૌરવશાળી વોલેન્ટિયર - JIVSEVAK PARIVAR (@jivsevak) 🕊️\n\nહું ${name} (${address}) આજથી અબોલ પશુ-પક્ષીઓની સેવા અને માનવતાના આ પવિત્ર અભિયાન "JIVSEVAK PARIVAR" સાથે જોડાયો છું! 🙏\n\n"યુવા શક્તિ જોડાશે, તો જીવસેવાનું અભિયાન આગળ વધશે!"\nતમે પણ જોડાવા માટે ફોલો કરો: @jivsevak\n\n#JivsevakParivar #Jivsevak #YouthForSeva #જીવદયા #ગૌસેવા #AnimalWelfare #GujaratVolunteers`;
+    return `💚🐾 ગૌરવશાળી વોલેન્ટિયર (${currentVolId}) - JIVSEVAK PARIVAR (@jivsevak) 🕊️\n\nહું ${name} (${address}) આજથી અબોલ પશુ-પક્ષીઓની સેવા અને માનવતાના આ પવિત્ર અભિયાન "JIVSEVAK PARIVAR" સાથે જોડાયો છું! 🙏\n\n"યુવા શક્તિ જોડાશે, તો જીવસેવાનું અભિયાન આગળ વધશે!"\nતમે પણ જોડાવા માટે ફોલો કરો: @jivsevak\n\n#JivsevakParivar #Jivsevak #YouthForSeva #જીવદયા #ગૌસેવા #AnimalWelfare #GujaratVolunteers`;
   }
 
   function copyCaption() {
     const text = getShareCaption();
     navigator.clipboard.writeText(text).then(() => {
-      alert("✅ કેપ્શન અને @jivsevak ટેગ કોપી થઈ ગયા છે! હવે Instagram કે Facebook પર પેસ્ટ કરી દો.");
+      alert("✅ કેપ્શન અને @jivsevak ટેગ કોપી થઈ ગયા છે!");
     });
   }
 
-  // સીધું Instagram / Facebook / WhatsApp પર ઈમેજ શેર કરવાનું ફંક્શન
   async function shareDirect(type) {
     const targetCanvas = (type === 'post') ? postCanvas : storyCanvas;
-    const fileName = (type === 'post') ? 'Jivsevak_Volunteer_Post.png' : 'Jivsevak_Volunteer_Story.png';
+    const fileName = currentVolId + (type === 'post' ? '_Jivsevak_Post.png' : '_Jivsevak_Story.png');
     const caption = getShareCaption();
 
-    // કેપ્શન પણ ક્લિપબોર્ડમાં કોપી કરી દો જેથી Insta/FB માં તરત પેસ્ટ થઈ શકે
     if (navigator.clipboard) {
       try { await navigator.clipboard.writeText(caption); } catch(e) {}
     }
 
     targetCanvas.toBlob(async function(blob) {
       const file = new File([blob], fileName, { type: 'image/png' });
-
       if (navigator.canShare && navigator.canShare({ files: [file] })) {
         try {
-          await navigator.share({
-            files: [file],
-            title: 'JIVSEVAK PARIVAR Volunteer',
-            text: caption
-          });
-        } catch (err) {
-          console.log('Share cancelled', err);
-        }
+          await navigator.share({ files: [file], title: 'JIVSEVAK PARIVAR Volunteer', text: caption });
+        } catch (err) {}
       } else {
-        // જો ડેસ્કટોપ બ્રાઉઝર હોય જ્યાં ડાયરેક્ટ એપ શેર સપોર્ટ ન હોય, તો ડાઉનલોડ કરી આપશે
         downloadImage(type);
-        alert("તમારું પોસ્ટર ડાઉનલોડ થઈ ગયું છે અને કેપ્શન કોપી થઈ ગયું છે! હવે Instagram અથવા Facebook ખોલીને અપલોડ કરો.");
+        alert("તમારું પોસ્ટર ડાઉનલોડ થઈ ગયું છે અને કેપ્શન કોપી થઈ ગયું છે!");
       }
     }, 'image/png', 1.0);
   }
@@ -784,35 +828,35 @@
     const link = document.createElement('a');
     const name = document.getElementById('volName').value.trim().replace(/\s+/g, '_') || 'Volunteer';
     if (type === 'post') {
-      link.download = 'Jivsevak_Post_' + name + '.png';
+      link.download = currentVolId + '_Jivsevak_Post_' + name + '.png';
       link.href = postCanvas.toDataURL('image/png', 1.0);
     } else {
-      link.download = 'Jivsevak_Story_' + name + '.png';
+      link.download = currentVolId + '_Jivsevak_Story_' + name + '.png';
       link.href = storyCanvas.toDataURL('image/png', 1.0);
     }
     link.click();
   }
 
-  function saveToGoogleDrive(name, address, instaId, fbName) {
+  function saveToGoogleDrive(volId, name, address, instaId, fbName) {
     const statusMsg = document.getElementById('statusMsg');
     if (GOOGLE_SCRIPT_URL === "https://script.google.com/macros/s/AKfycbyyvq-9Fn5ELzzjaVJA45smi_PDK25IZTcUo50JlBwW-xxGzaz2orbpFegL30hepmi8/exec") {
-      statusMsg.innerText = "✅ તમારું HD પોસ્ટર અને સ્ટોરી શેર કરવા માટે તૈયાર છે!";
+      statusMsg.innerText = "✅ તમારું ID (" + volId + ") અને HD પોસ્ટર તૈયાર છે!";
       return;
     }
-    statusMsg.innerText = "⏳ તમારી વિગતો JIVSEVAK PARIVAR ના રેકોર્ડમાં સેવ થઈ રહી છે...";
+    statusMsg.innerText = "⏳ તમારું ID (" + volId + ") JIVSEVAK PARIVAR ના રેકોર્ડમાં સેવ થઈ રહ્યું છે...";
     const posterImage = postCanvas.toDataURL('image/png', 0.9);
 
     fetch(GOOGLE_SCRIPT_URL, {
       method: 'POST',
       mode: 'no-cors',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, address, instaId, fbName, posterImage })
+      body: JSON.stringify({ volId, name, address, instaId, fbName, posterImage })
     })
     .then(() => {
-      statusMsg.innerText = "✅ રજીસ્ટ્રેશન સફળ! નીચેના બટનથી Direct Insta/FB પર શેર કરો.";
+      statusMsg.innerText = "✅ રજીસ્ટ્રેશન સફળ! તમારો ID: " + volId + " — હવે Insta/FB પર શેર કરો.";
     })
     .catch(() => {
-      statusMsg.innerText = "✅ તમારું HD પોસ્ટર શેર કરવા માટે તૈયાર છે!";
+      statusMsg.innerText = "✅ તમારું ID (" + volId + ") અને HD પોસ્ટર તૈયાર છે!";
     });
   }
 </script>
