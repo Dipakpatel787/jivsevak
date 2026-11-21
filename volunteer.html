@@ -12,6 +12,7 @@
       --accent: #dc2626;
       --orange: #ea580c;
       --gold: #f59e0b;
+      --whatsapp: #25D366;
       --bg: linear-gradient(135deg, #ecfdf5 0%, #fefce8 50%, #fff7ed 100%);
     }
 
@@ -193,9 +194,10 @@
       color: #1e293b;
     }
 
-    label span { color: #dc2626; }
+    label span.req { color: #dc2626; }
+    label span.opt { color: #64748b; font-weight: 500; font-size: 12px; }
 
-    input[type="text"] {
+    input[type="text"], input[type="tel"] {
       width: 100%;
       padding: 12px 14px;
       border: 2px solid #e2e8f0;
@@ -206,7 +208,7 @@
       transition: 0.2s;
     }
 
-    input[type="text"]:focus {
+    input[type="text"]:focus, input[type="tel"]:focus {
       border-color: var(--primary);
       background: #fff;
       outline: none;
@@ -246,6 +248,7 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
+      text-decoration: none;
     }
 
     .btn:active { transform: scale(0.98); }
@@ -257,11 +260,35 @@
       margin-top: 8px;
     }
 
+    /* WhatsApp Group Join Button */
+    .whatsapp-card {
+      background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+      border: 2px solid #10b981;
+      border-radius: 16px;
+      padding: 14px;
+      margin-top: 14px;
+      text-align: center;
+    }
+
+    .whatsapp-card p {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #065f46;
+      margin-bottom: 10px;
+    }
+
+    .btn-whatsapp {
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: #ffffff;
+      font-size: 16px;
+      box-shadow: 0 6px 18px rgba(37, 211, 102, 0.35);
+    }
+
     .share-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
-      margin-top: 14px;
+      margin-top: 12px;
     }
 
     .btn-direct-post {
@@ -402,27 +429,32 @@
 
     <form id="volunteerForm">
       <div class="form-group">
-        <label>તમારું પૂરું નામ <span>*</span></label>
+        <label>તમારું પૂરું નામ <span class="req">*</span></label>
         <input type="text" id="volName" placeholder="દા.ત. રાજેશભાઈ પટેલ" required>
       </div>
 
       <div class="form-group">
-        <label>ગામ / તાલુકો / શહેર <span>*</span></label>
+        <label>મોબાઈલ નંબર <span class="opt">(Optional - ફક્ત પરિવારના રેકોર્ડ માટે)</span></label>
+        <input type="tel" id="volMobile" placeholder="દા.ત. 9876543210" maxlength="15">
+      </div>
+
+      <div class="form-group">
+        <label>ગામ / તાલુકો / શહેર <span class="req">*</span></label>
         <input type="text" id="volAddress" placeholder="દા.ત. ગાંધીનગર, ગુજરાત" required>
       </div>
 
       <div class="form-group">
-        <label>Instagram ID <span>*</span></label>
-        <input type="text" id="volInsta" placeholder="દા.ત. @rajesh_patel" required>
+        <label>Instagram ID <span class="opt">(Optional - હોય તો લખો)</span></label>
+        <input type="text" id="volInsta" placeholder="દા.ત. @rajesh_patel">
       </div>
 
       <div class="form-group">
-        <label>Facebook આઈડીનું નામ</label>
+        <label>Facebook આઈડીનું નામ <span class="opt">(Optional - હોય તો લખો)</span></label>
         <input type="text" id="volFb" placeholder="દા.ત. Rajesh Patel">
       </div>
 
       <div class="form-group">
-        <label>તમારો સારો HD ફોટો અપલોડ કરો <span>*</span></label>
+        <label>તમારો સારો HD ફોટો અપલોડ કરો <span class="req">*</span></label>
         <div class="upload-zone">
           <input type="file" id="volPhoto" accept="image/*" required onchange="showFileName(this)">
           <div style="font-size: 28px;">📸</div>
@@ -447,6 +479,14 @@
       <br>
       <div class="status-pill" id="statusMsg"></div>
 
+      <!-- WhatsApp Group Join Box -->
+      <div class="whatsapp-card">
+        <p>🐾 જીવસેવાના દૈનિક અપડેટ્સ અને વોલેન્ટિયર ટીમ સાથે જોડાવા અમારા WhatsApp ગ્રુપમાં જોડાઓ:</p>
+        <a href="YOUR_WHATSAPP_GROUP_LINK_HERE" target="_blank" class="btn btn-whatsapp" id="waJoinBtn">
+          💬 Join JIVSEVAK PARIVAR WhatsApp Group
+        </a>
+      </div>
+
       <div class="share-grid">
         <button class="btn btn-direct-post" onclick="shareDirect('post')">
           📤 Direct Post Share (Insta / FB)
@@ -470,8 +510,8 @@
 
       <div class="tag-box">
         <strong>🔥 હવે શું કરવું?</strong><br>
-        1️⃣ મોબાઈલમાં ઉપરના <b>Direct Post Share</b> અથવા <b>Direct Story Share</b> પર ક્લિક કરીને સીધું <b>Instagram</b> કે <b>Facebook</b> પસંદ કરો.<br>
-        2️⃣ પોસ્ટ/સ્ટોરીમાં <b>@jivsevak</b> ને ટેગ કરો, જેથી અમે પણ તમારી પોસ્ટ અમારા પેજ પર શેર કરી શકીએ! 🙏
+        1️⃣ ઉપરના ગ્રીન બટનથી <b>JIVSEVAK PARIVAR WhatsApp Group</b> માં જોડાઓ.<br>
+        2️⃣ <b>Direct Post Share</b> અથવા <b>Direct Story Share</b> પર ક્લિક કરીને Instagram/Facebook પર પોસ્ટ મૂકો અને <b>@jivsevak</b> ને ટેગ કરો! 🙏
       </div>
     </div>
   </div>
@@ -480,8 +520,13 @@
 <img src="poster_bg.png" id="bgTemplate" style="display:none;" crossorigin="anonymous">
 
 <script>
-  // અહીં તમારી Google Apps Script Web App URL પેસ્ટ કરો
-  const GOOGLE_SCRIPT_URL = "YOUR_GOOGLE_SCRIPT_URL_HERE";
+  // ૧. અહીં તમારી Google Apps Script Web App URL પેસ્ટ કરો
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyyvq-9Fn5ELzzjaVJA45smi_PDK25IZTcUo50JlBwW-xxGzaz2orbpFegL30hepmi8/exec";
+
+  // ૨. અહીં તમારી WhatsApp Group Invite Link પેસ્ટ કરો (દા.ત. https://chat.whatsapp.com/AbCdEfGhIjKlMnOpQr)
+  const WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/HHj0iQsahDM5B9nLngv6eR";
+
+  document.getElementById('waJoinBtn').href = WHATSAPP_GROUP_URL;
 
   const form = document.getElementById('volunteerForm');
   const postCanvas = document.getElementById('postCanvas');
@@ -497,7 +542,6 @@
     lbl.innerText = (input.files && input.files[0]) ? "✅ પસંદ કરેલ: " + input.files[0].name : "કોઈ ફોટો પસંદ કર્યો નથી";
   }
 
-  // Google Sheet માંથી આગળનો નંબર (JS_1, JS_2...) લાવવાનું ફંક્શન
   async function getNextVolunteerId() {
     if (GOOGLE_SCRIPT_URL === "YOUR_GOOGLE_SCRIPT_URL_HERE") {
       return "JS_1";
@@ -507,17 +551,28 @@
       const data = await res.json();
       return data.volId || "JS_1";
     } catch (e) {
-      return "JS_" + Math.floor(1 + Math.random() * 99);
+      return "JS_1";
     }
+  }
+
+  function buildSocialLine(insta, fb) {
+    let parts = [];
+    if (insta) parts.push("📸 " + insta);
+    if (fb) parts.push("📘 " + fb);
+    if (parts.length > 0) {
+      return parts.join("   |   ");
+    }
+    return "🐾 JIVSEVAK PARIVAR VOLUNTEER 🕊️";
   }
 
   form.addEventListener('submit', async function(e) {
     e.preventDefault();
     const name = document.getElementById('volName').value.trim();
+    const mobile = document.getElementById('volMobile').value.trim();
     const address = document.getElementById('volAddress').value.trim();
     let insta = document.getElementById('volInsta').value.trim();
     if (insta && !insta.startsWith('@')) insta = '@' + insta;
-    const fb = document.getElementById('volFb').value.trim() || name;
+    const fb = document.getElementById('volFb').value.trim();
     const photoInput = document.getElementById('volPhoto');
 
     if (!photoInput.files || !photoInput.files[0]) return;
@@ -526,7 +581,6 @@
     btn.disabled = true;
     btn.innerText = "⏳ ID જનરેટ અને HD પોસ્ટર બની રહ્યું છે...";
 
-    // પહેલા Sheet માંથી સાચો નંબર (JS_1, JS_2...) મેળવો
     currentVolId = await getNextVolunteerId();
     document.getElementById('volIdBadge').innerText = "🪪 Volunteer ID: " + currentVolId;
 
@@ -543,7 +597,7 @@
         btn.innerText = "✨ ફરીથી પોસ્ટર બનાવો";
         resBox.scrollIntoView({ behavior: 'smooth' });
 
-        saveToGoogleDrive(currentVolId, name, address, insta, fb);
+        saveToGoogleDrive(currentVolId, name, mobile, address, insta, fb);
       };
       userImg.src = event.target.result;
     };
@@ -570,7 +624,6 @@
     postCtx.fillStyle = '#0a4a24';
     postCtx.fillRect(innerX, innerY, innerW, innerH);
 
-    // મોટો HD ફોટો
     const cy = 510;
     const r = 128;
 
@@ -592,7 +645,6 @@
     drawCroppedImage(postCtx, userImg, cx - r, cy - r, r * 2, r * 2);
     postCtx.restore();
 
-    // ફોટોની બરાબર નીચે ID બેજ (JS_1, JS_2...)
     postCtx.fillStyle = '#f59e0b';
     roundRect(postCtx, cx - 72, cy + r - 14, 144, 30, 15);
     postCtx.fill();
@@ -605,7 +657,6 @@
     postCtx.textAlign = 'center';
     postCtx.fillText('ID: ' + volId, cx, cy + r + 7);
 
-    // નીચેનું વ્હાઈટ ડિટેલ કાર્ડ
     const boxX = 346;
     const boxY = 664;
     const boxW = 344;
@@ -630,9 +681,10 @@
     postCtx.lineTo(boxX + boxW - 18, boxY + 69);
     postCtx.stroke();
 
+    const socialLine = buildSocialLine(insta, fb);
     postCtx.fillStyle = '#1e293b';
     postCtx.font = '600 13.5px "Poppins", "Noto Sans Gujarati", sans-serif';
-    postCtx.fillText('📸 ' + insta + '  |  📘 ' + fb, cx, boxY + 91);
+    postCtx.fillText(socialLine, cx, boxY + 91);
 
     postCtx.fillStyle = '#15803d';
     postCtx.font = 'bold 13.5px "Noto Sans Gujarati", sans-serif';
@@ -703,7 +755,6 @@
     drawCroppedImage(storyCtx, userImg, cx - r, cy - r, r * 2, r * 2);
     storyCtx.restore();
 
-    // Story માં ID બેજ
     storyCtx.fillStyle = '#f59e0b';
     roundRect(storyCtx, cx - 140, cy + r - 24, 280, 56, 28);
     storyCtx.fill();
@@ -734,9 +785,10 @@
     storyCtx.lineTo(920, 1290);
     storyCtx.stroke();
 
+    const socialLine = buildSocialLine(insta, fb);
     storyCtx.fillStyle = '#1e293b';
     storyCtx.font = '600 32px "Poppins", "Noto Sans Gujarati", sans-serif';
-    storyCtx.fillText('📸 ' + insta + '   |   📘 ' + fb, W / 2, 1355);
+    storyCtx.fillText(socialLine, W / 2, 1355);
 
     storyCtx.fillStyle = '#15803d';
     storyCtx.font = 'bold 32px "Noto Sans Gujarati", sans-serif';
@@ -837,24 +889,32 @@
     link.click();
   }
 
-  function saveToGoogleDrive(volId, name, address, instaId, fbName) {
+  function getCompressedPoster() {
+    const tempCanvas = document.createElement('canvas');
+    tempCanvas.width = 540;
+    tempCanvas.height = 600;
+    const tCtx = tempCanvas.getContext('2d');
+    tCtx.drawImage(postCanvas, 0, 0, 540, 600);
+    return tempCanvas.toDataURL('image/jpeg', 0.7);
+  }
+
+  function saveToGoogleDrive(volId, name, mobile, address, instaId, fbName) {
     const statusMsg = document.getElementById('statusMsg');
     if (GOOGLE_SCRIPT_URL === "https://script.google.com/macros/s/AKfycbyyvq-9Fn5ELzzjaVJA45smi_PDK25IZTcUo50JlBwW-xxGzaz2orbpFegL30hepmi8/exec") {
       statusMsg.innerText = "✅ તમારું ID (" + volId + ") અને HD પોસ્ટર તૈયાર છે!";
       return;
-      
     }
     statusMsg.innerText = "⏳ તમારું ID (" + volId + ") JIVSEVAK PARIVAR ના રેકોર્ડમાં સેવ થઈ રહ્યું છે...";
-    const posterImage = postCanvas.toDataURL('image/png', 0.9);
+    const posterImage = getCompressedPoster();
 
     fetch(GOOGLE_SCRIPT_URL, {
       method: 'POST',
       mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ volId, name, address, instaId, fbName, posterImage })
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ volId, name, mobile, address, instaId, fbName, posterImage })
     })
     .then(() => {
-      statusMsg.innerText = "✅ રજીસ્ટ્રેશન સફળ! તમારો ID: " + volId + " — હવે Insta/FB પર શેર કરો.";
+      statusMsg.innerText = "✅ રજીસ્ટ્રેશન સફળ! તમારો ID: " + volId + " — નીચે WhatsApp ગ્રુપમાં જોડાઓ!";
     })
     .catch(() => {
       statusMsg.innerText = "✅ તમારું ID (" + volId + ") અને HD પોસ્ટર તૈયાર છે!";
