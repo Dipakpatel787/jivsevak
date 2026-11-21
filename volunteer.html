@@ -37,7 +37,6 @@
       border: 1px solid rgba(20, 83, 45, 0.12);
     }
 
-    /* હીરો સેક્શન */
     .hero {
       background: linear-gradient(135deg, #052e16 0%, #14532d 65%, #166534 100%);
       color: #fff;
@@ -101,7 +100,6 @@
       margin-top: 6px;
     }
 
-    /* સેવા કાર્યો અને લાભો */
     .info-cards {
       padding: 18px 20px 6px;
       background: #f8fafc;
@@ -164,7 +162,6 @@
       gap: 4px;
     }
 
-    /* ફોર્મ સેક્શન */
     .form-area {
       padding: 20px 20px 26px;
     }
@@ -316,7 +313,6 @@
 <body>
 
 <div class="wrapper">
-  <!-- ટોપ બેનર -->
   <div class="hero">
     <div class="logo-circle">
       <img src="jivsevaklogo.jpg" alt="Jivsevak Parivar" id="orgLogo">
@@ -330,7 +326,6 @@
     </p>
   </div>
 
-  <!-- સેવા કાર્યો અને લાભો -->
   <div class="info-cards">
     <div class="goal-strip">🌍 અમારું લક્ષ્ય: દરેક ગામમાં જીવસેવા, દરેક શહેરમાં સેવાભાવી પરિવાર!</div>
     
@@ -355,7 +350,6 @@
     </div>
   </div>
 
-  <!-- વોલેન્ટિયર ફોર્મ -->
   <div class="form-area">
     <div class="form-header">
       <h2>✨ તમારું HD Volunteer Poster બનાવો</h2>
@@ -396,15 +390,12 @@
       <button type="submit" class="btn btn-create" id="submitBtn">🎨 મારું HD વોલેન્ટિયર પોસ્ટર બનાવો</button>
     </form>
 
-    <!-- પરિણામ અને ડાઉનલોડ -->
     <div class="result-box" id="resultBox">
       <h3 style="color: #14532d; font-size: 19px; font-weight: 900; margin-bottom: 10px;">
         🎉 અભિનંદન! JIVSEVAK PARIVAR માં આપનું સ્વાગત છે
       </h3>
       
-      <!-- પોસ્ટ સાઈઝ કેનવાસ (1080x1200) -->
       <canvas id="postCanvas" width="1080" height="1200"></canvas>
-      <!-- સ્ટોરી સાઈઝ કેનવાસ (1080x1920 - છુપાયેલું રહેશે પણ ડાઉનલોડ થશે) -->
       <canvas id="storyCanvas" width="1080" height="1920" style="display:none;"></canvas>
 
       <br>
@@ -428,7 +419,6 @@
   </div>
 </div>
 
-<!-- બેકગ્રાઉન્ડ ટેમ્પલેટ ઈમેજ -->
 <img src="poster_bg.png" id="bgTemplate" style="display:none;" crossorigin="anonymous">
 
 <script>
@@ -483,7 +473,7 @@
     reader.readAsDataURL(photoInput.files[0]);
   });
 
-  // 1. મુખ્ય HD પોસ્ટ (1080x1200) - તમારા સુંદર બેકગ્રાઉન્ડ ટેમ્પલેટ સાથે
+  // 1. મુખ્ય HD પોસ્ટ (1080x1200) - પરફેક્ટ અલાઈનમેન્ટ અને મોટા ફોટા સાથે
   function drawMainPost(userImg, name, address, insta, fb) {
     const W = 1080, H = 1200;
     postCtx.clearRect(0, 0, W, H);
@@ -495,121 +485,90 @@
       postCtx.fillRect(0, 0, W, H);
     }
 
-    // વચ્ચેના કાર્ડ પર નવા વોલેન્ટિયરનો મોટો HD ફોટો અને વિગતો સેટ કરવી
-    // કાર્ડ એરિયા: x=330, y=275, width=376, height=540
-    const cardX = 332, cardY = 278, cardW = 372, cardH = 534;
+    // બેકગ્રાઉન્ડની ગોલ્ડન બોર્ડર અને ટોપ હેડરની બરાબર નીચેથી જ ફોટો + ડિટેલ કાર્ડ સેટ કરવું
+    // જેથી ઉપરની ઓરિજિનલ બોર્ડર અને હેડર બિલકુલ મિસમેચ ન થાય!
+    const innerX = 342;
+    const innerY = 382;
+    const innerW = 352;
+    const innerH = 428;
+    const cx = innerX + innerW / 2; // 518
 
-    // કાર્ડનું બેકગ્રાઉન્ડ ક્લીન કરવું જેથી જૂનો સેમ્પલ ફોટો/નામ ઢંકાઈ જાય
-    postCtx.save();
-    roundRect(postCtx, cardX, cardY, cardW, cardH, 22);
-    postCtx.clip();
+    // જૂના ખાલી સર્કલ અને ટેક્સ્ટ બોક્સને પરફેક્ટ ગ્રીન બેકગ્રાઉન્ડથી કવર કરવું
+    postCtx.fillStyle = '#0a4a24';
+    postCtx.fillRect(innerX, innerY, innerW, innerH);
 
-    const grad = postCtx.createLinearGradient(0, cardY, 0, cardY + cardH);
-    grad.addColorStop(0, '#073b1c');
-    grad.addColorStop(0.65, '#14532d');
-    grad.addColorStop(1, '#052e16');
-    postCtx.fillStyle = grad;
-    postCtx.fillRect(cardX, cardY, cardW, cardH);
+    // 1. વોલેન્ટિયરનો મોટો HD ગોળ ફોટો (Radius = 135 -> 270px મોટો ફોટો!)
+    const cy = 516;
+    const r = 135;
 
-    // ટોપ ઓરેન્જ હેડર
-    postCtx.fillStyle = '#ea580c';
-    roundRect(postCtx, cardX + 16, cardY + 14, cardW - 32, 42, 21);
-    postCtx.fill();
-
-    // નાનો લોગો
-    if (orgLogo && orgLogo.complete && orgLogo.naturalWidth > 0) {
-      postCtx.save();
-      postCtx.beginPath();
-      postCtx.arc(cardX + 38, cardY + 35, 22, 0, Math.PI * 2);
-      postCtx.fillStyle = '#fde047';
-      postCtx.fill();
-      postCtx.beginPath();
-      postCtx.arc(cardX + 38, cardY + 35, 19, 0, Math.PI * 2);
-      postCtx.clip();
-      postCtx.drawImage(orgLogo, cardX + 19, cardY + 16, 38, 38);
-      postCtx.restore();
-    }
-
-    postCtx.fillStyle = '#ffffff';
-    postCtx.font = 'bold 18px "Noto Sans Gujarati", sans-serif';
-    postCtx.textAlign = 'center';
-    postCtx.fillText('જીવસેવક પરિવાર (JIVSEVAK)', cardX + cardW / 2 + 16, cardY + 41);
-
-    // સબ-હેડિંગ
-    postCtx.fillStyle = '#fde047';
-    postCtx.font = 'bold 18px "Noto Sans Gujarati", sans-serif';
-    postCtx.fillText('ગૌરવશાળી વોલેન્ટિયર (PROUD VOLUNTEER)', cardX + cardW / 2, cardY + 80);
-
-    postCtx.fillStyle = '#dcfce7';
-    postCtx.font = '600 13px "Noto Sans Gujarati", sans-serif';
-    postCtx.fillText('"૩૬૫ દિવસ જીવ સેવા યજ્ઞ — નાનો દાણો, મોટું પુણ્ય"', cardX + cardW / 2, cardY + 100);
-
-    // વોલેન્ટિયરનો મોટો HD ગોળ ફોટો (Radius = 118 -> 236px મોટો ફોટો)
-    const cx = cardX + cardW / 2;
-    const cy = cardY + 234;
-    const r = 118;
-
+    // ગોલ્ડન આઉટર રિંગ
     postCtx.beginPath();
     postCtx.arc(cx, cy, r + 9, 0, Math.PI * 2);
     postCtx.fillStyle = '#f59e0b';
     postCtx.fill();
 
+    // વ્હાઈટ ઇનર રિંગ
     postCtx.beginPath();
     postCtx.arc(cx, cy, r + 4, 0, Math.PI * 2);
     postCtx.fillStyle = '#ffffff';
     postCtx.fill();
 
+    // યુઝરનો HD ફોટો
     postCtx.save();
     postCtx.beginPath();
     postCtx.arc(cx, cy, r, 0, Math.PI * 2);
     postCtx.closePath();
     postCtx.clip();
-
     drawCroppedImage(postCtx, userImg, cx - r, cy - r, r * 2, r * 2);
     postCtx.restore();
 
-    // નીચેનું વ્હાઈટ ડિટેલ કાર્ડ
+    // 2. નીચેનું વ્હાઈટ ડિટેલ કાર્ડ (ઓરિજિનલ જગ્યાએ એકદમ પરફેક્ટ ફિટ)
+    const boxX = 346;
+    const boxY = 664;
+    const boxW = 344;
+    const boxH = 122;
+
     postCtx.fillStyle = '#ffffff';
-    roundRect(postCtx, cardX + 14, cardY + 368, cardW - 28, 134, 16);
+    roundRect(postCtx, boxX, boxY, boxW, boxH, 14);
     postCtx.fill();
+
+    postCtx.textAlign = 'center';
 
     // વોલેન્ટિયરનું નામ
     postCtx.fillStyle = '#14532d';
     postCtx.font = 'bold 26px "Noto Sans Gujarati", sans-serif';
-    postCtx.fillText(name, cx, cardY + 402);
+    postCtx.fillText(name, cx, boxY + 32);
 
     // ગામ / શહેર
     postCtx.fillStyle = '#dc2626';
-    postCtx.font = 'bold 18px "Noto Sans Gujarati", sans-serif';
-    postCtx.fillText('📍 ' + address, cx, cardY + 430);
+    postCtx.font = 'bold 17px "Noto Sans Gujarati", sans-serif';
+    postCtx.fillText('📍 ' + address, cx, boxY + 57);
 
     // ડિવાઈડર લાઈન
     postCtx.strokeStyle = '#e2e8f0';
     postCtx.lineWidth = 1.5;
     postCtx.beginPath();
-    postCtx.moveTo(cardX + 34, cardY + 444);
-    postCtx.lineTo(cardX + cardW - 34, cardY + 444);
+    postCtx.moveTo(boxX + 18, boxY + 69);
+    postCtx.lineTo(boxX + boxW - 18, boxY + 69);
     postCtx.stroke();
 
     // Insta & FB ID
     postCtx.fillStyle = '#1e293b';
-    postCtx.font = '600 14px "Poppins", "Noto Sans Gujarati", sans-serif';
-    postCtx.fillText('📸 ' + insta + '  |  📘 ' + fb, cx, cardY + 468);
+    postCtx.font = '600 13.5px "Poppins", "Noto Sans Gujarati", sans-serif';
+    postCtx.fillText('📸 ' + insta + '  |  📘 ' + fb, cx, boxY + 91);
 
     // ટેગ લાઈન
     postCtx.fillStyle = '#15803d';
-    postCtx.font = 'bold 14px "Noto Sans Gujarati", sans-serif';
-    postCtx.fillText('અમારી સાથે જોડાવા ફોલો કરો: @jivsevak', cx, cardY + 492);
+    postCtx.font = 'bold 13.5px "Noto Sans Gujarati", sans-serif';
+    postCtx.fillText('અમારી સાથે જોડાવા ફોલો કરો: @jivsevak', cx, boxY + 113);
 
-    // બોટમ પટ્ટી
+    // બોટમ ગ્રીન પટ્ટી પર લખાણ
     postCtx.fillStyle = '#bbf7d0';
-    postCtx.font = '600 11.5px "Noto Sans Gujarati", sans-serif';
-    postCtx.fillText('બેજુબાન જીવો માટે પ્રેમ અને ખોરાક સેવા • દયા | કરુણા | માનવતા', cx, cardY + 520);
-
-    postCtx.restore();
+    postCtx.font = '600 11px "Noto Sans Gujarati", sans-serif';
+    postCtx.fillText('બેજુબાન જીવો માટે પ્રેમ અને ખોરાક સેવા • દયા | કરુણા | માનવતા', cx, 804);
   }
 
-  // 2. Full HD Story (1080x1920) - Instagram અને WhatsApp સ્ટોરી માટે
+  // 2. Full HD Story (1080x1920)
   function drawStoryPost(userImg, name, address, insta, fb) {
     const W = 1080, H = 1920;
     const bgGrad = storyCtx.createLinearGradient(0, 0, W, H);
@@ -619,12 +578,10 @@
     storyCtx.fillStyle = bgGrad;
     storyCtx.fillRect(0, 0, W, H);
 
-    // ગોલ્ડન બોર્ડર
     storyCtx.strokeStyle = '#f59e0b';
     storyCtx.lineWidth = 16;
     storyCtx.strokeRect(32, 32, W - 64, H - 64);
 
-    // ટોપ લોગો
     if (orgLogo && orgLogo.complete && orgLogo.naturalWidth > 0) {
       storyCtx.save();
       storyCtx.beginPath();
@@ -647,7 +604,6 @@
     storyCtx.font = 'bold 30px "Noto Sans Gujarati", sans-serif';
     storyCtx.fillText('💚 સેવા • શ્રદ્ધા • વિશ્વાસ 💚', W / 2, 365);
 
-    // રેડ બેનર
     storyCtx.fillStyle = '#dc2626';
     roundRect(storyCtx, 130, 405, 820, 74, 37);
     storyCtx.fill();
@@ -655,8 +611,8 @@
     storyCtx.font = 'bold 34px "Noto Sans Gujarati", sans-serif';
     storyCtx.fillText('ગૌરવશાળી વોલેન્ટિયર (PROUD VOLUNTEER)', W / 2, 453);
 
-    // મોટો HD ફોટો (Radius = 240 -> 480px મોટો ફોટો)
-    const cx = W / 2, cy = 780, r = 240;
+    // મોટો HD ફોટો (Radius = 255 -> 510px)
+    const cx = W / 2, cy = 785, r = 255;
     storyCtx.beginPath();
     storyCtx.arc(cx, cy, r + 18, 0, Math.PI * 2);
     storyCtx.fillStyle = '#f59e0b';
@@ -674,49 +630,47 @@
     drawCroppedImage(storyCtx, userImg, cx - r, cy - r, r * 2, r * 2);
     storyCtx.restore();
 
-    // ડિટેલ કાર્ડ
     storyCtx.fillStyle = '#ffffff';
-    roundRect(storyCtx, 95, 1080, 890, 380, 32);
+    roundRect(storyCtx, 95, 1095, 890, 370, 32);
     storyCtx.fill();
 
     storyCtx.fillStyle = '#14532d';
     storyCtx.font = 'bold 58px "Noto Sans Gujarati", sans-serif';
-    storyCtx.fillText(name, W / 2, 1170);
+    storyCtx.fillText(name, W / 2, 1185);
 
     storyCtx.fillStyle = '#dc2626';
     storyCtx.font = 'bold 38px "Noto Sans Gujarati", sans-serif';
-    storyCtx.fillText('📍 ' + address, W / 2, 1235);
+    storyCtx.fillText('📍 ' + address, W / 2, 1250);
 
     storyCtx.strokeStyle = '#e2e8f0';
     storyCtx.lineWidth = 3;
     storyCtx.beginPath();
-    storyCtx.moveTo(160, 1275);
-    storyCtx.lineTo(920, 1275);
+    storyCtx.moveTo(160, 1290);
+    storyCtx.lineTo(920, 1290);
     storyCtx.stroke();
 
     storyCtx.fillStyle = '#1e293b';
     storyCtx.font = '600 32px "Poppins", "Noto Sans Gujarati", sans-serif';
-    storyCtx.fillText('📸 ' + insta + '   |   📘 ' + fb, W / 2, 1340);
+    storyCtx.fillText('📸 ' + insta + '   |   📘 ' + fb, W / 2, 1355);
 
     storyCtx.fillStyle = '#15803d';
     storyCtx.font = 'bold 32px "Noto Sans Gujarati", sans-serif';
-    storyCtx.fillText('અમારી સાથે જોડાવા ફોલો કરો: @jivsevak', W / 2, 1410);
+    storyCtx.fillText('અમારી સાથે જોડાવા ફોલો કરો: @jivsevak', W / 2, 1425);
 
-    // નીચેનું સ્લોગન
     storyCtx.fillStyle = '#fde047';
     storyCtx.font = 'bold 34px "Noto Sans Gujarati", sans-serif';
-    storyCtx.fillText('"યુવા શક્તિ જોડાશે, તો જીવસેવાનું અભિયાન આગળ વધશે!"', W / 2, 1550);
+    storyCtx.fillText('"યુવા શક્તિ જોડાશે, તો જીવસેવાનું અભિયાન આગળ વધશે!"', W / 2, 1555);
 
     storyCtx.fillStyle = '#dcfce7';
     storyCtx.font = '28px "Noto Sans Gujarati", sans-serif';
-    storyCtx.fillText('🐄 ગૌસેવા  •  🐕 શ્વાન સેવા  •  🐒 જીવસેવા  •  🐦 પક્ષી ચણ', W / 2, 1620);
+    storyCtx.fillText('🐄 ગૌસેવા  •  🐕 શ્વાન સેવા  •  🐒 જીવસેવા  •  🐦 પક્ષી ચણ', W / 2, 1625);
 
     storyCtx.fillStyle = '#ea580c';
-    roundRect(storyCtx, 180, 1690, 720, 80, 40);
+    roundRect(storyCtx, 180, 1695, 720, 80, 40);
     storyCtx.fill();
     storyCtx.fillStyle = '#ffffff';
     storyCtx.font = 'bold 32px "Noto Sans Gujarati", sans-serif';
-    storyCtx.fillText('જોડાવા માટે @jivsevak ને DM કરો: VOLUNTEER', W / 2, 1741);
+    storyCtx.fillText('જોડાવા માટે @jivsevak ને DM કરો: VOLUNTEER', W / 2, 1746);
   }
 
   function drawCroppedImage(ctx, img, x, y, w, h) {
