@@ -1,364 +1,914 @@
 <!DOCTYPE html>
 <html lang="gu">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0b3d2e">
-<title>JIVSEVAK PARIVAR | Volunteer Registration</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-:root{--green:#0b3d2e;--green2:#146b45;--mint:#eaf7ef;--gold:#e9b949;--ink:#18251f;--muted:#64756c;--line:#dce9e0;--paper:#fff;--bg:#f3f8f4;--red:#b83b36}
-*{box-sizing:border-box}
-body{margin:0;background:radial-gradient(circle at 10% 0%,#e1f4e8 0,transparent 35%),linear-gradient(135deg,#f6faf6,#fff9eb);font-family:"Noto Sans Gujarati",Poppins,sans-serif;color:var(--ink);padding:24px 14px}
-.page{max-width:780px;margin:auto;background:var(--paper);border:1px solid #e1ebe4;border-radius:26px;overflow:hidden;box-shadow:0 24px 70px rgba(11,61,46,.12)}
-.hero{position:relative;overflow:hidden;text-align:center;color:#fff;padding:32px 24px 28px;background:linear-gradient(130deg,#06291f,#0b3d2e 55%,#167447)}
-.hero:before,.hero:after{content:"";position:absolute;border:1px solid rgba(233,185,73,.28);border-radius:50%;width:280px;height:280px;pointer-events:none}
-.hero:before{left:-150px;top:-160px}.hero:after{right:-170px;bottom:-220px;width:390px;height:390px}
-.brand{position:relative;z-index:1;display:flex;justify-content:center;align-items:center;gap:14px;margin-bottom:13px}
-.logo{width:76px;height:76px;border-radius:50%;border:3px solid var(--gold);background:#fff;color:var(--green);display:grid;place-items:center;font-size:22px;font-weight:900;overflow:hidden;box-shadow:0 5px 20px #0003}
-.logo img{width:100%;height:100%;object-fit:cover}
-.brand-name{text-align:left}.brand-name strong{display:block;font:800 clamp(22px,5vw,32px) Poppins,sans-serif;letter-spacing:.4px}.brand-name span{color:#f7d987;font-weight:700;font-size:13px}
-.hero h1{position:relative;z-index:1;margin:8px 0 7px;font-size:clamp(23px,5vw,34px);font-weight:900}
-.hero .tagline{position:relative;z-index:1;display:inline-block;padding:7px 16px;border:1px solid #e9b94988;border-radius:30px;background:#ffffff12;color:#ffe6a6;font-size:14px;font-weight:800}
-.hero p{position:relative;z-index:1;max-width:620px;margin:15px auto 0;line-height:1.85;color:#e6f4eb;font-size:14px}
-.content{padding:22px}
-.goal{padding:13px 16px;text-align:center;color:white;font-weight:800;border-radius:14px;background:linear-gradient(100deg,#0b3d2e,#16814f);box-shadow:0 8px 20px #0b3d2e20}
-.section-title{font-size:17px;color:var(--green);font-weight:900;margin:22px 0 12px}
-.seva-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
-.seva{padding:12px 8px;text-align:center;border:1px solid var(--line);border-radius:13px;background:#fbfefb;color:#19563b;font-size:12px;font-weight:800;min-height:68px;display:flex;flex-direction:column;justify-content:center;gap:4px}
-.seva b{font-size:21px}
-.benefits{margin-top:14px;background:#fff9e9;border:1px solid #f2dfaa;border-radius:15px;padding:15px}
-.benefits h3{margin:0 0 8px;color:#8a5b08;font-size:15px}
-.benefits ul{margin:0;padding-left:20px;line-height:1.9;font-size:13px;color:#59451b}
-.form-panel{margin-top:22px;border:1px solid var(--line);border-radius:19px;padding:20px;background:#fff}
-.form-heading{text-align:center;margin-bottom:18px}.form-heading h2{margin:0;color:var(--green);font-size:22px}.form-heading p{margin:6px 0 0;color:var(--muted);font-size:13px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.field{min-width:0}.field.full{grid-column:1/-1}
-label{display:block;font-weight:800;font-size:13px;margin-bottom:6px;color:#263d31}
-.req{color:var(--red)}.optional{color:var(--muted);font-size:11px;font-weight:500}
-input,select,textarea{width:100%;border:1.5px solid #d7e4db;border-radius:11px;padding:12px 13px;font:500 14px "Noto Sans Gujarati",Poppins,sans-serif;color:var(--ink);background:#fbfdfb;outline:none;transition:.2s}
-input:focus,select:focus,textarea:focus{border-color:#218553;box-shadow:0 0 0 3px #21855318;background:white}
-input[type=file]{padding:10px;background:#f2faf4}
-.hint{font-size:11px;color:var(--muted);margin-top:5px;line-height:1.5}
-.check-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
-.check{display:flex;align-items:center;gap:8px;border:1px solid var(--line);padding:9px 10px;border-radius:10px;font-size:12px;font-weight:700;background:#fbfefb}
-.check input{width:auto;accent-color:#16814f}
-.consent{display:flex;gap:9px;align-items:flex-start;font-size:12px;line-height:1.65;color:#52655a;margin-top:13px}
-.consent input{width:auto;margin-top:4px;accent-color:#16814f}
-.primary-btn,.secondary-btn{width:100%;border:0;border-radius:13px;padding:14px 16px;font:800 15px "Noto Sans Gujarati",Poppins,sans-serif;cursor:pointer;transition:.2s}
-.primary-btn{margin-top:16px;background:linear-gradient(110deg,#16814f,#0b3d2e);color:#fff;box-shadow:0 8px 20px #0b3d2e25}
-.primary-btn:disabled{opacity:.65;cursor:wait}
-.secondary-btn{background:#f0f6f1;color:var(--green);border:1px solid var(--line);margin-top:9px}
-.status{display:none;margin-top:14px;padding:12px 14px;border-radius:11px;font-size:13px;line-height:1.6}
-.status.info{display:block;background:#eef6ff;color:#174a75;border:1px solid #c8e0f8}
-.status.success{display:block;background:#eaf8ef;color:#14532d;border:1px solid #bce6ca}
-.status.error{display:block;background:#fff0ef;color:#922e2a;border:1px solid #f2c5c1}
-.result{display:none;margin-top:20px;padding-top:20px;border-top:1px dashed #cbd9cf;text-align:center}
-.id-pill{display:inline-block;padding:8px 17px;background:#fff5d9;color:#75500b;border:1px solid #e9b949;border-radius:30px;font-weight:900;margin-bottom:12px}
-canvas{display:block;width:min(100%,480px);height:auto;margin:0 auto;border-radius:15px;box-shadow:0 10px 30px #102b1d22}
-.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}
-.actions button{font:700 13px "Noto Sans Gujarati",Poppins,sans-serif;padding:12px;border:0;border-radius:11px;color:white;cursor:pointer}
-.download{background:#bd5a13}.share{background:#1766b1}.copy{background:#eef3ef!important;color:#1e4933!important;border:1px solid var(--line)!important;grid-column:1/-1}
-.wa{display:block;margin-top:14px;padding:13px;border-radius:12px;background:#e9fbef;color:#08743d;text-decoration:none;font-weight:800;border:1px solid #b6e9c8}
-.footer{background:#f7faf7;text-align:center;padding:17px;color:#587064;font-size:12px;line-height:1.8;border-top:1px solid var(--line)}
-.footer strong{color:var(--green)}
-@media(max-width:620px){body{padding:10px}.page{border-radius:18px}.hero{padding:24px 16px}.content{padding:14px}.seva-grid{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.field.full{grid-column:auto}.form-panel{padding:15px}.brand{gap:10px}.logo{width:62px;height:62px}.brand-name strong{font-size:21px}.hero p{font-size:13px}.actions{grid-template-columns:1fr}.copy{grid-column:auto}}
-@media(max-width:360px){.check-grid{grid-template-columns:1fr}.hero .tagline{font-size:12px}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JIVSEVAK PARIVAR (@jivsevak) - વોલેન્ટિયર જોડાઓ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;500;600;700;800;900&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #14532d;
+      --primary-dark: #052e16;
+      --accent: #dc2626;
+      --orange: #ea580c;
+      --gold: #f59e0b;
+      --whatsapp: #25D366;
+      --bg: linear-gradient(135deg, #ecfdf5 0%, #fefce8 50%, #fff7ed 100%);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans Gujarati', 'Poppins', sans-serif;
+      background: var(--bg);
+      color: #1f2937;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .wrapper {
+      max-width: 600px;
+      width: 100%;
+      background: #ffffff;
+      border-radius: 24px;
+      box-shadow: 0 20px 45px rgba(20, 83, 45, 0.14);
+      overflow: hidden;
+      border: 1px solid rgba(20, 83, 45, 0.12);
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #052e16 0%, #14532d 65%, #166534 100%);
+      color: #fff;
+      padding: 26px 20px 24px;
+      text-align: center;
+      border-bottom: 5px solid var(--gold);
+    }
+
+    .logo-circle {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 12px;
+      border-radius: 50%;
+      padding: 4px;
+      background: linear-gradient(45deg, #f59e0b, #ea580c, #fde047);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+    }
+
+    .logo-circle img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #fff;
+    }
+
+    .motto-pill {
+      display: inline-block;
+      background: rgba(253, 224, 71, 0.18);
+      border: 1px solid #fde047;
+      color: #fde047;
+      font-size: 13px;
+      font-weight: 800;
+      padding: 4px 16px;
+      border-radius: 50px;
+      margin-bottom: 8px;
+    }
+
+    .hero h1 {
+      font-size: 27px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+    }
+
+    .hero-banner-red {
+      background: #dc2626;
+      color: #fff;
+      font-weight: 800;
+      font-size: 15px;
+      padding: 8px 14px;
+      border-radius: 12px;
+      margin: 12px auto;
+      display: inline-block;
+      box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
+    }
+
+    .hero-desc {
+      font-size: 14px;
+      line-height: 1.65;
+      color: #ecfdf5;
+      margin-top: 6px;
+    }
+
+    .info-cards {
+      padding: 18px 20px 6px;
+      background: #f8fafc;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .goal-strip {
+      background: linear-gradient(90deg, #14532d, #15803d);
+      color: #fff;
+      text-align: center;
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-size: 13.5px;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .seva-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .seva-item {
+      background: #ffffff;
+      border: 1px solid #dcfce7;
+      padding: 8px 10px;
+      border-radius: 10px;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #14532d;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+    }
+
+    .benefits-box {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 14px;
+      padding: 12px 14px;
+      margin-bottom: 14px;
+    }
+
+    .benefits-box h3 {
+      font-size: 14px;
+      font-weight: 800;
+      color: #b45309;
+      margin-bottom: 6px;
+    }
+
+    .benefits-list {
+      list-style: none;
+      font-size: 12.5px;
+      color: #451a03;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+
+    .form-area {
+      padding: 20px 20px 26px;
+    }
+
+    .form-header {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    .form-header h2 {
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--primary);
+    }
+
+    .form-header p {
+      font-size: 13px;
+      color: #64748b;
+      margin-top: 3px;
+    }
+
+    .form-group { margin-bottom: 14px; }
+
+    label {
+      display: block;
+      font-weight: 700;
+      font-size: 13.5px;
+      margin-bottom: 5px;
+      color: #1e293b;
+    }
+
+    label span.req { color: #dc2626; }
+    label span.opt { color: #64748b; font-weight: 500; font-size: 12px; }
+
+    input[type="text"], input[type="tel"] {
+      width: 100%;
+      padding: 12px 14px;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      font-size: 15px;
+      font-family: inherit;
+      background: #f8fafc;
+      transition: 0.2s;
+    }
+
+    input[type="text"]:focus, input[type="tel"]:focus {
+      border-color: var(--primary);
+      background: #fff;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(20, 83, 45, 0.12);
+    }
+
+    .upload-zone {
+      border: 2px dashed #16a34a;
+      background: #f0fdf4;
+      border-radius: 14px;
+      padding: 16px;
+      text-align: center;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .upload-zone input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 14px;
+      font-size: 15.5px;
+      font-weight: 800;
+      cursor: pointer;
+      font-family: inherit;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+
+    .btn:active { transform: scale(0.98); }
+
+    .btn-create {
+      background: linear-gradient(135deg, #16a34a, #14532d);
+      color: #fff;
+      box-shadow: 0 8px 20px rgba(20, 83, 45, 0.25);
+      margin-top: 8px;
+    }
+
+    .whatsapp-card {
+      background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+      border: 2px solid #10b981;
+      border-radius: 16px;
+      padding: 14px;
+      margin-top: 14px;
+      text-align: center;
+    }
+
+    .whatsapp-card p {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #065f46;
+      margin-bottom: 10px;
+    }
+
+    .btn-whatsapp {
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: #ffffff;
+      font-size: 16px;
+      box-shadow: 0 6px 18px rgba(37, 211, 102, 0.35);
+    }
+
+    .share-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .btn-direct-post {
+      background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+      color: #fff;
+      box-shadow: 0 6px 16px rgba(220, 39, 67, 0.3);
+      font-size: 14px;
+      padding: 13px 10px;
+    }
+
+    .btn-direct-story {
+      background: linear-gradient(135deg, #1877f2, #0d47a1);
+      color: #fff;
+      box-shadow: 0 6px 16px rgba(24, 119, 242, 0.3);
+      font-size: 14px;
+      padding: 13px 10px;
+    }
+
+    .btn-post-dl {
+      background: linear-gradient(135deg, #ea580c, #c2410c);
+      color: #fff;
+      box-shadow: 0 6px 16px rgba(234, 88, 12, 0.25);
+      margin-top: 10px;
+    }
+
+    .btn-story-dl {
+      background: #14532d;
+      color: #fff;
+      margin-top: 10px;
+    }
+
+    .btn-copy-caption {
+      background: #f1f5f9;
+      color: #0f172a;
+      border: 1.5px solid #cbd5e1;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    .result-box {
+      display: none;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 2px dashed #cbd5e1;
+      text-align: center;
+    }
+
+    .id-badge-display {
+      display: inline-block;
+      background: #fef3c7;
+      border: 2px solid #f59e0b;
+      color: #92400e;
+      font-weight: 900;
+      font-size: 16px;
+      padding: 6px 18px;
+      border-radius: 50px;
+      margin-bottom: 12px;
+    }
+
+    canvas {
+      width: 100%;
+      max-width: 460px;
+      height: auto;
+      border-radius: 14px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.22);
+      border: 2px solid var(--gold);
+    }
+
+    .status-pill {
+      margin-top: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #15803d;
+      background: #dcfce7;
+      padding: 7px 14px;
+      border-radius: 20px;
+      display: inline-block;
+    }
+
+    .tag-box {
+      background: #fffbeb;
+      border: 1.5px solid #fcd34d;
+      padding: 14px;
+      border-radius: 14px;
+      margin-top: 14px;
+      text-align: left;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #78350f;
+    }
+  </style>
 </head>
 <body>
-<main class="page">
-  <header class="hero">
-    <div class="brand">
-      <div class="logo" id="logoBox">🐾</div>
-      <div class="brand-name"><strong>JIVSEVAK PARIVAR</strong><span>SEVA • SHRADDHA • VISHWAS</span></div>
-    </div>
-    <div class="tagline">💚 સેવા • શ્રદ્ધા • વિશ્વાસ 💚</div>
-    <h1>જીવસેવાના પરિવાર સાથે જોડાઓ</h1>
-    <p>ગુજરાતના દરેક શહેર, તાલુકા અને ગામમાંથી સેવાભાવી યુવાનોને આમંત્રણ. ચાલો, ગૌસેવા, શ્વાન સેવા, પક્ષી સેવા અને માનવતાના કાર્યોને સાથે મળીને આગળ વધારીએ.</p>
-  </header>
 
-  <section class="content">
-    <div class="goal">🌍 અમારું લક્ષ્ય: દરેક ગામમાં જીવસેવા, દરેક શહેરમાં સેવાભાવી પરિવાર!</div>
-    <h2 class="section-title">આપણી સેવા પ્રવૃત્તિઓ</h2>
-    <div class="seva-grid">
-      <div class="seva"><b>🐄</b>ગૌસેવા</div><div class="seva"><b>🐕</b>શ્વાન સેવા</div>
-      <div class="seva"><b>🐦</b>પક્ષીઓને દાણા-પાણી</div><div class="seva"><b>🐒</b>અન્ય અબોલ જીવોની સેવા</div>
-      <div class="seva"><b>🏥</b>ઘાયલ જીવોને મદદ</div><div class="seva"><b>🌳</b>પર્યાવરણ સંરક્ષણ</div>
-      <div class="seva"><b>📚</b>શિક્ષણ સહયોગ</div><div class="seva"><b>❤️</b>સામાજિક સેવા</div>
+<div class="wrapper">
+  <div class="hero">
+    <div class="logo-circle">
+      <img src="jivsevaklogo.jpg" alt="Jivsevak Parivar" id="orgLogo">
     </div>
-    <div class="benefits">
-      <h3>🎖️ જોડાવાના લાભ</h3>
-      <ul>
-        <li>આજીવન મફત Volunteer Registration અને Unique ID.</li>
-        <li>Professional Digital Profile અને સેવાકીય રેકોર્ડ.</li>
-        <li>યોગ્ય સેવાકાર્ય માટે પ્રશંસાપત્ર અને સન્માનની તક.</li>
-        <li>સેવાભાવી લોકો, Trust અને NGO સાથે જોડાવાની તક.</li>
+    <div class="motto-pill">💚 સેવા • શ્રદ્ધા • વિશ્વાસ 💚</div>
+    <h1>JIVSEVAK PARIVAR</h1>
+    <div class="hero-banner-red">💚🐾 યુવા શક્તિ જોડાશે, તો જીવસેવાનું અભિયાન આગળ વધશે!</div>
+    <p class="hero-desc">
+      શું તમે પણ સમાજ અને અબોલ જીવો માટે કંઈક સારું કરવા માંગો છો? ❤️<br>
+      અમને ગુજરાતના દરેક શહેર, તાલુકા અને ગામમાંથી સેવાભાવી યુવાનો અને <strong>Volunteers</strong> ની જરૂર છે.
+    </p>
+  </div>
+
+  <div class="info-cards">
+    <div class="goal-strip">🌍 અમારું લક્ષ્ય: દરેક ગામમાં જીવસેવા, દરેક શહેરમાં સેવાભાવી પરિવાર!</div>
+    
+    <div class="seva-grid">
+      <div class="seva-item">🐄 ગૌસેવા</div>
+      <div class="seva-item">🐕 શ્વાન સેવા</div>
+      <div class="seva-item">🐒 વાંદરા અને જીવસેવા</div>
+      <div class="seva-item">🐦 પક્ષીઓને દાણા-પાણી</div>
+      <div class="seva-item">🏥 ઘાયલ જીવોની મદદ</div>
+      <div class="seva-item">🌳 પર્યાવરણ સંરક્ષણ</div>
+      <div class="seva-item">📚 બાળકોને શિક્ષણ સહયોગ</div>
+      <div class="seva-item">❤️ સામાજિક માનવતા</div>
+    </div>
+
+    <div class="benefits-box">
+      <h3>🎖️ JIVSEVAK PARIVAR સાથે જોડાવાના લાભ:</h3>
+      <ul class="benefits-list">
+        <li>✅ આજીવન મફત Volunteer Registration & યુનિક ID (JS_1, JS_2...)</li>
+        <li>✅ પોતાની Professional Digital Profile & સેવાકીય રેકોર્ડ</li>
+        <li>✅ યોગ્ય કામગીરી બદલ પ્રશંસાપત્ર (Certificate) અને વિશેષ સન્માન</li>
       </ul>
     </div>
+  </div>
 
-    <section class="form-panel">
-      <div class="form-heading"><h2>✨ Volunteer Registration</h2><p>તમારી વિગતો ભરો અને JIVSEVAK PARIVAR સાથે જોડાઓ.</p></div>
-      <form id="volunteerForm">
-        <div class="grid">
-          <div class="field">
-            <label for="volName">પૂરું નામ <span class="req">*</span></label>
-            <input id="volName" name="name" type="text" maxlength="80" autocomplete="name" placeholder="દા.ત. રાજેશભાઈ પટેલ" required>
-          </div>
-          <div class="field">
-            <label for="volMobile">મોબાઈલ નંબર <span class="req">*</span></label>
-            <input id="volMobile" name="mobile" type="tel" inputmode="numeric" maxlength="15" autocomplete="tel" placeholder="મોબાઈલ નંબર" required>
-          </div>
-          <div class="field">
-            <label for="volAddress">ગામ / શહેર <span class="req">*</span></label>
-            <input id="volAddress" name="address" type="text" maxlength="120" autocomplete="address-level2" placeholder="દા.ત. ગાંધીનગર, ગુજરાત" required>
-          </div>
-          <div class="field">
-            <label for="volDistrict">જિલ્લો <span class="req">*</span></label>
-            <input id="volDistrict" name="district" type="text" maxlength="80" placeholder="તમારો જિલ્લો" required>
-          </div>
-          <div class="field">
-            <label for="volInsta">Instagram ID <span class="optional">(વૈકલ્પિક)</span></label>
-            <input id="volInsta" name="instagram" type="text" maxlength="80" placeholder="@username">
-          </div>
-          <div class="field">
-            <label for="volFb">Facebook Name / Link <span class="optional">(વૈકલ્પિક)</span></label>
-            <input id="volFb" name="facebook" type="text" maxlength="150" placeholder="Facebook નામ અથવા Link">
-          </div>
-          <div class="field full">
-            <label>તમારી સેવા પસંદ કરો <span class="req">*</span></label>
-            <div class="check-grid">
-              <label class="check"><input type="checkbox" name="interests" value="ગૌસેવા"> 🐄 ગૌસેવા</label>
-              <label class="check"><input type="checkbox" name="interests" value="શ્વાન સેવા"> 🐕 શ્વાન સેવા</label>
-              <label class="check"><input type="checkbox" name="interests" value="પક્ષી સેવા"> 🐦 પક્ષી સેવા</label>
-              <label class="check"><input type="checkbox" name="interests" value="અન્ય જીવસેવા"> 🐒 અન્ય જીવસેવા</label>
-              <label class="check"><input type="checkbox" name="interests" value="ઘાયલ જીવ સહાય"> 🏥 ઘાયલ જીવ સહાય</label>
-              <label class="check"><input type="checkbox" name="interests" value="પર્યાવરણ સેવા"> 🌳 પર્યાવરણ સેવા</label>
-              <label class="check"><input type="checkbox" name="interests" value="શિક્ષણ સેવા"> 📚 શિક્ષણ સેવા</label>
-              <label class="check"><input type="checkbox" name="interests" value="માનવ સેવા"> ❤️ માનવ સેવા</label>
-            </div>
-          </div>
-          <div class="field">
-            <label for="volAvailability">ક્યારે સેવા આપી શકો?</label>
-            <select id="volAvailability" name="availability">
-              <option value="">પસંદ કરો</option><option>સવારે</option><option>બપોરે</option><option>સાંજે</option><option>રજાના દિવસોમાં</option><option>જરૂર મુજબ</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="volPhoto">તમારો ફોટો <span class="req">*</span></label>
-            <input id="volPhoto" name="photo" type="file" accept="image/jpeg,image/png,image/webp" required>
-            <div class="hint">JPG, PNG અથવા WebP • મહત્તમ 5 MB. ફોટો ID Poster માટે વપરાશે.</div>
-          </div>
-          <div class="field full">
-            <label for="volNote">વધારાની માહિતી <span class="optional">(વૈકલ્પિક)</span></label>
-            <textarea id="volNote" name="note" rows="3" maxlength="500" placeholder="તમારી સેવા અથવા અનુભવ વિશે લખો..."></textarea>
-          </div>
+  <div class="form-area">
+    <div class="form-header">
+      <h2>✨ તમારું HD Volunteer Poster બનાવો</h2>
+      <p>ફોટો અપલોડ કરો — ઓટોમેટિક Volunteer ID સાથે પોસ્ટર બની જશે</p>
+    </div>
+
+    <form id="volunteerForm">
+      <div class="form-group">
+        <label>તમારું પૂરું નામ <span class="req">*</span></label>
+        <input type="text" id="volName" placeholder="દા.ત. રાજેશભાઈ પટેલ" required>
+      </div>
+
+      <div class="form-group">
+        <label>મોબાઈલ નંબર <span class="opt">(Optional - ફક્ત પરિવારના રેકોર્ડ માટે)</span></label>
+        <input type="tel" id="volMobile" placeholder="દા.ત. 9876543210" maxlength="15">
+      </div>
+
+      <div class="form-group">
+        <label>ગામ / તાલુકો / શહેર <span class="req">*</span></label>
+        <input type="text" id="volAddress" placeholder="દા.ત. ગાંધીનગર, ગુજરાત" required>
+      </div>
+
+      <div class="form-group">
+        <label>Instagram ID <span class="opt">(Optional - હોય તો લખો)</span></label>
+        <input type="text" id="volInsta" placeholder="દા.ત. @rajesh_patel">
+      </div>
+
+      <div class="form-group">
+        <label>Facebook આઈડીનું નામ <span class="opt">(Optional - હોય તો લખો)</span></label>
+        <input type="text" id="volFb" placeholder="દા.ત. Rajesh Patel">
+      </div>
+
+      <div class="form-group">
+        <label>તમારો સારો HD ફોટો અપલોડ કરો <span class="req">*</span></label>
+        <div class="upload-zone">
+          <input type="file" id="volPhoto" accept="image/*" required onchange="showFileName(this)">
+          <div style="font-size: 28px;">📸</div>
+          <div style="font-weight: 800; color: #14532d; font-size: 14px;">અહીં ક્લિક કરીને તમારો ફોટો પસંદ કરો</div>
+          <div id="fileLabel" style="font-size: 12px; color: #ea580c; font-weight: 600; margin-top: 4px;">કોઈ ફોટો પસંદ કર્યો નથી</div>
         </div>
-        <label class="consent"><input id="terms" type="checkbox" required><span>હું ખાતરી આપું છું કે આપેલી વિગતો સાચી છે અને JIVSEVAK PARIVAR ની Registration તથા Privacy Policy વાંચીને સ્વીકારું છું. મારી વિગતો Volunteer Registration માટે Google Sheets / Drive માં સંગ્રહિત થશે. ફોટો Poster બનાવવા માટે વપરાશે.</span></label>
-        <label class="consent"><input id="mediaConsent" type="checkbox"><span>મારો ફોટો / સેવાકીય Content JIVSEVAK PARIVAR ના Social Media પર શેર કરવા માટે હું અલગથી સંમતિ આપું છું. (વૈકલ્પિક)</span></label>
-        <button class="primary-btn" id="submitBtn" type="submit">💚 Registration Submit કરો</button>
-      </form>
-      <div id="status" class="status" role="status" aria-live="polite"></div>
+      </div>
 
-      <section class="result" id="result">
-        <h2 style="color:#0b3d2e;margin-bottom:8px">🎉 અભિનંદન! આપનું Registration પ્રાપ્ત થયું.</h2>
-        <div class="id-pill" id="idPill">Volunteer ID: Pending</div>
-        <canvas id="poster" width="1080" height="1350"></canvas>
-        <div class="actions">
-          <button class="download" id="downloadPoster">⬇️ HD Poster Download</button>
-          <button class="share" id="sharePoster">📤 Share Poster</button>
-          <button class="copy" id="copyCaption">📋 Caption Copy કરો</button>
-        </div>
-        <a class="wa" href="https://chat.whatsapp.com/HHj0iQsahDM5B9nLngv6eR" target="_blank" rel="noopener">💬 JIVSEVAK PARIVAR WhatsApp Group માં જોડાઓ</a>
-      </section>
-    </section>
-  </section>
-  <footer class="footer"><strong>JIVSEVAK PARIVAR</strong><br>સેવા • શ્રદ્ધા • વિશ્વાસ<br>Volunteer Registration મફત છે. Registration ની ચકાસણી પછી Volunteer ID આપવામાં આવશે.</footer>
-</main>
+      <button type="submit" class="btn btn-create" id="submitBtn">🎨 મારું HD વોલેન્ટિયર પોસ્ટર બનાવો</button>
+    </form>
 
-<iframe name="gasResponseFrame" id="gasResponseFrame" title="Registration response" hidden></iframe>
+    <div class="result-box" id="resultBox">
+      <h3 style="color: #14532d; font-size: 19px; font-weight: 900; margin-bottom: 8px;">
+        🎉 અભિનંદન! JIVSEVAK PARIVAR માં આપનું સ્વાગત છે
+      </h3>
+      <div class="id-badge-display" id="volIdBadge">🪪 Volunteer ID: JS_1</div>
+      <br>
+      
+      <canvas id="postCanvas" width="1080" height="1200"></canvas>
+      <canvas id="storyCanvas" width="1080" height="1920" style="display:none;"></canvas>
+
+      <br>
+      <div class="status-pill" id="statusMsg"></div>
+
+      <div class="whatsapp-card">
+        <p>🐾 જીવસેવાના દૈનિક અપડેટ્સ અને વોલેન્ટિયર ટીમ સાથે જોડાવા અમારા WhatsApp ગ્રુપમાં જોડાઓ:</p>
+        <a href="https://chat.whatsapp.com/HHj0iQsahDM5B9nLngv6eR" target="_blank" class="btn btn-whatsapp" id="waJoinBtn">
+          💬 Join JIVSEVAK PARIVAR WhatsApp Group
+        </a>
+      </div>
+
+      <div class="share-grid">
+        <button class="btn btn-direct-post" onclick="shareDirect('post')">
+          📤 Direct Post Share (Insta / FB)
+        </button>
+        <button class="btn btn-direct-story" onclick="shareDirect('story')">
+          📲 Direct Story Share (Insta / FB)
+        </button>
+      </div>
+
+      <button class="btn btn-post-dl" onclick="downloadImage('post')">
+        ⬇️ HD Post ડાઉનલોડ કરો (Gallery માં સેવ)
+      </button>
+
+      <button class="btn btn-story-dl" onclick="downloadImage('story')">
+        📱 Full HD Story ડાઉનલોડ કરો (Gallery માં સેવ)
+      </button>
+
+      <button class="btn btn-copy-caption" onclick="copyCaption()">
+        📋 પોસ્ટ માટે કેપ્શન અને @jivsevak ટેગ કોપી કરો
+      </button>
+
+      <div class="tag-box">
+        <strong>🔥 હવે શું કરવું?</strong><br>
+        1️⃣ ઉપરના ગ્રીન બટનથી <b>JIVSEVAK PARIVAR WhatsApp Group</b> માં જોડાઓ.<br>
+        2️⃣ <b>Direct Post Share</b> અથવા <b>Direct Story Share</b> પર ક્લિક કરીને Instagram/Facebook પર પોસ્ટ મૂકો અને <b>@jivsevak</b> ને ટેગ કરો! 🙏
+      </div>
+    </div>
+  </div>
+</div>
+
+<img src="poster_bg.png" id="bgTemplate" style="display:none;" crossorigin="anonymous">
 
 <script>
-/*
-  IMPORTANT:
-  1. Replace the URL below with your newly deployed Google Apps Script Web App URL.
-  2. Deploy Apps Script as: Execute as Me; Who has access: Anyone.
-  3. Run setupJivsevak() once in Apps Script before deployment.
-*/
-const GOOGLE_SCRIPT_URL = "PASTE_YOUR_DEPLOYED_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";
-const WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/HHj0iQsahDM5B9nLngv6eR";
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyyvq-9Fn5ELzzjaVJA45smi_PDK25IZTcUo50JlBwW-xxGzaz2orbpFegL30hepmi8/exec";
+  const WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/HHj0iQsahDM5B9nLngv6eR";
 
-const form = document.getElementById("volunteerForm");
-const submitBtn = document.getElementById("submitBtn");
-const statusBox = document.getElementById("status");
-const result = document.getElementById("result");
-const poster = document.getElementById("poster");
-const ctx = poster.getContext("2d");
-let latestRegistration = null;
-let latestPosterBlob = null;
-let pendingRequestId = null;
-let responseTimer = null;
+  document.getElementById('waJoinBtn').href = WHATSAPP_GROUP_URL;
 
-function showStatus(message, type="info"){
-  statusBox.className = "status " + type;
-  statusBox.textContent = message;
-}
-function normalizeInstagram(value){
-  value = (value || "").trim();
-  if(value && !value.startsWith("@") && !value.includes("instagram.com/")) value = "@" + value;
-  return value;
-}
-function fileToDataUrl(file){
-  return new Promise((resolve,reject)=>{
-    const reader = new FileReader();
-    reader.onload = ()=>resolve(reader.result);
-    reader.onerror = ()=>reject(new Error("ફોટો વાંચી શકાયો નથી."));
-    reader.readAsDataURL(file);
-  });
-}
-async function compressImage(file, maxSide=1200, quality=.78){
-  const dataUrl = await fileToDataUrl(file);
-  const img = new Image();
-  await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=reject;img.src=dataUrl;});
-  const scale = Math.min(1, maxSide / Math.max(img.width,img.height));
-  const c = document.createElement("canvas");
-  c.width = Math.round(img.width*scale); c.height = Math.round(img.height*scale);
-  c.getContext("2d").drawImage(img,0,0,c.width,c.height);
-  return c.toDataURL("image/jpeg",quality);
-}
-function roundedRect(c,x,y,w,h,r,fill){
-  c.beginPath(); c.roundRect(x,y,w,h,r); c.fillStyle=fill; c.fill();
-}
-function drawCover(c,img,x,y,w,h){
-  const scale=Math.max(w/img.width,h/img.height), dw=img.width*scale, dh=img.height*scale;
-  c.save(); c.beginPath(); c.arc(x+w/2,y+h/2,Math.min(w,h)/2,0,Math.PI*2); c.clip();
-  c.drawImage(img,x+(w-dw)/2,y+(h-dh)/2,dw,dh); c.restore();
-}
-async function makePoster(photoData, data, volunteerId){
-  const photo = new Image();
-  await new Promise((resolve,reject)=>{photo.onload=resolve;photo.onerror=reject;photo.src=photoData;});
-  const W=1080,H=1350;
-  const grad=ctx.createLinearGradient(0,0,W,H);
-  grad.addColorStop(0,"#06291f"); grad.addColorStop(.55,"#0b5739"); grad.addColorStop(1,"#13784a");
-  ctx.fillStyle=grad;ctx.fillRect(0,0,W,H);
-  ctx.strokeStyle="#e9b949";ctx.lineWidth=12;ctx.strokeRect(28,28,W-56,H-56);
-  ctx.textAlign="center";
-  ctx.fillStyle="#f9dc91";ctx.font="800 34px Poppins, sans-serif";ctx.fillText("JIVSEVAK PARIVAR",W/2,105);
-  ctx.fillStyle="#ffffff";ctx.font="700 28px 'Noto Sans Gujarati', sans-serif";ctx.fillText("સેવા • શ્રદ્ધા • વિશ્વાસ",W/2,155);
-  ctx.fillStyle="#f9dc91";ctx.font="800 30px 'Noto Sans Gujarati', sans-serif";ctx.fillText("ગૌરવશાળી વોલેન્ટિયર",W/2,230);
-  ctx.beginPath();ctx.arc(W/2,490,230,0,Math.PI*2);ctx.fillStyle="#e9b949";ctx.fill();
-  ctx.beginPath();ctx.arc(W/2,490,214,0,Math.PI*2);ctx.fillStyle="#ffffff";ctx.fill();
-  drawCover(ctx,photo,W/2-202,288,404,404);
-  roundedRect(ctx,W/2-190,730,380,68,34,"#f5d477");
-  ctx.fillStyle="#173b2b";ctx.font="800 30px Poppins, sans-serif";ctx.fillText("ID: "+volunteerId,W/2,775);
-  roundedRect(ctx,95,845,890,260,28,"#ffffff");
-  ctx.fillStyle="#0b3d2e";ctx.font="800 54px 'Noto Sans Gujarati', sans-serif";ctx.fillText(data.name,W/2,930);
-  ctx.fillStyle="#b83b36";ctx.font="700 32px 'Noto Sans Gujarati', sans-serif";ctx.fillText(data.address+" • "+data.district,W/2,990);
-  ctx.fillStyle="#34483c";ctx.font="500 25px Poppins, sans-serif";ctx.fillText(data.instagram || "JIVSEVAK PARIVAR VOLUNTEER",W/2,1045);
-  ctx.fillStyle="#f8df9d";ctx.font="700 30px 'Noto Sans Gujarati', sans-serif";ctx.fillText("તમારી સેવા બીજા લોકોને પ્રેરણા આપે!",W/2,1180);
-  ctx.fillStyle="#ffffff";ctx.font="700 25px Poppins, sans-serif";ctx.fillText("@jivsevak",W/2,1240);
-  ctx.fillStyle="#d9f5e2";ctx.font="500 22px 'Noto Sans Gujarati', sans-serif";ctx.fillText("ગૌસેવા • શ્વાન સેવા • પક્ષી સેવા • માનવતા",W/2,1290);
-  return new Promise(resolve=>poster.toBlob(resolve,"image/png",1));
-}
-function getCaption(d,id){
-  return `💚🐾 ગૌરવશાળી વોલેન્ટિયર – ${id}\n\nહું ${d.name}, ${d.address}, ${d.district} થી JIVSEVAK PARIVAR ના જીવસેવા અભિયાન સાથે જોડાયો/જોડાઈ છું.\n\nચાલો, આપણી સેવા જોઈને બીજા લોકો પણ સેવા કરવા પ્રેરાય!\n\nJIVSEVAK PARIVAR – સેવા • શ્રદ્ધા • વિશ્વાસ\n@jivsevak\n\n#JivsevakParivar #JivDaya #AnimalWelfare #Seva #GujaratVolunteers`;
-}
-function submitToAppsScript(payload){
-  return new Promise((resolve,reject)=>{
-    if(!GOOGLE_SCRIPT_URL.startsWith("https://script.google.com/macros/s/") || GOOGLE_SCRIPT_URL.includes("PASTE_YOUR")){
-      reject(new Error("Google Apps Script URL સેટ કરેલું નથી. HTML માં GOOGLE_SCRIPT_URL બદલો."));
-      return;
+  const form = document.getElementById('volunteerForm');
+  const postCanvas = document.getElementById('postCanvas');
+  const postCtx = postCanvas.getContext('2d');
+  const storyCanvas = document.getElementById('storyCanvas');
+  const storyCtx = storyCanvas.getContext('2d');
+  const bgTemplate = document.getElementById('bgTemplate');
+  const orgLogo = document.getElementById('orgLogo');
+  let currentVolId = "JS_1";
+
+  function showFileName(input) {
+    const lbl = document.getElementById('fileLabel');
+    lbl.innerText = (input.files && input.files[0]) ? "✅ પસંદ કરેલ: " + input.files[0].name : "કોઈ ફોટો પસંદ કર્યો નથી";
+  }
+
+  async function getNextVolunteerId() {
+    try {
+      const res = await fetch(GOOGLE_SCRIPT_URL);
+      const data = await res.json();
+      return data.volId || "JS_1";
+    } catch (e) {
+      return "JS_1";
     }
-    const requestId = (crypto.randomUUID ? crypto.randomUUID() : String(Date.now())+Math.random());
-    pendingRequestId=requestId;
-    const frame=document.getElementById("gasResponseFrame");
-    const f=document.createElement("form");
-    f.method="POST";f.action=GOOGLE_SCRIPT_URL;f.target="gasResponseFrame";f.style.display="none";
-    const input=document.createElement("input");
-    input.type="hidden";input.name="payload";input.value=JSON.stringify({...payload,requestId});
-    f.appendChild(input);document.body.appendChild(f);
-    const cleanup=()=>{f.remove();clearTimeout(responseTimer);};
-    responseTimer=setTimeout(()=>{cleanup();reject(new Error("Google તરફથી confirmation મળ્યું નથી. કૃપા કરીને Google Sheet માં Registration ચકાસો; ફરી Submit કરતા પહેલાં duplicate નોંધાઈ નથી તેની ખાતરી કરો."));},45000);
-    window.__registrationResolve=(message)=>{
-      if(message && message.requestId===requestId){
-        cleanup();
-        if(message.success) resolve(message);
-        else reject(new Error(message.message || "Registration save થઈ શક્યું નથી."));
-      }
-    };
-    f.submit();
-  });
-}
-window.addEventListener("message",event=>{
-  // Accept only Google Apps Script / Googleusercontent responses carrying our request ID.
-  if(!/googleusercontent\.com$|script\.google\.com$/.test(new URL(event.origin).hostname)) return;
-  if(event.data && event.data.type==="JIVSEVAK_REGISTRATION_RESULT" && window.__registrationResolve){
-    window.__registrationResolve(event.data);
   }
-});
 
-form.addEventListener("submit",async event=>{
-  event.preventDefault();
-  result.style.display="none";
-  const interests=[...form.querySelectorAll('input[name="interests"]:checked')].map(x=>x.value);
-  const file=document.getElementById("volPhoto").files[0];
-  if(!interests.length){showStatus("ઓછામાં ઓછી એક સેવા પસંદ કરો.","error");return;}
-  if(!file){showStatus("કૃપા કરીને તમારો ફોટો પસંદ કરો.","error");return;}
-  if(file.size>5*1024*1024){showStatus("ફોટો 5 MB કરતાં નાનો હોવો જોઈએ.","error");return;}
-  const mobile=document.getElementById("volMobile").value.trim();
-  if(!/^[0-9+\-\s]{8,15}$/.test(mobile)){showStatus("યોગ્ય મોબાઈલ નંબર દાખલ કરો.","error");return;}
-  const data={
-    name:document.getElementById("volName").value.trim(),
-    mobile,
-    address:document.getElementById("volAddress").value.trim(),
-    district:document.getElementById("volDistrict").value.trim(),
-    instagram:normalizeInstagram(document.getElementById("volInsta").value),
-    facebook:document.getElementById("volFb").value.trim(),
-    interests,
-    availability:document.getElementById("volAvailability").value,
-    note:document.getElementById("volNote").value.trim(),
-    mediaConsent:document.getElementById("mediaConsent").checked,
-    termsAccepted:document.getElementById("terms").checked,
-    language:"gu"
-  };
-  submitBtn.disabled=true;submitBtn.textContent="⏳ ફોટો અને Registration સુરક્ષિત રીતે સેવ થઈ રહ્યું છે...";
-  showStatus("તમારી વિગતો Google Sheets અને ફોટો Google Drive માં સેવ થઈ રહ્યા છે. કૃપા કરીને પેજ બંધ ન કરો.","info");
-  try{
-    const photoData=await compressImage(file);
-    const response=await submitToAppsScript({ ...data, photoData });
-    latestRegistration={...data,volunteerId:response.volunteerId};
-    latestPosterBlob=await makePoster(photoData,data,response.volunteerId);
-    document.getElementById("idPill").textContent="Volunteer ID: "+response.volunteerId;
-    result.style.display="block";
-    showStatus("✅ Registration સફળતાપૂર્વક Google Sheet માં સેવ થયું. Volunteer ID: "+response.volunteerId,"success");
-    result.scrollIntoView({behavior:"smooth",block:"start"});
-  }catch(error){
-    showStatus("❌ "+error.message,"error");
-  }finally{
-    submitBtn.disabled=false;submitBtn.textContent="💚 Registration Submit કરો";
+  function buildSocialLine(insta, fb) {
+    let parts = [];
+    if (insta) parts.push("📸 " + insta);
+    if (fb) parts.push("📘 " + fb);
+    if (parts.length > 0) {
+      return parts.join("   |   ");
+    }
+    return "🐾 JIVSEVAK PARIVAR VOLUNTEER 🕊️";
   }
-});
-document.getElementById("downloadPoster").addEventListener("click",()=>{
-  if(!latestPosterBlob)return;
-  const url=URL.createObjectURL(latestPosterBlob),a=document.createElement("a");
-  a.href=url;a.download=latestRegistration.volunteerId+"_Jivsevak_Poster.png";a.click();URL.revokeObjectURL(url);
-});
-document.getElementById("sharePoster").addEventListener("click",async()=>{
-  if(!latestPosterBlob)return;
-  const file=new File([latestPosterBlob],latestRegistration.volunteerId+"_Jivsevak.png",{type:"image/png"});
-  const text=getCaption(latestRegistration,latestRegistration.volunteerId);
-  try{
-    if(navigator.canShare && navigator.canShare({files:[file]})) await navigator.share({files:[file],title:"JIVSEVAK PARIVAR",text});
-    else {await navigator.clipboard.writeText(text);document.getElementById("downloadPoster").click();showStatus("Poster Download થયું અને Caption Copy થયું. હવે Instagram માં Upload કરો.","success");}
-  }catch(e){if(e.name!=="AbortError")showStatus("Share ઉપલબ્ધ નથી. Poster Download કરીને Instagram પર Upload કરો.","info");}
-});
-document.getElementById("copyCaption").addEventListener("click",async()=>{
-  if(!latestRegistration)return;
-  await navigator.clipboard.writeText(getCaption(latestRegistration,latestRegistration.volunteerId));
-  showStatus("Caption Copy થઈ ગયું.","success");
-});
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const name = document.getElementById('volName').value.trim();
+    const mobile = document.getElementById('volMobile').value.trim();
+    const address = document.getElementById('volAddress').value.trim();
+    let insta = document.getElementById('volInsta').value.trim();
+    if (insta && !insta.startsWith('@')) insta = '@' + insta;
+    const fb = document.getElementById('volFb').value.trim();
+    const photoInput = document.getElementById('volPhoto');
+
+    if (!photoInput.files || !photoInput.files[0]) return;
+
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.innerText = "⏳ ID જનરેટ અને HD પોસ્ટર બની રહ્યું છે...";
+
+    currentVolId = await getNextVolunteerId();
+    document.getElementById('volIdBadge').innerText = "🪪 Volunteer ID: " + currentVolId;
+
+    const reader = new FileReader();
+    reader.onload = function(event) {
+      const userImg = new Image();
+      userImg.onload = function() {
+        drawMainPost(userImg, name, address, insta, fb, currentVolId);
+        drawStoryPost(userImg, name, address, insta, fb, currentVolId);
+
+        const resBox = document.getElementById('resultBox');
+        resBox.style.display = 'block';
+        btn.disabled = false;
+        btn.innerText = "✨ ફરીથી પોસ્ટર બનાવો";
+        resBox.scrollIntoView({ behavior: 'smooth' });
+
+        saveToGoogleDrive(currentVolId, name, mobile, address, insta, fb);
+      };
+      userImg.src = event.target.result;
+    };
+    reader.readAsDataURL(photoInput.files[0]);
+  });
+
+  function drawMainPost(userImg, name, address, insta, fb, volId) {
+    const W = 1080, H = 1200;
+    postCtx.clearRect(0, 0, W, H);
+
+    if (bgTemplate && bgTemplate.complete && bgTemplate.naturalWidth > 0) {
+      postCtx.drawImage(bgTemplate, 0, 0, W, H);
+    } else {
+      postCtx.fillStyle = '#14532d';
+      postCtx.fillRect(0, 0, W, H);
+    }
+
+    const innerX = 342;
+    const innerY = 382;
+    const innerW = 352;
+    const innerH = 428;
+    const cx = innerX + innerW / 2;
+
+    postCtx.fillStyle = '#0a4a24';
+    postCtx.fillRect(innerX, innerY, innerW, innerH);
+
+    const cy = 510;
+    const r = 128;
+
+    postCtx.beginPath();
+    postCtx.arc(cx, cy, r + 9, 0, Math.PI * 2);
+    postCtx.fillStyle = '#f59e0b';
+    postCtx.fill();
+
+    postCtx.beginPath();
+    postCtx.arc(cx, cy, r + 4, 0, Math.PI * 2);
+    postCtx.fillStyle = '#ffffff';
+    postCtx.fill();
+
+    postCtx.save();
+    postCtx.beginPath();
+    postCtx.arc(cx, cy, r, 0, Math.PI * 2);
+    postCtx.closePath();
+    postCtx.clip();
+    drawCroppedImage(postCtx, userImg, cx - r, cy - r, r * 2, r * 2);
+    postCtx.restore();
+
+    postCtx.fillStyle = '#f59e0b';
+    roundRect(postCtx, cx - 72, cy + r - 14, 144, 30, 15);
+    postCtx.fill();
+    postCtx.strokeStyle = '#ffffff';
+    postCtx.lineWidth = 2;
+    postCtx.stroke();
+
+    postCtx.fillStyle = '#052e16';
+    postCtx.font = '800 17px "Poppins", sans-serif';
+    postCtx.textAlign = 'center';
+    postCtx.fillText('ID: ' + volId, cx, cy + r + 7);
+
+    const boxX = 346;
+    const boxY = 664;
+    const boxW = 344;
+    const boxH = 122;
+
+    postCtx.fillStyle = '#ffffff';
+    roundRect(postCtx, boxX, boxY, boxW, boxH, 14);
+    postCtx.fill();
+
+    postCtx.fillStyle = '#14532d';
+    postCtx.font = 'bold 25px "Noto Sans Gujarati", sans-serif';
+    postCtx.fillText(name, cx, boxY + 32);
+
+    postCtx.fillStyle = '#dc2626';
+    postCtx.font = 'bold 17px "Noto Sans Gujarati", sans-serif';
+    postCtx.fillText('📍 ' + address, cx, boxY + 57);
+
+    postCtx.strokeStyle = '#e2e8f0';
+    postCtx.lineWidth = 1.5;
+    postCtx.beginPath();
+    postCtx.moveTo(boxX + 18, boxY + 69);
+    postCtx.lineTo(boxX + boxW - 18, boxY + 69);
+    postCtx.stroke();
+
+    const socialLine = buildSocialLine(insta, fb);
+    postCtx.fillStyle = '#1e293b';
+    postCtx.font = '600 13.5px "Poppins", "Noto Sans Gujarati", sans-serif';
+    postCtx.fillText(socialLine, cx, boxY + 91);
+
+    postCtx.fillStyle = '#15803d';
+    postCtx.font = 'bold 13.5px "Noto Sans Gujarati", sans-serif';
+    postCtx.fillText('અમારી સાથે જોડાવા ફોલો કરો: @jivsevak', cx, boxY + 113);
+
+    postCtx.fillStyle = '#bbf7d0';
+    postCtx.font = '600 11px "Noto Sans Gujarati", sans-serif';
+    postCtx.fillText('બેજુબાન જીવો માટે પ્રેમ અને ખોરાક સેવા • દયા | કરુણા | માનવતા', cx, 804);
+  }
+
+  function drawStoryPost(userImg, name, address, insta, fb, volId) {
+    const W = 1080, H = 1920;
+    const bgGrad = storyCtx.createLinearGradient(0, 0, W, H);
+    bgGrad.addColorStop(0, '#052e16');
+    bgGrad.addColorStop(0.5, '#14532d');
+    bgGrad.addColorStop(1, '#064e3b');
+    storyCtx.fillStyle = bgGrad;
+    storyCtx.fillRect(0, 0, W, H);
+
+    storyCtx.strokeStyle = '#f59e0b';
+    storyCtx.lineWidth = 16;
+    storyCtx.strokeRect(32, 32, W - 64, H - 64);
+
+    if (orgLogo && orgLogo.complete && orgLogo.naturalWidth > 0) {
+      storyCtx.save();
+      storyCtx.beginPath();
+      storyCtx.arc(W / 2, 165, 85, 0, Math.PI * 2);
+      storyCtx.fillStyle = '#fde047';
+      storyCtx.fill();
+      storyCtx.beginPath();
+      storyCtx.arc(W / 2, 165, 78, 0, Math.PI * 2);
+      storyCtx.clip();
+      storyCtx.drawImage(orgLogo, W / 2 - 78, 87, 156, 156);
+      storyCtx.restore();
+    }
+
+    storyCtx.fillStyle = '#ffffff';
+    storyCtx.textAlign = 'center';
+    storyCtx.font = 'bold 54px "Noto Sans Gujarati", sans-serif';
+    storyCtx.fillText('JIVSEVAK PARIVAR', W / 2, 315);
+
+    storyCtx.fillStyle = '#fde047';
+    storyCtx.font = 'bold 30px "Noto Sans Gujarati", sans-serif';
+    storyCtx.fillText('💚 સેવા • શ્રદ્ધા • વિશ્વાસ 💚', W / 2, 365);
+
+    storyCtx.fillStyle = '#dc2626';
+    roundRect(storyCtx, 130, 405, 820, 74, 37);
+    storyCtx.fill();
+    storyCtx.fillStyle = '#ffffff';
+    storyCtx.font = 'bold 34px "Noto Sans Gujarati", sans-serif';
+    storyCtx.fillText('ગૌરવશાળી વોલેન્ટિયર (PROUD VOLUNTEER)', W / 2, 453);
+
+    const cx = W / 2, cy = 775, r = 245;
+    storyCtx.beginPath();
+    storyCtx.arc(cx, cy, r + 18, 0, Math.PI * 2);
+    storyCtx.fillStyle = '#f59e0b';
+    storyCtx.fill();
+
+    storyCtx.beginPath();
+    storyCtx.arc(cx, cy, r + 8, 0, Math.PI * 2);
+    storyCtx.fillStyle = '#ffffff';
+    storyCtx.fill();
+
+    storyCtx.save();
+    storyCtx.beginPath();
+    storyCtx.arc(cx, cy, r, 0, Math.PI * 2);
+    storyCtx.clip();
+    drawCroppedImage(storyCtx, userImg, cx - r, cy - r, r * 2, r * 2);
+    storyCtx.restore();
+
+    storyCtx.fillStyle = '#f59e0b';
+    roundRect(storyCtx, cx - 140, cy + r - 24, 280, 56, 28);
+    storyCtx.fill();
+    storyCtx.strokeStyle = '#ffffff';
+    storyCtx.lineWidth = 4;
+    storyCtx.stroke();
+
+    storyCtx.fillStyle = '#052e16';
+    storyCtx.font = '800 32px "Poppins", sans-serif';
+    storyCtx.fillText('ID: ' + volId, cx, cy + r + 15);
+
+    storyCtx.fillStyle = '#ffffff';
+    roundRect(storyCtx, 95, 1095, 890, 370, 32);
+    storyCtx.fill();
+
+    storyCtx.fillStyle = '#14532d';
+    storyCtx.font = 'bold 58px "Noto Sans Gujarati", sans-serif';
+    storyCtx.fillText(name, W / 2, 1185);
+
+    storyCtx.fillStyle = '#dc2626';
+    storyCtx.font = 'bold 38px "Noto Sans Gujarati", sans-serif';
+    storyCtx.fillText('📍 ' + address, W / 2, 1250);
+
+    storyCtx.strokeStyle = '#e2e8f0';
+    storyCtx.lineWidth = 3;
+    storyCtx.beginPath();
+    storyCtx.moveTo(160, 1290);
+    storyCtx.lineTo(920, 1290);
+    storyCtx.stroke();
+
+    const socialLine = buildSocialLine(insta, fb);
+    storyCtx.fillStyle = '#1e293b';
+    storyCtx.font = '600 32px "Poppins", "Noto Sans Gujarati", sans-serif';
+    storyCtx.fillText(socialLine, W / 2, 1355);
+
+    storyCtx.fillStyle = '#15803d';
+    storyCtx.font = 'bold 32px "Noto Sans Gujarati", sans-serif';
+    storyCtx.fillText('અમારી સાથે જોડાવા ફોલો કરો: @jivsevak', W / 2, 1425);
+
+    storyCtx.fillStyle = '#fde047';
+    storyCtx.font = 'bold 34px "Noto Sans Gujarati", sans-serif';
+    storyCtx.fillText('"યુવા શક્તિ જોડાશે, તો જીવસેવાનું અભિયાન આગળ વધશે!"', W / 2, 1555);
+
+    storyCtx.fillStyle = '#dcfce7';
+    storyCtx.font = '28px "Noto Sans Gujarati", sans-serif';
+    storyCtx.fillText('🐄 ગૌસેવા  •  🐕 શ્વાન સેવા  •  🐒 જીવસેવા  •  🐦 પક્ષી ચણ', W / 2, 1625);
+
+    storyCtx.fillStyle = '#ea580c';
+    roundRect(storyCtx, 180, 1695, 720, 80, 40);
+    storyCtx.fill();
+    storyCtx.fillStyle = '#ffffff';
+    storyCtx.font = 'bold 32px "Noto Sans Gujarati", sans-serif';
+    storyCtx.fillText('જોડાવા માટે @jivsevak ને DM કરો: VOLUNTEER', W / 2, 1746);
+  }
+
+  function drawCroppedImage(ctx, img, x, y, w, h) {
+    const aspect = img.width / img.height;
+    let drawW, drawH, offX, offY;
+    if (aspect > 1) {
+      drawH = h;
+      drawW = drawH * aspect;
+      offX = x - (drawW - w) / 2;
+      offY = y;
+    } else {
+      drawW = w;
+      drawH = drawW / aspect;
+      offX = x;
+      offY = y - (drawH - h) / 2;
+    }
+    ctx.drawImage(img, offX, offY, drawW, drawH);
+  }
+
+  function roundRect(ctx, x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.lineTo(x + w - r, y);
+    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+    ctx.lineTo(x + w, y + h - r);
+    ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+    ctx.lineTo(x + r, y + h);
+    ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+    ctx.lineTo(x, y + r);
+    ctx.quadraticCurveTo(x, y, x + r, y);
+    ctx.closePath();
+  }
+
+  function getShareCaption() {
+    const name = document.getElementById('volName').value.trim();
+    const address = document.getElementById('volAddress').value.trim();
+    return `💚🐾 ગૌરવશાળી વોલેન્ટિયર (${currentVolId}) - JIVSEVAK PARIVAR (@jivsevak) 🕊️\n\nહું ${name} (${address}) આજથી અબોલ પશુ-પક્ષીઓની સેવા અને માનવતાના આ પવિત્ર અભિયાન "JIVSEVAK PARIVAR" સાથે જોડાયો છું! 🙏\n\n"યુવા શક્તિ જોડાશે, તો જીવસેવાનું અભિયાન આગળ વધશે!"\nતમે પણ જોડાવા માટે ફોલો કરો: @jivsevak\n\n#JivsevakParivar #Jivsevak #YouthForSeva #જીવદયા #ગૌસેવા #AnimalWelfare #GujaratVolunteers`;
+  }
+
+  function copyCaption() {
+    const text = getShareCaption();
+    navigator.clipboard.writeText(text).then(() => {
+      alert("✅ કેપ્શન અને @jivsevak ટેગ કોપી થઈ ગયા છે!");
+    });
+  }
+
+  async function shareDirect(type) {
+    const targetCanvas = (type === 'post') ? postCanvas : storyCanvas;
+    const fileName = currentVolId + (type === 'post' ? '_Jivsevak_Post.png' : '_Jivsevak_Story.png');
+    const caption = getShareCaption();
+
+    if (navigator.clipboard) {
+      try { await navigator.clipboard.writeText(caption); } catch(e) {}
+    }
+
+    targetCanvas.toBlob(async function(blob) {
+      const file = new File([blob], fileName, { type: 'image/png' });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        try {
+          await navigator.share({ files: [file], title: 'JIVSEVAK PARIVAR Volunteer', text: caption });
+        } catch (err) {}
+      } else {
+        downloadImage(type);
+        alert("તમારું પોસ્ટર ડાઉનલોડ થઈ ગયું છે અને કેપ્શન કોપી થઈ ગયું છે!");
+      }
+    }, 'image/png', 1.0);
+  }
+
+  function downloadImage(type) {
+    const link = document.createElement('a');
+    const name = document.getElementById('volName').value.trim().replace(/\s+/g, '_') || 'Volunteer';
+    if (type === 'post') {
+      link.download = currentVolId + '_Jivsevak_Post_' + name + '.png';
+      link.href = postCanvas.toDataURL('image/png', 1.0);
+    } else {
+      link.download = currentVolId + '_Jivsevak_Story_' + name + '.png';
+      link.href = storyCanvas.toDataURL('image/png', 1.0);
+    }
+    link.click();
+  }
+
+  function getCompressedPoster() {
+    const tempCanvas = document.createElement('canvas');
+    tempCanvas.width = 540;
+    tempCanvas.height = 600;
+    const tCtx = tempCanvas.getContext('2d');
+    tCtx.drawImage(postCanvas, 0, 0, 540, 600);
+    return tempCanvas.toDataURL('image/jpeg', 0.7);
+  }
+
+  function saveToGoogleDrive(volId, name, mobile, address, instaId, fbName) {
+    const statusMsg = document.getElementById('statusMsg');
+    statusMsg.innerText = "⏳ તમારું ID (" + volId + ") JIVSEVAK PARIVAR ના રેકોર્ડમાં સેવ થઈ રહ્યું છે...";
+    const posterImage = getCompressedPoster();
+
+    fetch(GOOGLE_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ volId, name, mobile, address, instaId, fbName, posterImage })
+    })
+    .then(() => {
+      statusMsg.innerText = "✅ રજીસ્ટ્રેશન સફળ! તમારો ID: " + volId + " — નીચે WhatsApp ગ્રુપમાં જોડાઓ!";
+    })
+    .catch(() => {
+      statusMsg.innerText = "✅ તમારું ID (" + volId + ") અને HD પોસ્ટર તૈયાર છે!";
+    });
+  }
 </script>
+
 </body>
 </html>
