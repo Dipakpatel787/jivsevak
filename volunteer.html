@@ -684,7 +684,7 @@
     reader.readAsDataURL(photoInput.files[0]);
   });
 
- function drawMainPost(userImg, name, address, insta, fb, volId) {
+  function drawMainPost(userImg, name, address, insta, fb, volId) {
     const W = 1080, H = 1200;
     postCtx.clearRect(0, 0, W, H);
     postCtx.imageSmoothingEnabled = true;
@@ -703,14 +703,18 @@
     const innerH = 432;
     const cx = innerX + innerW / 2;
 
-    // 1. "સેવોક" ની જોડણી સુધારવા માટે જૂની પટ્ટી ઢાંકીને સાચું લખાણ લખો
-    postCtx.fillStyle = '#0a4a24';
-    postCtx.fillRect(innerX + 4, 342, innerW - 8, 30);
+    // 1. "સેવોક" વાળો જૂનો ભાગ સંપૂર્ણ ઢાંકીને સાચું લખાણ લખો
+    postCtx.fillStyle = '#094320';
+    postCtx.fillRect(innerX + 2, 324, innerW - 4, 52);
     
     postCtx.fillStyle = '#fde047';
-    postCtx.font = 'bold 16.5px "Noto Sans Gujarati", "Poppins", sans-serif';
+    postCtx.font = 'bold 18.5px "Noto Sans Gujarati", "Poppins", sans-serif';
     postCtx.textAlign = 'center';
-    postCtx.fillText('ગૌરવશાળી સેવક (PROUD VOLUNTEER)', cx, 362);
+    postCtx.fillText('ગૌરવશાળી સેવક (PROUD VOLUNTEER)', cx, 350);
+
+    postCtx.fillStyle = '#e2e8f0';
+    postCtx.font = '600 12.5px "Noto Sans Gujarati", sans-serif';
+    postCtx.fillText('"ઉત્તમ દિવસ જીવ સેવા રસ — નાનો દાણો, મોટું પુણ્ય"', cx, 370);
 
     // 2. અંદરનું મુખ્ય લીલું કાર્ડ
     postCtx.fillStyle = '#0a4a24';
@@ -783,6 +787,7 @@
     postCtx.font = 'bold 12px "Noto Sans Gujarati", sans-serif';
     postCtx.fillText('ફોલો કરો: @jivsevak | જીવસેવા એ જ સાચી સેવા', cx, boxY + 83);
   }
+
   function drawStoryPost(userImg, name, address, insta, fb, volId) {
     const W = 1080, H = 1920;
     storyCtx.imageSmoothingEnabled = true;
@@ -826,7 +831,7 @@
     storyCtx.fill();
     storyCtx.fillStyle = '#ffffff';
     storyCtx.font = 'bold 34px "Noto Sans Gujarati", sans-serif';
-    storyCtx.fillText('ગૌરવશાળી વોલેન્ટિયર (PROUD VOLUNTEER)', W / 2, 453);
+    storyCtx.fillText('ગૌરવશાળી સેવક (PROUD VOLUNTEER)', W / 2, 453);
 
     const cx = W / 2, cy = 775, r = 255;
     storyCtx.beginPath();
@@ -935,7 +940,7 @@
   function getShareCaption() {
     const name = document.getElementById('volName').value.trim();
     const address = document.getElementById('volAddress').value.trim();
-    return `💚🐾 ગૌરવશાળી વોલેન્ટિયર (${currentVolId}) - JIVSEVAK PARIVAR (@jivsevak) 🕊️\n\nહું ${name} (${address}) આજથી અબોલ પશુ-પક્ષીઓની સેવા અને માનવતાના આ પવિત્ર અભિયાન "JIVSEVAK PARIVAR" સાથે જોડાયો છું! 🙏\n\n"યુવા શક્તિ જોડાશે, તો જીવસેવાનું અભિયાન આગળ વધશે!"\nતમે પણ જોડાવા માટે ફોલો કરો: @jivsevak\n\n#JivsevakParivar #Jivsevak #YouthForSeva #જીવદયા #ગૌસેવા #AnimalWelfare #GujaratVolunteers`;
+    return `💚🐾 ગૌરવશાળી સેવક (${currentVolId}) - JIVSEVAK PARIVAR (@jivsevak) 🕊️\n\nહું ${name} (${address}) આજથી અબોલ પશુ-પક્ષીઓની સેવા અને માનવતાના આ પવિત્ર અભિયાન "JIVSEVAK PARIVAR" સાથે જોડાયો છું! 🙏\n\n"યુવા શક્તિ જોડાશે, તો જીવસેવાનું અભિયાન આગળ વધશે!"\nતમે પણ જોડાવા માટે ફોલો કરો: @jivsevak\n\n#JivsevakParivar #Jivsevak #YouthForSeva #જીવદયા #ગૌસેવા #AnimalWelfare #GujaratVolunteers`;
   }
 
   function copyCaption() {
