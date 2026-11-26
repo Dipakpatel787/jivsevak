@@ -684,7 +684,7 @@
     reader.readAsDataURL(photoInput.files[0]);
   });
 
-  function drawMainPost(userImg, name, address, insta, fb, volId) {
+ function drawMainPost(userImg, name, address, insta, fb, volId) {
     const W = 1080, H = 1200;
     postCtx.clearRect(0, 0, W, H);
     postCtx.imageSmoothingEnabled = true;
@@ -703,10 +703,20 @@
     const innerH = 432;
     const cx = innerX + innerW / 2;
 
+    // 1. "સેવોક" ની જોડણી સુધારવા માટે જૂની પટ્ટી ઢાંકીને સાચું લખાણ લખો
+    postCtx.fillStyle = '#0a4a24';
+    postCtx.fillRect(innerX + 4, 342, innerW - 8, 30);
+    
+    postCtx.fillStyle = '#fde047';
+    postCtx.font = 'bold 16.5px "Noto Sans Gujarati", "Poppins", sans-serif';
+    postCtx.textAlign = 'center';
+    postCtx.fillText('ગૌરવશાળી સેવક (PROUD VOLUNTEER)', cx, 362);
+
+    // 2. અંદરનું મુખ્ય લીલું કાર્ડ
     postCtx.fillStyle = '#0a4a24';
     postCtx.fillRect(innerX, innerY, innerW, innerH);
 
-    // યુઝરનો ફોટો એકદમ મોટો અને ચોખ્ખો (Radius 160)
+    // 3. યુઝરનો મોટો HD ફોટો (Radius 160)
     const cy = 548;
     const r = 160;
 
@@ -773,7 +783,6 @@
     postCtx.font = 'bold 12px "Noto Sans Gujarati", sans-serif';
     postCtx.fillText('ફોલો કરો: @jivsevak | જીવસેવા એ જ સાચી સેવા', cx, boxY + 83);
   }
-
   function drawStoryPost(userImg, name, address, insta, fb, volId) {
     const W = 1080, H = 1920;
     storyCtx.imageSmoothingEnabled = true;
