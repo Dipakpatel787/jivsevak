@@ -2,7 +2,7 @@
 <html lang="gu">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>JIVSEVAK PARIVAR (@jivsevak) - વોલેન્ટિયર જોડાઓ</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;500;600;700;800;900&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
   <style>
@@ -18,42 +18,48 @@
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    body {
+    html, body {
       font-family: 'Noto Sans Gujarati', 'Poppins', sans-serif;
       background: var(--bg);
       color: #1f2937;
-      padding: 14px;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    body {
+      padding: 12px;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
     .wrapper {
-      max-width: 600px;
+      max-width: 620px;
       width: 100%;
       background: #ffffff;
-      border-radius: 24px;
-      box-shadow: 0 20px 45px rgba(20, 83, 45, 0.14);
+      border-radius: 26px;
+      box-shadow: 0 22px 50px rgba(20, 83, 45, 0.15);
       overflow: hidden;
-      border: 1px solid rgba(20, 83, 45, 0.12);
+      border: 1.5px solid rgba(20, 83, 45, 0.14);
     }
 
+    /* Hero Section */
     .hero {
-      background: linear-gradient(135deg, #052e16 0%, #14532d 65%, #166534 100%);
+      background: linear-gradient(135deg, #052e16 0%, #14532d 60%, #166534 100%);
       color: #fff;
-      padding: 26px 20px 24px;
+      padding: 28px 20px 26px;
       text-align: center;
       border-bottom: 5px solid var(--gold);
     }
 
     .logo-circle {
-      width: 100px;
-      height: 100px;
+      width: 104px;
+      height: 104px;
       margin: 0 auto 12px;
       border-radius: 50%;
       padding: 4px;
       background: linear-gradient(45deg, #f59e0b, #ea580c, #fde047);
-      box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.35);
     }
 
     .logo-circle img {
@@ -62,12 +68,13 @@
       border-radius: 50%;
       object-fit: cover;
       background: #fff;
+      display: block;
     }
 
     .motto-pill {
       display: inline-block;
       background: rgba(253, 224, 71, 0.18);
-      border: 1px solid #fde047;
+      border: 1.5px solid #fde047;
       color: #fde047;
       font-size: 13px;
       font-weight: 800;
@@ -77,21 +84,21 @@
     }
 
     .hero h1 {
-      font-size: 27px;
+      font-size: 28px;
       font-weight: 900;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.6px;
     }
 
     .hero-banner-red {
-      background: #dc2626;
+      background: linear-gradient(90deg, #dc2626, #b91c1c);
       color: #fff;
       font-weight: 800;
-      font-size: 15px;
-      padding: 8px 14px;
+      font-size: 14.5px;
+      padding: 9px 16px;
       border-radius: 12px;
       margin: 12px auto;
       display: inline-block;
-      box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
+      box-shadow: 0 4px 14px rgba(220, 38, 38, 0.4);
     }
 
     .hero-desc {
@@ -101,70 +108,130 @@
       margin-top: 6px;
     }
 
+    /* Info Cards & Color-Coded Seva Grid */
     .info-cards {
-      padding: 18px 20px 6px;
+      padding: 20px 18px 10px;
       background: #f8fafc;
-      border-bottom: 1px solid #e2e8f0;
+      border-bottom: 1.5px solid #e2e8f0;
     }
 
     .goal-strip {
-      background: linear-gradient(90deg, #14532d, #15803d);
-      color: #fff;
+      background: linear-gradient(90deg, #064e3b, #15803d, #065f46);
+      color: #ffffff;
       text-align: center;
-      padding: 10px 12px;
-      border-radius: 12px;
-      font-size: 13.5px;
-      font-weight: 700;
-      margin-bottom: 14px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      font-size: 14px;
+      font-weight: 800;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 12px rgba(21, 128, 61, 0.2);
+      border: 1px solid #34d399;
     }
 
     .seva-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 8px;
-      margin-bottom: 14px;
+      gap: 10px;
+      margin-bottom: 18px;
     }
 
     .seva-item {
-      background: #ffffff;
-      border: 1px solid #dcfce7;
-      padding: 8px 10px;
-      border-radius: 10px;
-      font-size: 12.5px;
-      font-weight: 700;
-      color: #14532d;
+      padding: 11px 12px;
+      border-radius: 14px;
+      font-size: 13px;
+      font-weight: 800;
       display: flex;
       align-items: center;
-      gap: 6px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+      gap: 9px;
+      transition: all 0.25s ease;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.04);
     }
 
+    .seva-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+    }
+
+    .seva-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      flex-shrink: 0;
+      background: rgba(255, 255, 255, 0.85);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+    }
+
+    /* Individual Color Coding for All 8 Sevas */
+    .seva-1 { background: linear-gradient(135deg, #fffbeb, #fef3c7); border: 1.5px solid #f59e0b; color: #92400e; }
+    .seva-2 { background: linear-gradient(135deg, #fff7ed, #ffedd5); border: 1.5px solid #f97316; color: #9a3412; }
+    .seva-3 { background: linear-gradient(135deg, #fefce8, #fef08a); border: 1.5px solid #eab308; color: #854d0e; }
+    .seva-4 { background: linear-gradient(135deg, #f0f9ff, #e0f2fe); border: 1.5px solid #0ea5e9; color: #075985; }
+    .seva-5 { background: linear-gradient(135deg, #fef2f2, #fee2e2); border: 1.5px solid #ef4444; color: #991b1b; }
+    .seva-6 { background: linear-gradient(135deg, #ecfdf5, #d1fae5); border: 1.5px solid #10b981; color: #065f46; }
+    .seva-7 { background: linear-gradient(135deg, #f5f3ff, #ede9fe); border: 1.5px solid #8b5cf6; color: #5b21b6; }
+    .seva-8 { background: linear-gradient(135deg, #fdf2f8, #fce7f3); border: 1.5px solid #ec4899; color: #9d174d; }
+
+    /* Premium Benefits Card */
     .benefits-box {
-      background: #fffbeb;
-      border: 1px solid #fde68a;
-      border-radius: 14px;
-      padding: 12px 14px;
+      background: linear-gradient(135deg, #ffffff 0%, #fffbeb 100%);
+      border: 2px solid #f59e0b;
+      border-radius: 18px;
+      padding: 16px;
       margin-bottom: 14px;
+      box-shadow: 0 8px 20px rgba(245, 158, 11, 0.12);
     }
 
-    .benefits-box h3 {
-      font-size: 14px;
+    .benefits-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(90deg, #b45309, #d97706);
+      color: #ffffff;
+      padding: 8px 14px;
+      border-radius: 11px;
+      font-size: 14.5px;
       font-weight: 800;
-      color: #b45309;
-      margin-bottom: 6px;
+      margin-bottom: 12px;
     }
 
     .benefits-list {
       list-style: none;
-      font-size: 12.5px;
-      color: #451a03;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
     }
 
+    .benefits-list li {
+      background: #ffffff;
+      border: 1px solid #fde68a;
+      border-left: 4px solid #16a34a;
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #1e293b;
+      line-height: 1.5;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+
+    .id-highlight {
+      background: #fef3c7;
+      color: #92400e;
+      padding: 2px 7px;
+      border-radius: 6px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 12px;
+      border: 1px solid #f59e0b;
+    }
+
+    /* Form Section */
     .form-area {
-      padding: 20px 20px 26px;
+      padding: 22px 18px 28px;
     }
 
     .form-header {
@@ -173,7 +240,7 @@
     }
 
     .form-header h2 {
-      font-size: 20px;
+      font-size: 21px;
       font-weight: 900;
       color: var(--primary);
     }
@@ -223,6 +290,11 @@
       text-align: center;
       position: relative;
       cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .upload-zone:hover {
+      background: #dcfce7;
     }
 
     .upload-zone input[type="file"] {
@@ -279,7 +351,7 @@
     .btn-whatsapp {
       background: linear-gradient(135deg, #25D366, #128C7E);
       color: #ffffff;
-      font-size: 16px;
+      font-size: 15.5px;
       box-shadow: 0 6px 18px rgba(37, 211, 102, 0.35);
     }
 
@@ -294,16 +366,16 @@
       background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
       color: #fff;
       box-shadow: 0 6px 16px rgba(220, 39, 67, 0.3);
-      font-size: 14px;
-      padding: 13px 10px;
+      font-size: 13.5px;
+      padding: 13px 8px;
     }
 
     .btn-direct-story {
       background: linear-gradient(135deg, #1877f2, #0d47a1);
       color: #fff;
       box-shadow: 0 6px 16px rgba(24, 119, 242, 0.3);
-      font-size: 14px;
-      padding: 13px 10px;
+      font-size: 13.5px;
+      padding: 13px 8px;
     }
 
     .btn-post-dl {
@@ -378,11 +450,21 @@
       line-height: 1.6;
       color: #78350f;
     }
+
+    /* Mobile Small Screen Adjustments */
+    @media (max-width: 420px) {
+      body { padding: 8px; }
+      .hero h1 { font-size: 24px; }
+      .seva-grid { grid-template-columns: 1fr; gap: 8px; }
+      .share-grid { grid-template-columns: 1fr; }
+      .seva-item { font-size: 13.5px; }
+    }
   </style>
 </head>
 <body>
 
 <div class="wrapper">
+  <!-- Hero Section -->
   <div class="hero">
     <div class="logo-circle">
       <img src="jivsevaklogo.jpg" alt="Jivsevak Parivar" id="orgLogo">
@@ -396,30 +478,35 @@
     </p>
   </div>
 
+  <!-- Info Cards & Color-Coded Seva Grid -->
   <div class="info-cards">
     <div class="goal-strip">🌍 અમારું લક્ષ્ય: દરેક ગામમાં જીવસેવા, દરેક શહેરમાં સેવાભાવી પરિવાર!</div>
     
     <div class="seva-grid">
-      <div class="seva-item">🐄 ગૌસેવા</div>
-      <div class="seva-item">🐕 શ્વાન સેવા</div>
-      <div class="seva-item">🐒 વાંદરા અને જીવસેવા</div>
-      <div class="seva-item">🐦 પક્ષીઓને દાણા-પાણી</div>
-      <div class="seva-item">🏥 ઘાયલ જીવોની મદદ</div>
-      <div class="seva-item">🌳 પર્યાવરણ સંરક્ષણ</div>
-      <div class="seva-item">📚 બાળકોને શિક્ષણ સહયોગ</div>
-      <div class="seva-item">❤️ સામાજિક માનવતા</div>
+      <div class="seva-item seva-1"><span class="seva-icon">🐄</span><span>ગૌસેવા</span></div>
+      <div class="seva-item seva-2"><span class="seva-icon">🐕</span><span>શ્વાન સેવા</span></div>
+      <div class="seva-item seva-3"><span class="seva-icon">🐒</span><span>વાંદરા અને જીવસેવા</span></div>
+      <div class="seva-item seva-4"><span class="seva-icon">🐦</span><span>પક્ષીઓને દાણા-પાણી</span></div>
+      <div class="seva-item seva-5"><span class="seva-icon">🏥</span><span>ઘાયલ જીવોની મદદ</span></div>
+      <div class="seva-item seva-6"><span class="seva-icon">🌳</span><span>પર્યાવરણ સંરક્ષણ</span></div>
+      <div class="seva-item seva-7"><span class="seva-icon">📚</span><span>બાળકોને શિક્ષણ સહયોગ</span></div>
+      <div class="seva-item seva-8"><span class="seva-icon">❤️</span><span>સામાજિક માનવતા</span></div>
     </div>
 
     <div class="benefits-box">
-      <h3>🎖️ JIVSEVAK PARIVAR સાથે જોડાવાના લાભ:</h3>
+      <div class="benefits-header">
+        <span>🎖️</span>
+        <span>JIVSEVAK PARIVAR સાથે જોડાવાના લાભ:</span>
+      </div>
       <ul class="benefits-list">
-        <li>✅ આજીવન મફત Volunteer Registration & યુનિક ID (JS_1, JS_2...)</li>
+        <li>✅ આજીવન મફત Volunteer Registration & યુનિક ID (<span class="id-highlight">JS26-001</span>, <span class="id-highlight">JS26-002</span>...)</li>
         <li>✅ પોતાની Professional Digital Profile & સેવાકીય રેકોર્ડ</li>
         <li>✅ યોગ્ય કામગીરી બદલ પ્રશંસાપત્ર (Certificate) અને વિશેષ સન્માન</li>
       </ul>
     </div>
   </div>
 
+  <!-- Registration Form Area -->
   <div class="form-area">
     <div class="form-header">
       <h2>✨ તમારું HD Volunteer Poster બનાવો</h2>
@@ -456,7 +543,7 @@
         <label>તમારો સારો HD ફોટો અપલોડ કરો <span class="req">*</span></label>
         <div class="upload-zone">
           <input type="file" id="volPhoto" accept="image/*" required onchange="showFileName(this)">
-          <div style="font-size: 28px;">📸</div>
+          <div style="font-size: 30px;">📸</div>
           <div style="font-weight: 800; color: #14532d; font-size: 14px;">અહીં ક્લિક કરીને તમારો ફોટો પસંદ કરો</div>
           <div id="fileLabel" style="font-size: 12px; color: #ea580c; font-weight: 600; margin-top: 4px;">કોઈ ફોટો પસંદ કર્યો નથી</div>
         </div>
@@ -465,11 +552,12 @@
       <button type="submit" class="btn btn-create" id="submitBtn">🎨 મારું HD વોલેન્ટિયર પોસ્ટર બનાવો</button>
     </form>
 
+    <!-- Generated Poster Result -->
     <div class="result-box" id="resultBox">
       <h3 style="color: #14532d; font-size: 19px; font-weight: 900; margin-bottom: 8px;">
         🎉 અભિનંદન! JIVSEVAK PARIVAR માં આપનું સ્વાગત છે
       </h3>
-      <div class="id-badge-display" id="volIdBadge">🪪 Volunteer ID: JS_1</div>
+      <div class="id-badge-display" id="volIdBadge">🪪 Volunteer ID: JS26-001</div>
       <br>
       
       <canvas id="postCanvas" width="1080" height="1200"></canvas>
@@ -530,7 +618,7 @@
   const storyCtx = storyCanvas.getContext('2d');
   const bgTemplate = document.getElementById('bgTemplate');
   const orgLogo = document.getElementById('orgLogo');
-  let currentVolId = "JS_1";
+  let currentVolId = "JS26-001";
 
   function showFileName(input) {
     const lbl = document.getElementById('fileLabel');
@@ -541,9 +629,9 @@
     try {
       const res = await fetch(GOOGLE_SCRIPT_URL);
       const data = await res.json();
-      return data.volId || "JS_1";
+      return data.volId || "JS26-001";
     } catch (e) {
-      return "JS_1";
+      return "JS26-001";
     }
   }
 
@@ -599,6 +687,8 @@
   function drawMainPost(userImg, name, address, insta, fb, volId) {
     const W = 1080, H = 1200;
     postCtx.clearRect(0, 0, W, H);
+    postCtx.imageSmoothingEnabled = true;
+    postCtx.imageSmoothingQuality = 'high';
 
     if (bgTemplate && bgTemplate.complete && bgTemplate.naturalWidth > 0) {
       postCtx.drawImage(bgTemplate, 0, 0, W, H);
@@ -608,19 +698,20 @@
     }
 
     const innerX = 342;
-    const innerY = 382;
+    const innerY = 380;
     const innerW = 352;
-    const innerH = 428;
+    const innerH = 432;
     const cx = innerX + innerW / 2;
 
     postCtx.fillStyle = '#0a4a24';
     postCtx.fillRect(innerX, innerY, innerW, innerH);
 
-    const cy = 510;
-    const r = 128;
+    // યુઝરનો ફોટો એકદમ મોટો અને ચોખ્ખો (Radius 160)
+    const cy = 548;
+    const r = 160;
 
     postCtx.beginPath();
-    postCtx.arc(cx, cy, r + 9, 0, Math.PI * 2);
+    postCtx.arc(cx, cy, r + 8, 0, Math.PI * 2);
     postCtx.fillStyle = '#f59e0b';
     postCtx.fill();
 
@@ -638,57 +729,56 @@
     postCtx.restore();
 
     postCtx.fillStyle = '#f59e0b';
-    roundRect(postCtx, cx - 72, cy + r - 14, 144, 30, 15);
+    roundRect(postCtx, cx - 78, cy + r - 18, 156, 28, 14);
     postCtx.fill();
     postCtx.strokeStyle = '#ffffff';
     postCtx.lineWidth = 2;
     postCtx.stroke();
 
     postCtx.fillStyle = '#052e16';
-    postCtx.font = '800 17px "Poppins", sans-serif';
+    postCtx.font = '800 16px "Poppins", sans-serif';
     postCtx.textAlign = 'center';
-    postCtx.fillText('ID: ' + volId, cx, cy + r + 7);
+    postCtx.fillText('ID: ' + volId, cx, cy + r + 2);
 
     const boxX = 346;
-    const boxY = 664;
+    const boxY = 720;
     const boxW = 344;
-    const boxH = 122;
+    const boxH = 88;
 
     postCtx.fillStyle = '#ffffff';
-    roundRect(postCtx, boxX, boxY, boxW, boxH, 14);
+    roundRect(postCtx, boxX, boxY, boxW, boxH, 12);
     postCtx.fill();
 
     postCtx.fillStyle = '#14532d';
-    postCtx.font = 'bold 25px "Noto Sans Gujarati", sans-serif';
-    postCtx.fillText(name, cx, boxY + 32);
+    postCtx.font = 'bold 21px "Noto Sans Gujarati", sans-serif';
+    postCtx.fillText(name, cx, boxY + 24);
 
     postCtx.fillStyle = '#dc2626';
-    postCtx.font = 'bold 17px "Noto Sans Gujarati", sans-serif';
-    postCtx.fillText('📍 ' + address, cx, boxY + 57);
+    postCtx.font = 'bold 14.5px "Noto Sans Gujarati", sans-serif';
+    postCtx.fillText('📍 ' + address, cx, boxY + 44);
 
     postCtx.strokeStyle = '#e2e8f0';
-    postCtx.lineWidth = 1.5;
+    postCtx.lineWidth = 1;
     postCtx.beginPath();
-    postCtx.moveTo(boxX + 18, boxY + 69);
-    postCtx.lineTo(boxX + boxW - 18, boxY + 69);
+    postCtx.moveTo(boxX + 16, boxY + 51);
+    postCtx.lineTo(boxX + boxW - 16, boxY + 51);
     postCtx.stroke();
 
     const socialLine = buildSocialLine(insta, fb);
     postCtx.fillStyle = '#1e293b';
-    postCtx.font = '600 13.5px "Poppins", "Noto Sans Gujarati", sans-serif';
-    postCtx.fillText(socialLine, cx, boxY + 91);
+    postCtx.font = '600 12px "Poppins", "Noto Sans Gujarati", sans-serif';
+    postCtx.fillText(socialLine, cx, boxY + 67);
 
     postCtx.fillStyle = '#15803d';
-    postCtx.font = 'bold 13.5px "Noto Sans Gujarati", sans-serif';
-    postCtx.fillText('અમારી સાથે જોડાવા ફોલો કરો: @jivsevak', cx, boxY + 113);
-
-    postCtx.fillStyle = '#bbf7d0';
-    postCtx.font = '600 11px "Noto Sans Gujarati", sans-serif';
-    postCtx.fillText('બેજુબાન જીવો માટે પ્રેમ અને ખોરાક સેવા • દયા | કરુણા | માનવતા', cx, 804);
+    postCtx.font = 'bold 12px "Noto Sans Gujarati", sans-serif';
+    postCtx.fillText('ફોલો કરો: @jivsevak | જીવસેવા એ જ સાચી સેવા', cx, boxY + 83);
   }
 
   function drawStoryPost(userImg, name, address, insta, fb, volId) {
     const W = 1080, H = 1920;
+    storyCtx.imageSmoothingEnabled = true;
+    storyCtx.imageSmoothingQuality = 'high';
+
     const bgGrad = storyCtx.createLinearGradient(0, 0, W, H);
     bgGrad.addColorStop(0, '#052e16');
     bgGrad.addColorStop(0.5, '#14532d');
@@ -729,7 +819,7 @@
     storyCtx.font = 'bold 34px "Noto Sans Gujarati", sans-serif';
     storyCtx.fillText('ગૌરવશાળી વોલેન્ટિયર (PROUD VOLUNTEER)', W / 2, 453);
 
-    const cx = W / 2, cy = 775, r = 245;
+    const cx = W / 2, cy = 775, r = 255;
     storyCtx.beginPath();
     storyCtx.arc(cx, cy, r + 18, 0, Math.PI * 2);
     storyCtx.fillStyle = '#f59e0b';
@@ -748,7 +838,7 @@
     storyCtx.restore();
 
     storyCtx.fillStyle = '#f59e0b';
-    roundRect(storyCtx, cx - 140, cy + r - 24, 280, 56, 28);
+    roundRect(storyCtx, cx - 150, cy + r - 24, 300, 56, 28);
     storyCtx.fill();
     storyCtx.strokeStyle = '#ffffff';
     storyCtx.lineWidth = 4;
@@ -759,32 +849,32 @@
     storyCtx.fillText('ID: ' + volId, cx, cy + r + 15);
 
     storyCtx.fillStyle = '#ffffff';
-    roundRect(storyCtx, 95, 1095, 890, 370, 32);
+    roundRect(storyCtx, 95, 1105, 890, 365, 32);
     storyCtx.fill();
 
     storyCtx.fillStyle = '#14532d';
     storyCtx.font = 'bold 58px "Noto Sans Gujarati", sans-serif';
-    storyCtx.fillText(name, W / 2, 1185);
+    storyCtx.fillText(name, W / 2, 1195);
 
     storyCtx.fillStyle = '#dc2626';
     storyCtx.font = 'bold 38px "Noto Sans Gujarati", sans-serif';
-    storyCtx.fillText('📍 ' + address, W / 2, 1250);
+    storyCtx.fillText('📍 ' + address, W / 2, 1260);
 
     storyCtx.strokeStyle = '#e2e8f0';
     storyCtx.lineWidth = 3;
     storyCtx.beginPath();
-    storyCtx.moveTo(160, 1290);
-    storyCtx.lineTo(920, 1290);
+    storyCtx.moveTo(160, 1300);
+    storyCtx.lineTo(920, 1300);
     storyCtx.stroke();
 
     const socialLine = buildSocialLine(insta, fb);
     storyCtx.fillStyle = '#1e293b';
     storyCtx.font = '600 32px "Poppins", "Noto Sans Gujarati", sans-serif';
-    storyCtx.fillText(socialLine, W / 2, 1355);
+    storyCtx.fillText(socialLine, W / 2, 1365);
 
     storyCtx.fillStyle = '#15803d';
     storyCtx.font = 'bold 32px "Noto Sans Gujarati", sans-serif';
-    storyCtx.fillText('અમારી સાથે જોડાવા ફોલો કરો: @jivsevak', W / 2, 1425);
+    storyCtx.fillText('અમારી સાથે જોડાવા ફોલો કરો: @jivsevak', W / 2, 1435);
 
     storyCtx.fillStyle = '#fde047';
     storyCtx.font = 'bold 34px "Noto Sans Gujarati", sans-serif';
@@ -883,11 +973,13 @@
 
   function getCompressedPoster() {
     const tempCanvas = document.createElement('canvas');
-    tempCanvas.width = 540;
-    tempCanvas.height = 600;
+    tempCanvas.width = 810;
+    tempCanvas.height = 900;
     const tCtx = tempCanvas.getContext('2d');
-    tCtx.drawImage(postCanvas, 0, 0, 540, 600);
-    return tempCanvas.toDataURL('image/jpeg', 0.7);
+    tCtx.imageSmoothingEnabled = true;
+    tCtx.imageSmoothingQuality = 'high';
+    tCtx.drawImage(postCanvas, 0, 0, 810, 900);
+    return tempCanvas.toDataURL('image/jpeg', 0.92);
   }
 
   function saveToGoogleDrive(volId, name, mobile, address, instaId, fbName) {
